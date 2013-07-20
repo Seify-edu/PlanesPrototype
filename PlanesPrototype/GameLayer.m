@@ -91,9 +91,9 @@
         MapVertex *mv = [[[MapVertex alloc] initWithPosition:CGPointMake(positionX, positionY) ResourceType:vertexResourceType] autorelease];
         mv.index = index;
         mv.pictogrammType = pictogrammType;
-        if (mv.pictogrammType == MODIFIER_END) {
-            mv.sprite.visible = NO;
-        }
+//        if (mv.pictogrammType == MODIFIER_END) {
+//            mv.sprite.visible = NO;
+//        }
         [mv recreatePictogramm];
         [self.vertexes addObject:mv];
     }
@@ -140,7 +140,7 @@
     self.player.sprite = [CCSprite spriteWithFile:@"bee.png"];
     //    self.player.scale = 0.7;
     [self.player addChild:self.player.sprite];
-    self.player.sprite.position = ccp(0, 15);
+//    self.player.sprite.position = ccp(0, 15);
     self.player.currentVertex = mvStart;
     self.player.position = mvStart.position;
 
@@ -167,7 +167,7 @@
 	if (self = [super init])
     {        
 //        CCSprite *bg = [CCSprite spriteWithFile:@"BlueSkyBg.jpg"];
-        CCSprite *bg = [CCSprite spriteWithFile:@"GrassBg2.png"];
+        CCSprite *bg = [CCSprite spriteWithFile:@"background.png"];
         bg.position = ccp (self.contentSize.width / 2.0, self.contentSize.height / 2.0);
         [self addChild:bg];
         
@@ -183,8 +183,8 @@
         self.map.position = ccp(WIN_SIZE.width / 2.0, WIN_SIZE.height / 2.0);
         self.map.position = ccpSub(self.map.position, self.player.currentVertex.position);
         
-        CCMenuItemSprite *backButton = [self createButtonWithNormalSprite:@"redVertex.png"
-                                                           selectedSprite:@"redVertex.png"
+        CCMenuItemSprite *backButton = [self createButtonWithNormalSprite:@"flowerBase.png"
+                                                           selectedSprite:@"flowerBase.png"
                                                                      Text:@"<-"
                                                                  Selector:@selector(backPressed)];
         CCMenu *backMenu = [CCMenu menuWithItems:backButton, nil];
@@ -322,7 +322,9 @@
     [mv recreatePictogramm];
     self.flowersCollected = self.flowersCollected + 1;
 //    CCSprite *flower = [CCSprite spriteWithFile:@"Flower.png"];
-    CCSprite *flower = [CCSprite spriteWithFile:@"drop.png"];
+    CCSprite *flower = [CCSprite spriteWithFile:@"starBase.png"];
+    flower.color = SIGNS_COLOR_ORANGE;
+    flower.opacity = DEFAULT_OPACITY;
     [self addChild:flower];
     flower.position = ccp(WIN_SIZE.width * (0.7 + 0.08 * self.flowersCollected), WIN_SIZE.height * 0.92);
 }

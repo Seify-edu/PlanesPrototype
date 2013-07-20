@@ -36,7 +36,6 @@
     [selectedSprite addChild:label2];
     
     CCMenuItemSprite *sp = [CCMenuItemSprite itemWithNormalSprite:normalSprite selectedSprite:selectedSprite target:self selector: sel];
-    sp.scale = 0.7;
     
     return sp;
 }
@@ -46,53 +45,89 @@
     if (self = [super init])
     {
         
-        CCSprite *bg = [CCSprite spriteWithFile:@"BlueSkyBg.jpg"];
+        CCSprite *bg = [CCSprite spriteWithFile:@"background.png"];
         bg.position = ccp(self.contentSize.width / 2.0, self.contentSize.height / 2.0);
         [self addChild:bg];
         
-#define COLUMNS_COUNT 2
+//#define COLUMNS_COUNT 2
 #define RAWS_COUNT 5
+#define LEVELS_IN_PACK 20
         
-        NSMutableArray *menuItems = [NSMutableArray array];
-        for (int j = 0; j < 5; j++) {
-            CCMenuItemSprite *button = [self createButtonWithNormalSprite:@"greenVertex.png"
-                                                           selectedSprite:@"greenVertex.png"
-                                                                     Text:[NSString stringWithFormat:@"%d", j + 1]
+//        CCMenu *menu = nil;
+//        NSMutableArray *menuItems = nil;
+        int row = 0;
+        
+        for (int i = 0; i < LEVELS_IN_PACK; i++) {
+            
+            NSMutableArray *menuItems;
+            
+            if ((i % RAWS_COUNT) == 0) {
+                menuItems = [NSMutableArray array];
+            }
+            CCMenuItemSprite *button = [self createButtonWithNormalSprite:@"levelSelectButtonBase.png"
+                                                           selectedSprite:@"levelSelectButtonBase.png"
+                                                                     Text:[NSString stringWithFormat:@"%d", i + 1]
                                                                  Selector:@selector(buttonPressed:)];
-            button.tag = j + 1;
+            
+            button.color = FLOWERS_COLOR_GREEN;
+            button.opacity = DEFAULT_OPACITY;
+            button.tag = i + 1;
             [menuItems addObject:button];
+            
+            if ( ( i + 1 ) % RAWS_COUNT == 0) {
+                CCMenu *menu = [CCMenu menuWithArray:menuItems];
+                [menu alignItemsHorizontallyWithPadding:50];
+                [menu setPosition:ccp( WIN_SIZE.width / 2.0, WIN_SIZE.height * ( 0.8 - 0.2 * row ) )];
+                row++;
+                [self addChild:menu];
+                [menuItems removeAllObjects];
+            }
         }
         
-		CCMenu *menu = [CCMenu menuWithArray:menuItems];
-		[menu alignItemsHorizontallyWithPadding:20];
-		[menu setPosition:ccp( WIN_SIZE.width / 2.0, WIN_SIZE.height * 0.7)];
-		
-        NSMutableArray *menuItems2 = [NSMutableArray array];
-        for (int j = 5; j < 10; j++) {
-            CCMenuItemSprite *button = [self createButtonWithNormalSprite:@"greenVertex.png"
-                                                           selectedSprite:@"greenVertex.png"
-                                                                     Text:[NSString stringWithFormat:@"%d", j + 1]
-                                                                 Selector:@selector(buttonPressed:)];
-            button.tag = j + 1;
-            [menuItems2 addObject:button];
-        }
+//        NSMutableArray *menuItems = [NSMutableArray array];
+//        for (int j = 0; j < 5; j++) {
+//            CCMenuItemSprite *button = [self createButtonWithNormalSprite:@"levelSelectButtonBase.png"
+//                                                           selectedSprite:@"levelSelectButtonBase.png"
+//                                                                     Text:[NSString stringWithFormat:@"%d", j + 1]
+//                                                                 Selector:@selector(buttonPressed:)];
+//            button.color = FLOWERS_COLOR_GREEN;
+//            button.opacity = DEFAULT_OPACITY;
+//            button.tag = j + 1;
+//            [menuItems addObject:button];
+//        }
         
-		CCMenu *menu2 = [CCMenu menuWithArray:menuItems2];
-		[menu2 alignItemsHorizontallyWithPadding:20];
-		[menu2 setPosition:ccp( WIN_SIZE.width / 2.0, WIN_SIZE.height * 0.3)];
+//		CCMenu *menu = [CCMenu menuWithArray:menuItems];
+//		[menu alignItemsHorizontallyWithPadding:20];
+//		[menu setPosition:ccp( WIN_SIZE.width / 2.0, WIN_SIZE.height * 0.7)];
+//		
+//        NSMutableArray *menuItems2 = [NSMutableArray array];
+//        for (int j = 5; j < 10; j++) {
+//            CCMenuItemSprite *button = [self createButtonWithNormalSprite:@"levelSelectButtonBase.png"
+//                                                           selectedSprite:@"levelSelectButtonBase.png"
+//                                                                     Text:[NSString stringWithFormat:@"%d", j + 1]
+//                                                                 Selector:@selector(buttonPressed:)];
+//            button.color = FLOWERS_COLOR_GREEN;
+//            button.opacity = DEFAULT_OPACITY;
+//            button.tag = j + 1;
+//            [menuItems2 addObject:button];
+//        }
+//        
+//		CCMenu *menu2 = [CCMenu menuWithArray:menuItems2];
+//		[menu2 alignItemsHorizontallyWithPadding:20];
+//		[menu2 setPosition:ccp( WIN_SIZE.width / 2.0, WIN_SIZE.height * 0.3)];
 		
         
                 
-        CCMenuItemSprite *backButton = [self createButtonWithNormalSprite:@"redVertex.png"
-                                                           selectedSprite:@"redVertex.png"
+        CCMenuItemSprite *backButton = [self createButtonWithNormalSprite:@"flowerBase.png"
+                                                           selectedSprite:@"flowerBase.png"
                                                                      Text:@"<-"
                                                                  Selector:@selector(backPressed)];
+        backButton.color = FLOWERS_COLOR_PURPLE;
+        backButton.opacity = DEFAULT_OPACITY;
         CCMenu *backMenu = [CCMenu menuWithItems:backButton, nil];
 		[backMenu alignItemsHorizontallyWithPadding:20];
 		[backMenu setPosition:ccp( WIN_SIZE.width * 0.1, WIN_SIZE.height * 0.1)];
-        
-        [self addChild:menu];
-        [self addChild:menu2];
+
         [self addChild:backMenu];
         
         self.currentPageNumber = 1;

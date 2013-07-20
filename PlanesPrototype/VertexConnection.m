@@ -36,45 +36,55 @@
         
     CGPoint vectorBetweenVetrexes = ccpSub(self.startVertex.position, self.endVertex.position);
     float distanceBetweenVetrexes = ccpLength(vectorBetweenVetrexes);
-    NSString *spriteName;
+
+    float sc = [CCDirector sharedDirector].contentScaleFactor;
+    self.sprite = [CCSprite spriteWithFile:@"roadBase.png" rect:CGRectMake(0, 0, distanceBetweenVetrexes, 16 * sc)];
+    self.sprite.opacity = DEFAULT_OPACITY;
+
     switch (self.resourceType) {
         case RESOURCE_TYPE_1:
         {
-            spriteName = @"redLink.png";
+//            spriteName = @"redLink.png";
+            self.sprite.color = FLOWERS_COLOR_PINK;
             break;
         }
             
         case RESOURCE_TYPE_2:
         {
-            spriteName = @"greenLink.png";
+//            spriteName = @"greenLink.png";
+            self.sprite.color = FLOWERS_COLOR_GREEN;
+
             break;
         }
             
         case RESOURCE_TYPE_3:
         {
-            spriteName = @"blueLink.png";
+//            spriteName = @"blueLink.png";
+            self.sprite.color = FLOWERS_COLOR_BLUE;
+            
             break;
         }
             
         case RESOURCE_TYPE_4:
         {
-            spriteName = @"brownLink.png";
+//            spriteName = @"brownLink.png";
+            self.sprite.color = FLOWERS_COLOR_PURPLE;
+            
             break;
         }
 
         case RESOURCE_TYPE_5:
         {
-            spriteName = @"goldLink.png";
+//            spriteName = @"goldLink.png";
+            self.sprite.color = FLOWERS_COLOR_YELLOW;
+
             break;
         }
             
         default:
             break;
     }
-    NSAssert(spriteName, @"file not found");
-    
-    float sc = [CCDirector sharedDirector].contentScaleFactor;
-    self.sprite = [CCSprite spriteWithFile:spriteName rect:CGRectMake(0, 0, distanceBetweenVetrexes, 64 * sc)];
+
     ccTexParams params = {GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_REPEAT};
     [self.sprite.texture setTexParameters:&params];
     float angle = -CC_RADIANS_TO_DEGREES(ccpToAngle(vectorBetweenVetrexes));

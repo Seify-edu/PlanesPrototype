@@ -36,21 +36,29 @@
     switch (self.pictogrammType) {
         case MODIFIER_START:
         {
-            spriteName = @"play.png";
+//            spriteName = @"play.png";
             break;
         }
 
         case MODIFIER_END:
         {
 //            spriteName = @"stop.png";
-            spriteName = @"bee_home.png";
+//            spriteName = @"bee_home.png";
+            self.pictogramm = [CCSprite spriteWithFile:@"exclamationMarkBase.png"];
+            self.pictogramm.color = SIGNS_COLOR_ORANGE;
+            self.pictogramm.opacity = DEFAULT_OPACITY;
+
             break;
         }
             
         case MODIFIER_BONUS:
         {
 //            spriteName = @"Flower.png";
-            spriteName = @"drop.png";
+//            spriteName = @"drop.png";
+            self.pictogramm = [CCSprite spriteWithFile:@"starBase.png"];
+            self.pictogramm.color = SIGNS_COLOR_ORANGE;
+            self.pictogramm.opacity = DEFAULT_OPACITY;
+
             break;
         }
             
@@ -61,11 +69,8 @@
         }
     }
 
-    if (spriteName)
-    {
-        self.pictogramm = [CCSprite spriteWithFile:spriteName];
+    if (self.pictogramm)
         [self addChild:self.pictogramm];
-    }
 }
 
 - (void)recreateSprite
@@ -75,48 +80,49 @@
         self.sprite = nil;
     }
     
-    NSString *spriteName;
+    self.sprite = [CCSprite spriteWithFile:@"flowerBase.png"];
+    self.sprite.opacity = DEFAULT_OPACITY;
+    
     switch (self.resourceType) {
         case RESOURCE_TYPE_1:
         {
 //            spriteName = @"redVertex.png";
-            spriteName = @"flower_red.png";
+            self.sprite.color = FLOWERS_COLOR_PINK;
             break;
         }
             
         case RESOURCE_TYPE_2:
         {
 //            spriteName = @"greenVertex.png";
-            spriteName = @"flower_green.png";
+            self.sprite.color = FLOWERS_COLOR_GREEN;
             break;
         }
             
         case RESOURCE_TYPE_3:
         {
 //            spriteName = @"blueVertex.png";
-            spriteName = @"flower_blue.png";
+            self.sprite.color = FLOWERS_COLOR_BLUE;
             break;
         }
             
         case RESOURCE_TYPE_4:
         {
 //            spriteName = @"brownVertex.png";
-            spriteName = @"flower_brown.png";
+            self.sprite.color = FLOWERS_COLOR_PURPLE;
+
             break;
         }
             
         case RESOURCE_TYPE_5:
         {
 //            spriteName = @"goldVertex.png";
-            spriteName = @"flower_yellow.png";
+            self.sprite.color = FLOWERS_COLOR_YELLOW;
             break;
         }
             
         default:
             break;
     }
-    NSAssert(spriteName, @"file not found");
-    self.sprite = [CCSprite spriteWithFile:spriteName];
     [self addChild:self.sprite];
 }
 

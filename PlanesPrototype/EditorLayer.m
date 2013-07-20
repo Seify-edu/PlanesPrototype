@@ -130,7 +130,7 @@
     {
         CGSize winSize = [[CCDirector sharedDirector] winSize];
         
-        CCSprite *bg = [CCSprite spriteWithFile:@"BlueSkyBg.jpg"];
+        CCSprite *bg = [CCSprite spriteWithFile:@"background.png"];
         bg.position = ccp(self.contentSize.width / 2.0, self.contentSize.height / 2.0);
         [self addChild:bg];
         

@@ -26,3 +26,19 @@ enum
     MODIFIER_END,
     MODIFIER_BONUS
 };
+
+#define BEE_COLOR_ORANGE ccc3(181, 123, 23);
+#define BEE_COLOR_BROWN ccc3(47, 34, 15);
+
+#define UI_COLOR_BLUE ccc3(34, 64, 162);
+#define UI_COLOR_GREY ccc3(122, 125, 136);
+
+#define SIGNS_COLOR_ORANGE ccc3(150, 87, 20);
+
+#define FLOWERS_COLOR_PINK ccc3(222, 140, 160);
+#define FLOWERS_COLOR_PURPLE ccc3(169, 140, 222);
+#define FLOWERS_COLOR_BLUE ccc3(140, 206, 222);
+#define FLOWERS_COLOR_GREEN ccc3(144, 222, 140);
+#define FLOWERS_COLOR_YELLOW ccc3(222, 221, 140);
+
+#define DEFAULT_OPACITY (204)
