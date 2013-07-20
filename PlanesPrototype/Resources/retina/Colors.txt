@@ -1,0 +1,15 @@
+Bee color orange #b57b17 r181 g123 b23
+Bee color brown #2f220f r47 g34 b15
+
+UI color blue #2240a2 r34 g64 b162
+UI color grey #7a7d88 r122 g125 b136
+
+Signs color orange #965714 r150 g87 b20
+
+flowers color pink #de8ca0 r222 g140 b160 
+flowers color purple #a98cde r169 g140 b222 
+flowers color blue #8ccede r140 g206 b222 
+flowers color green #90de8c r144 g222 b140 
+flowers color yellow #dedd8c r222 g221 b140 
+
+
