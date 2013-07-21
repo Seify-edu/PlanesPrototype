@@ -35,14 +35,14 @@
 		[CCMenuItemFont setFontSize:28];
         
         CCSprite *unpressedButton = [CCSprite spriteWithFile:@"popupButtonBase.png"];
-        unpressedButton.color = FLOWERS_COLOR_PINK;
+        unpressedButton.color = flowerColors[FLOWERS_COLOR_PINK];
         unpressedButton.opacity = DEFAULT_OPACITY;
         CCLabelTTF *labelPlayUnpressed = [CCLabelTTF labelWithString:@"Play" fontName:@"Marker Felt" fontSize:64];
         labelPlayUnpressed.position = ccp(unpressedButton.contentSize.width * 0.48, unpressedButton.contentSize.height * 0.67);
         [unpressedButton addChild:labelPlayUnpressed];
 
         CCSprite *pressedButton = [CCSprite spriteWithFile:@"popupButtonBase.png"];
-        pressedButton.color = FLOWERS_COLOR_BLUE;
+        pressedButton.color = flowerColors[FLOWERS_COLOR_BLUE];
         pressedButton.opacity = DEFAULT_OPACITY;
         CCLabelTTF *labelPlayPressed = [CCLabelTTF labelWithString:@"Play" fontName:@"Marker Felt" fontSize:64];
         labelPlayPressed.position = ccp(pressedButton.contentSize.width * 0.48, pressedButton.contentSize.height * 0.57);
@@ -51,7 +51,7 @@
         CCMenuItemSprite *playButton = [CCMenuItemSprite itemWithNormalSprite:unpressedButton selectedSprite:pressedButton target:self selector:@selector(playButtonPressed)];
         
         CCSprite *unpressedEditorButton = [CCSprite spriteWithFile:@"popupButtonBase.png"];
-        unpressedEditorButton.color = FLOWERS_COLOR_PINK;
+        unpressedEditorButton.color = flowerColors[FLOWERS_COLOR_PINK];
         unpressedEditorButton.opacity = DEFAULT_OPACITY;
 
         CCLabelTTF *labelEditorUnpressed = [CCLabelTTF labelWithString:@"Editor" fontName:@"Marker Felt" fontSize:64];
@@ -59,7 +59,7 @@
         [unpressedEditorButton addChild:labelEditorUnpressed];
         
         CCSprite *pressedEditorButton = [CCSprite spriteWithFile:@"popupButtonBase.png"];
-        pressedEditorButton.color = FLOWERS_COLOR_BLUE;
+        pressedEditorButton.color = flowerColors[FLOWERS_COLOR_BLUE];
         pressedEditorButton.opacity = DEFAULT_OPACITY;
 
         CCLabelTTF *labelEditorPressed = [CCLabelTTF labelWithString:@"Editor" fontName:@"Marker Felt" fontSize:64];

@@ -185,7 +185,6 @@
 		B1EA24A016B107280021D124 /* vec4.c in Sources */ = {isa = PBXBuildFile; fileRef = B1EA249F16B107280021D124 /* vec4.c */; };
 		B1EA24A516B107280021D124 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EA24A416B107280021D124 /* main.m */; };
 		B1EA24A816B107280021D124 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EA24A716B107280021D124 /* AppDelegate.m */; };
-		B1EA24AB16B107280021D124 /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EA24AA16B107280021D124 /* HelloWorldLayer.m */; };
 		B1EA24AE16B107280021D124 /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EA24AD16B107280021D124 /* IntroLayer.m */; };
 		B1EA24B616B1093B0021D124 /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EA24B516B1093B0021D124 /* GameLayer.m */; };
 		B1EA24B916B10F300021D124 /* MapVertex.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EA24B816B10F300021D124 /* MapVertex.m */; };
@@ -513,8 +512,6 @@
 		B1EA24A416B107280021D124 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B1EA24A616B107280021D124 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B1EA24A716B107280021D124 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		B1EA24A916B107280021D124 /* HelloWorldLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldLayer.h; sourceTree = "<group>"; };
-		B1EA24AA16B107280021D124 /* HelloWorldLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloWorldLayer.m; sourceTree = "<group>"; };
 		B1EA24AC16B107280021D124 /* IntroLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntroLayer.h; sourceTree = "<group>"; };
 		B1EA24AD16B107280021D124 /* IntroLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroLayer.m; sourceTree = "<group>"; };
 		B1EA24B416B1093B0021D124 /* GameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLayer.h; sourceTree = "<group>"; };
@@ -591,6 +588,40 @@
 				B13174CC179AEE2F0047E307 /* starFrameBase.png */,
 			);
 			name = "non-Retina";
+			sourceTree = "<group>";
+		};
+		B13174DA179C40720047E307 /* Layers */ = {
+			isa = PBXGroup;
+			children = (
+				B1EA24AC16B107280021D124 /* IntroLayer.h */,
+				B1EA24AD16B107280021D124 /* IntroLayer.m */,
+				B1EA250F16B7015D0021D124 /* MainMenuLayer.h */,
+				B1EA251016B7015F0021D124 /* MainMenuLayer.m */,
+				B1EA24B416B1093B0021D124 /* GameLayer.h */,
+				B1EA24B516B1093B0021D124 /* GameLayer.m */,
+				B1D76AA016C98333007012E5 /* LevelSelectLayer.h */,
+				B1D76AA116C98333007012E5 /* LevelSelectLayer.m */,
+				B1B2300116E500A2000EBD19 /* Walkthrough.h */,
+				B1B2300216E500A2000EBD19 /* Walkthrough.m */,
+				B132921416B8648700AC3436 /* EditorLayer.h */,
+				B132921516B8648700AC3436 /* EditorLayer.m */,
+				B1EA24E716B560DC0021D124 /* HUDLayer.h */,
+				B1EA24E816B560DC0021D124 /* HUDLayer.m */,
+			);
+			name = Layers;
+			sourceTree = "<group>";
+		};
+		B13174DB179C40890047E307 /* Game classes */ = {
+			isa = PBXGroup;
+			children = (
+				B1EA24E416B473120021D124 /* Player.h */,
+				B1EA24E516B473120021D124 /* Player.m */,
+				B1EA24B716B10F300021D124 /* MapVertex.h */,
+				B1EA24B816B10F300021D124 /* MapVertex.m */,
+				B1EA24DB16B321060021D124 /* VertexConnection.h */,
+				B1EA24DC16B321060021D124 /* VertexConnection.m */,
+			);
+			name = "Game classes";
 			sourceTree = "<group>";
 		};
 		B1A77640171376130044AA99 /* Levels */ = {
@@ -671,31 +702,11 @@
 		B1EA232E16B107260021D124 /* PlanesPrototype */ = {
 			isa = PBXGroup;
 			children = (
+				B13174DA179C40720047E307 /* Layers */,
+				B13174DB179C40890047E307 /* Game classes */,
 				B1EA24EA16B576740021D124 /* Constants.h */,
 				B1EA24A616B107280021D124 /* AppDelegate.h */,
 				B1EA24A716B107280021D124 /* AppDelegate.m */,
-				B1EA24A916B107280021D124 /* HelloWorldLayer.h */,
-				B1EA24AA16B107280021D124 /* HelloWorldLayer.m */,
-				B1EA24AC16B107280021D124 /* IntroLayer.h */,
-				B1EA24AD16B107280021D124 /* IntroLayer.m */,
-				B1EA250F16B7015D0021D124 /* MainMenuLayer.h */,
-				B1EA251016B7015F0021D124 /* MainMenuLayer.m */,
-				B1EA24B416B1093B0021D124 /* GameLayer.h */,
-				B1EA24B516B1093B0021D124 /* GameLayer.m */,
-				B1D76AA016C98333007012E5 /* LevelSelectLayer.h */,
-				B1D76AA116C98333007012E5 /* LevelSelectLayer.m */,
-				B1B2300116E500A2000EBD19 /* Walkthrough.h */,
-				B1B2300216E500A2000EBD19 /* Walkthrough.m */,
-				B132921416B8648700AC3436 /* EditorLayer.h */,
-				B132921516B8648700AC3436 /* EditorLayer.m */,
-				B1EA24E716B560DC0021D124 /* HUDLayer.h */,
-				B1EA24E816B560DC0021D124 /* HUDLayer.m */,
-				B1EA24E416B473120021D124 /* Player.h */,
-				B1EA24E516B473120021D124 /* Player.m */,
-				B1EA24B716B10F300021D124 /* MapVertex.h */,
-				B1EA24B816B10F300021D124 /* MapVertex.m */,
-				B1EA24DB16B321060021D124 /* VertexConnection.h */,
-				B1EA24DC16B321060021D124 /* VertexConnection.m */,
 				B1EA232F16B107260021D124 /* Resources */,
 				B1EA234916B107260021D124 /* libs */,
 				B1EA24A216B107280021D124 /* Supporting Files */,
@@ -1301,7 +1312,6 @@
 				B1EA24A016B107280021D124 /* vec4.c in Sources */,
 				B1EA24A516B107280021D124 /* main.m in Sources */,
 				B1EA24A816B107280021D124 /* AppDelegate.m in Sources */,
-				B1EA24AB16B107280021D124 /* HelloWorldLayer.m in Sources */,
 				B1EA24AE16B107280021D124 /* IntroLayer.m in Sources */,
 				B1EA24B616B1093B0021D124 /* GameLayer.m in Sources */,
 				B1EA24B916B10F300021D124 /* MapVertex.m in Sources */,

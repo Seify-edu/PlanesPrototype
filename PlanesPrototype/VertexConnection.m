@@ -37,22 +37,21 @@
     CGPoint vectorBetweenVetrexes = ccpSub(self.startVertex.position, self.endVertex.position);
     float distanceBetweenVetrexes = ccpLength(vectorBetweenVetrexes);
 
-    float sc = [CCDirector sharedDirector].contentScaleFactor;
-    self.sprite = [CCSprite spriteWithFile:@"roadBase.png" rect:CGRectMake(0, 0, distanceBetweenVetrexes, 16 * sc)];
+    self.sprite = [CCSprite spriteWithFile:@"roadBase.png" rect:CGRectMake(0, 0, distanceBetweenVetrexes, 32)];
     self.sprite.opacity = DEFAULT_OPACITY;
 
     switch (self.resourceType) {
         case RESOURCE_TYPE_1:
         {
 //            spriteName = @"redLink.png";
-            self.sprite.color = FLOWERS_COLOR_PINK;
+            self.sprite.color = flowerColors[FLOWERS_COLOR_PINK];
             break;
         }
             
         case RESOURCE_TYPE_2:
         {
 //            spriteName = @"greenLink.png";
-            self.sprite.color = FLOWERS_COLOR_GREEN;
+            self.sprite.color = flowerColors[FLOWERS_COLOR_GREEN];
 
             break;
         }
@@ -60,7 +59,7 @@
         case RESOURCE_TYPE_3:
         {
 //            spriteName = @"blueLink.png";
-            self.sprite.color = FLOWERS_COLOR_BLUE;
+            self.sprite.color = flowerColors[FLOWERS_COLOR_BLUE];
             
             break;
         }
@@ -68,7 +67,7 @@
         case RESOURCE_TYPE_4:
         {
 //            spriteName = @"brownLink.png";
-            self.sprite.color = FLOWERS_COLOR_PURPLE;
+            self.sprite.color = flowerColors[FLOWERS_COLOR_PURPLE];
             
             break;
         }
@@ -76,7 +75,7 @@
         case RESOURCE_TYPE_5:
         {
 //            spriteName = @"goldLink.png";
-            self.sprite.color = FLOWERS_COLOR_YELLOW;
+            self.sprite.color = flowerColors[FLOWERS_COLOR_YELLOW];
 
             break;
         }

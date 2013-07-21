@@ -87,28 +87,28 @@
         case RESOURCE_TYPE_1:
         {
 //            spriteName = @"redVertex.png";
-            self.sprite.color = FLOWERS_COLOR_PINK;
+            self.sprite.color = flowerColors[FLOWERS_COLOR_PINK];
             break;
         }
             
         case RESOURCE_TYPE_2:
         {
 //            spriteName = @"greenVertex.png";
-            self.sprite.color = FLOWERS_COLOR_GREEN;
+            self.sprite.color = flowerColors[FLOWERS_COLOR_GREEN];
             break;
         }
             
         case RESOURCE_TYPE_3:
         {
 //            spriteName = @"blueVertex.png";
-            self.sprite.color = FLOWERS_COLOR_BLUE;
+            self.sprite.color = flowerColors[FLOWERS_COLOR_BLUE];
             break;
         }
             
         case RESOURCE_TYPE_4:
         {
 //            spriteName = @"brownVertex.png";
-            self.sprite.color = FLOWERS_COLOR_PURPLE;
+            self.sprite.color = flowerColors[FLOWERS_COLOR_PURPLE];
 
             break;
         }
@@ -116,7 +116,7 @@
         case RESOURCE_TYPE_5:
         {
 //            spriteName = @"goldVertex.png";
-            self.sprite.color = FLOWERS_COLOR_YELLOW;
+            self.sprite.color = flowerColors[FLOWERS_COLOR_YELLOW];
             break;
         }
             
