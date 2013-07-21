@@ -37,15 +37,15 @@
         CCSprite *unpressedButton = [CCSprite spriteWithFile:@"popupButtonBase.png"];
         unpressedButton.color = flowerColors[FLOWERS_COLOR_PINK];
         unpressedButton.opacity = DEFAULT_OPACITY;
-        CCLabelTTF *labelPlayUnpressed = [CCLabelTTF labelWithString:@"Play" fontName:@"Marker Felt" fontSize:64];
-        labelPlayUnpressed.position = ccp(unpressedButton.contentSize.width * 0.48, unpressedButton.contentSize.height * 0.67);
+        CCLabelTTF *labelPlayUnpressed = [CCLabelTTF labelWithString:@"Play" fontName:@"Marker Felt" fontSize:48];
+        labelPlayUnpressed.position = ccp(unpressedButton.contentSize.width * 0.48, unpressedButton.contentSize.height * 0.5);
         [unpressedButton addChild:labelPlayUnpressed];
 
         CCSprite *pressedButton = [CCSprite spriteWithFile:@"popupButtonBase.png"];
         pressedButton.color = flowerColors[FLOWERS_COLOR_BLUE];
         pressedButton.opacity = DEFAULT_OPACITY;
-        CCLabelTTF *labelPlayPressed = [CCLabelTTF labelWithString:@"Play" fontName:@"Marker Felt" fontSize:64];
-        labelPlayPressed.position = ccp(pressedButton.contentSize.width * 0.48, pressedButton.contentSize.height * 0.57);
+        CCLabelTTF *labelPlayPressed = [CCLabelTTF labelWithString:@"Play" fontName:@"Marker Felt" fontSize:48];
+        labelPlayPressed.position = ccp(pressedButton.contentSize.width * 0.48, pressedButton.contentSize.height * 0.5);
         [pressedButton addChild:labelPlayPressed];
         
         CCMenuItemSprite *playButton = [CCMenuItemSprite itemWithNormalSprite:unpressedButton selectedSprite:pressedButton target:self selector:@selector(playButtonPressed)];
@@ -54,16 +54,16 @@
         unpressedEditorButton.color = flowerColors[FLOWERS_COLOR_PINK];
         unpressedEditorButton.opacity = DEFAULT_OPACITY;
 
-        CCLabelTTF *labelEditorUnpressed = [CCLabelTTF labelWithString:@"Editor" fontName:@"Marker Felt" fontSize:64];
-        labelEditorUnpressed.position = ccp(unpressedEditorButton.contentSize.width * 0.48, unpressedEditorButton.contentSize.height * 0.67);
+        CCLabelTTF *labelEditorUnpressed = [CCLabelTTF labelWithString:@"Editor" fontName:@"Marker Felt" fontSize:48];
+        labelEditorUnpressed.position = ccp(unpressedEditorButton.contentSize.width * 0.48, unpressedEditorButton.contentSize.height * 0.5);
         [unpressedEditorButton addChild:labelEditorUnpressed];
         
         CCSprite *pressedEditorButton = [CCSprite spriteWithFile:@"popupButtonBase.png"];
         pressedEditorButton.color = flowerColors[FLOWERS_COLOR_BLUE];
         pressedEditorButton.opacity = DEFAULT_OPACITY;
 
-        CCLabelTTF *labelEditorPressed = [CCLabelTTF labelWithString:@"Editor" fontName:@"Marker Felt" fontSize:64];
-        labelEditorPressed.position = ccp(pressedEditorButton.contentSize.width * 0.48, pressedEditorButton.contentSize.height * 0.57);
+        CCLabelTTF *labelEditorPressed = [CCLabelTTF labelWithString:@"Editor" fontName:@"Marker Felt" fontSize:48];
+        labelEditorPressed.position = ccp(pressedEditorButton.contentSize.width * 0.48, pressedEditorButton.contentSize.height * 0.5);
         [pressedEditorButton addChild:labelEditorPressed];
         
         CCMenuItemSprite *editorButton = [CCMenuItemSprite itemWithNormalSprite:unpressedEditorButton selectedSprite:pressedEditorButton target:self selector:@selector(editorButtonPressed)];

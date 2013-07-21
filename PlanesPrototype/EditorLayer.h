@@ -56,5 +56,8 @@ enum
 
 @property (retain) NSString *levelName;
 
+@property int currentLevel;
+@property int currentPack;
+
 +(CCScene *) scene;
 @end

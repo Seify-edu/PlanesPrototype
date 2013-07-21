@@ -116,14 +116,6 @@
         [self.connections addObject:vc];
     }
     
-    //placing elements on map
-    for (VertexConnection *vc in self.connections) {
-        [self.map addChild:vc];
-    }
-    for (MapVertex *mv in self.vertexes) {
-        [self.map addChild:mv];
-    }
-
     //create player
     MapVertex *mvStart;
     for (MapVertex *mv in self.vertexes) {
@@ -135,20 +127,29 @@
     if (!mvStart) {
         NSLog(@"%@ : %@ level parse error : no start vertex found found", self, NSStringFromSelector(_cmd));
     }
-    self.player = [Player node];
-//    self.player.sprite = [CCSprite spriteWithFile:@"InYan.png"];
-    self.player.sprite = [CCSprite spriteWithFile:@"bee.png"];
-    //    self.player.scale = 0.7;
-    [self.player addChild:self.player.sprite];
-//    self.player.sprite.position = ccp(0, 15);
-    self.player.currentVertex = mvStart;
-    self.player.position = mvStart.position;
-
-    self.map.position = ccp(WIN_SIZE.width / 2.0, WIN_SIZE.height / 2.0);
     
     // remove start pictogramm
     mvStart.pictogrammType = MODIFIER_NONE;
     [mvStart recreatePictogramm];
+    
+    self.player = [Player node];
+    self.player.sprite = [CCSprite spriteWithFile:@"bee.png"];
+    self.player.currentVertex = mvStart;
+    self.player.position = mvStart.position;
+    self.map.position = ccp(WIN_SIZE.width / 2.0, WIN_SIZE.height / 2.0);
+    [self.player addChild:self.player.sprite];
+    
+    for (VertexConnection *vc in self.connections) {
+        [self.map addChild:vc];
+    }
+    
+    for (MapVertex *mv in self.vertexes) {
+        [self.map addChild:mv];
+    }
+    
+    [self.map addChild:self.player];
+    self.map.player = self.player;
+
     
 //    TODO: uncomment this to center map to player
 //    self.map.position = ccpSub(self.map.position, self.player.currentVertex.position);
@@ -156,7 +157,6 @@
 //    CCRotateBy *rotateInYan = [CCRotateBy actionWithDuration:5.0 angle:360.0];
 //    CCRepeatForever *repeat = [CCRepeatForever actionWithAction:rotateInYan];
 //    [self.player runAction:repeat];
-    [self.map addChild:self.player];
     
 //    [self updateAvaiblePathVisual];
     
@@ -173,7 +173,7 @@
         
 
         
-        self.map = [CCNode node];
+        self.map = [MapNode node];
         self.vertexes = [NSMutableArray array];
         self.connections = [NSMutableArray array];
 
@@ -259,6 +259,16 @@
                         
                         if (mv.pictogrammType == MODIFIER_END)
                         {
+                            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                            NSString *levelWonKey = [NSString stringWithFormat:@"pack%dlevel%dWon", self.currentPack, self.currentLevel ];
+                            [defaults setBool:YES forKey:levelWonKey];
+                            NSString *starsCollectedKey = [NSString stringWithFormat:@"starsUnlockedInPack%dLevel%d", self.currentPack, self.currentLevel];
+                            int starsCollectedBefore = [defaults integerForKey:starsCollectedKey];
+                            if (self.flowersCollected > starsCollectedBefore) {
+                                [defaults setInteger:self.flowersCollected forKey:starsCollectedKey];
+                            }
+                            [defaults synchronize];
+                            
                             [self performSelector:@selector(postConsoleMessage:) withObject:@"You Won!" afterDelay:(NSTimeInterval)timeToTravel];
                         } else {
                             BOOL cannotMove = YES;
@@ -352,6 +362,67 @@
     self.connections = nil;
     [super dealloc];
 }
+
+//#pragma mark - Drawing
+//
+//-(void) visit
+//{
+//	// quick return if not visible. children won't be drawn.
+//	if (!visible_)
+//		return;
+//    
+//	kmGLPushMatrix();
+//    
+//	if ( grid_ && grid_.active)
+//		[grid_ beforeDraw];
+//    
+//	[self transform];
+//    
+//	if(children_) {
+//        
+//		[self sortAllChildren];
+//        
+//		ccArray *arrayData = children_->data;
+//		NSUInteger i = 0;
+//        
+////		// draw children zOrder < 0
+////		for( ; i < arrayData->num; i++ ) {
+////			CCNode *child = arrayData->arr[i];
+////			if ( [child zOrder] < 0 )
+////				[child visit];
+////			else
+////				break;
+////		}
+//        
+//		// self draw
+//		[self draw];
+//        
+//		// draw children zOrder >= 0
+//		for( ; i < arrayData->num; i++ ) {
+//			CCNode *child =  arrayData->arr[i];
+//            if (child != self.player.sprite){
+//                [child visit];
+//            }
+//		}
+//        
+//	} else
+//		[self draw];
+//    
+//	// reset for next frame
+//	orderOfArrival_ = 0;
+//    
+//	if ( grid_ && grid_.active)
+//		[grid_ afterDraw:self];
+//    
+//	kmGLPopMatrix();
+//
+//}
+//
+//- (void)draw
+//{
+//    [super draw];
+////    [self.player.sprite draw];
+//}
 
 #pragma mark - Console
 

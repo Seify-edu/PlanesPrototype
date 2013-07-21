@@ -46,7 +46,7 @@
 //            spriteName = @"bee_home.png";
             self.pictogramm = [CCSprite spriteWithFile:@"exclamationMarkBase.png"];
             self.pictogramm.color = SIGNS_COLOR_ORANGE;
-            self.pictogramm.opacity = DEFAULT_OPACITY;
+//            self.pictogramm.opacity = DEFAULT_OPACITY;
 
             break;
         }
@@ -69,8 +69,10 @@
         }
     }
 
-    if (self.pictogramm)
+    if (self.pictogramm) {
+//        self.pictogramm.zOrder = -1; // hack for alpha-sorting
         [self addChild:self.pictogramm];
+    }
 }
 
 - (void)recreateSprite
@@ -81,7 +83,7 @@
     }
     
     self.sprite = [CCSprite spriteWithFile:@"flowerBase.png"];
-    self.sprite.opacity = DEFAULT_OPACITY;
+//    self.sprite.opacity = DEFAULT_OPACITY;
     
     switch (self.resourceType) {
         case RESOURCE_TYPE_1:

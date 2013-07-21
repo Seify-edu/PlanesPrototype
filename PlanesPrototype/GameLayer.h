@@ -14,6 +14,7 @@
 #import "cocos2d.h"
 #import "Constants.h"
 #import "MainMenuLayer.h"
+#import "MapNode.h"
 
 enum {
     PLAYER_EASY_MOVE_TAG
@@ -26,13 +27,16 @@ enum {
 
 @property (assign) CCLabelTTF *console;
 
-@property (assign) CCNode *map;
+@property (assign) MapNode *map;
 @property (retain) NSMutableArray *vertexes;
 @property (retain) NSMutableArray *connections;
 
 @property (assign) Player *player;
 
 @property int flowersCollected;
+
+@property int currentLevel;
+@property int currentPack;
 
 //@property int resCount1;
 //@property int resCount2;

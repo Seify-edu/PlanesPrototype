@@ -59,33 +59,52 @@
         
         int row = 0;
         
-        for (int i = 0; i < LEVELS_IN_PACK; i++) {
+        for (int buttonIndex = 0; buttonIndex < LEVELS_IN_PACK; buttonIndex++) {
             
+            int levelNumber =  buttonIndex + 1;
+            int prevLevelNumber = buttonIndex;
             NSMutableArray *menuItems;
             
-            if ((i % RAWS_COUNT) == 0) {
+            if ((buttonIndex % RAWS_COUNT) == 0) {
                 menuItems = [NSMutableArray array];
             }
             
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             BOOL levelEnabled = YES; // first level avaible ever
-            if (i > 0) {
-                NSString *levWonKey = [NSString stringWithFormat:@"pack%dlevel%dWon", 1, (i - 1 ) ];
+            if (levelNumber > 1) {
+                NSString *levWonKey = [NSString stringWithFormat:@"pack%dlevel%dWon", 1, prevLevelNumber ];
                 levelEnabled = [defaults boolForKey:levWonKey];
             }
             
-            NSString *buttonText = levelEnabled ? [NSString stringWithFormat:@"%d", i + 1] : @"?";
-            CCMenuItemSprite *button = [self createButtonWithNormalSprite:@"levelSelectButtonBase.png"
-                                                           selectedSprite:@"levelSelectButtonBase.png"
-                                                                     Text:buttonText
-                                                                 Selector:@selector(buttonPressed:)];
+            NSString *buttonText = levelEnabled ? [NSString stringWithFormat:@"%d", levelNumber] : @"?";
             
-            button.color = flowerColors[ ( i + 2 * row ) % 5 ];
-            button.opacity = DEFAULT_OPACITY;
-            button.tag = i + 1;
+            CCSprite *normalSprite = [CCSprite spriteWithFile:@"levelSelectButtonBase.png"];
+            CCLabelTTF *label = [CCLabelTTF labelWithString:buttonText fontName:@"Marker Felt" fontSize:48];
+            label.position = ccp(normalSprite.contentSize.width * 0.5, normalSprite.contentSize.height * 0.7);
+            label.color = UI_COLOR_GREY;
+            label.opacity = levelEnabled ? DEFAULT_OPACITY : DEFAULT_OPACITY_DISABLED;
+            [normalSprite addChild:label];
             
-            NSString *key = [NSString stringWithFormat:@"starsUnlockedInPack%dLevel%d", 0, i];
-            int starsUnlocked = [defaults integerForKey:key];
+            CCSprite *selectedSprite = [CCSprite spriteWithFile:@"levelSelectButtonBase.png"];
+            CCLabelTTF *label2 = [CCLabelTTF labelWithString:buttonText fontName:@"Marker Felt" fontSize:48];
+            label2.position = ccp(selectedSprite.contentSize.width * 0.5, selectedSprite.contentSize.height * 0.7);
+            label2.color = UI_COLOR_GREY;
+            label2.opacity = levelEnabled ? DEFAULT_OPACITY : DEFAULT_OPACITY_DISABLED;
+            [selectedSprite addChild:label2];
+            
+            CCMenuItemSprite *button;
+            if (levelEnabled) {
+                button = [CCMenuItemSprite itemWithNormalSprite:normalSprite selectedSprite:selectedSprite target:self selector: @selector(buttonPressed:)];
+            } else {
+                button = [CCMenuItemSprite itemWithNormalSprite:normalSprite selectedSprite:selectedSprite target:nil selector:nil];
+            }
+            
+            button.color = flowerColors[ ( buttonIndex + 2 * row ) % 5 ];
+            button.opacity = levelEnabled ? DEFAULT_OPACITY : DEFAULT_OPACITY_DISABLED;
+            button.tag = levelNumber;
+            
+            NSString *starsCollectedKey = [NSString stringWithFormat:@"starsUnlockedInPack%dLevel%d", 1, levelNumber];
+            int starsUnlocked = [defaults integerForKey:starsCollectedKey];
                         
             for (int starsI = 1; starsI <= 3; starsI++ )
             {
@@ -93,21 +112,21 @@
                 starFrame.position = ccp(button.contentSize.width * ( 0.165 + 0.33 * ( starsI - 1 ) ), button.contentSize.height * 0.165);
                 starFrame.color = UI_COLOR_GREY;
                 starFrame.scale = 0.45;
-                starFrame.opacity = DEFAULT_OPACITY;
+                starFrame.opacity = levelEnabled ? DEFAULT_OPACITY : DEFAULT_OPACITY_DISABLED;
                 [button addChild:starFrame];
                 
                 if (starsI <= starsUnlocked) {
                     CCSprite *star = [CCSprite spriteWithFile:@"starBase.png"];
                     star.color = SIGNS_COLOR_ORANGE;
                     star.position = ccp(starFrame.contentSize.width / 2., starFrame.contentSize.height / 2.);
-                    star.opacity = DEFAULT_OPACITY;
+                    star.opacity = levelEnabled ? DEFAULT_OPACITY : DEFAULT_OPACITY_DISABLED;
                     [starFrame addChild:star];
                 }
             }
             
             [menuItems addObject:button];
             
-            if ( ( i + 1 ) % RAWS_COUNT == 0) {
+            if ( ( buttonIndex + 1 ) % RAWS_COUNT == 0) {
                 CCMenu *menu = [CCMenu menuWithArray:menuItems];
                 [menu alignItemsHorizontallyWithPadding:59];
                 [menu setPosition:ccp( WIN_SIZE.width / 2.0, WIN_SIZE.height * ( 0.8 - 0.2 * row ) - 15)];
@@ -141,12 +160,15 @@
 {
     NSLog(@"%@ : %@ button = %@", self, NSStringFromSelector(_cmd), button);
     
-    id nextLayer = [self.nextScene getChildByTag:0];
+    //TODO: add real pack number here
+    id <LevelSelectProtocol> nextLayer = [self.nextScene getChildByTag:0];
+    nextLayer.currentLevel = button.tag;
+    nextLayer.currentPack = 1;
     NSString *levelName = [NSString stringWithFormat:@"level%d_%d", self.currentPageNumber, button.tag];
     NSDictionary *level = [nextLayer loadLevel:levelName];
     [nextLayer parseLevel:level];
     
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:self.nextScene withColor:ccWHITE]];
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:(CCScene *)self.nextScene withColor:ccWHITE]];
     self.nextScene = nil;
 }
 

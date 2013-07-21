@@ -38,7 +38,7 @@
     float distanceBetweenVetrexes = ccpLength(vectorBetweenVetrexes);
 
     self.sprite = [CCSprite spriteWithFile:@"roadBase.png" rect:CGRectMake(0, 0, distanceBetweenVetrexes, 32)];
-    self.sprite.opacity = DEFAULT_OPACITY;
+//    self.sprite.opacity = DEFAULT_OPACITY;
 
     switch (self.resourceType) {
         case RESOURCE_TYPE_1:
