@@ -331,12 +331,16 @@
     mv.pictogrammType = MODIFIER_NONE;
     [mv recreatePictogramm];
     self.flowersCollected = self.flowersCollected + 1;
-//    CCSprite *flower = [CCSprite spriteWithFile:@"Flower.png"];
-    CCSprite *flower = [CCSprite spriteWithFile:@"starBase.png"];
-    flower.color = SIGNS_COLOR_ORANGE;
-    flower.opacity = DEFAULT_OPACITY;
-    [self addChild:flower];
-    flower.position = ccp(WIN_SIZE.width * (0.7 + 0.08 * self.flowersCollected), WIN_SIZE.height * 0.92);
+    CCSprite *starFrame = [CCSprite spriteWithFile:@"starFrameBase.png"];
+    starFrame.color = UI_COLOR_GREY;
+    starFrame.position = ccp(WIN_SIZE.width * (0.33 + 0.08 * self.flowersCollected), WIN_SIZE.height * 0.95);
+    [self addChild:starFrame];
+    
+    CCSprite *star = [CCSprite spriteWithFile:@"starBase.png"];
+    star.color = SIGNS_COLOR_ORANGE;
+    star.opacity = DEFAULT_OPACITY;
+    star.position = ccp( starFrame.contentSize.width/2. , starFrame.contentSize.height/2. );
+    [starFrame addChild:star];
 }
 
 - (void)updateAvaiblePathVisual
@@ -362,67 +366,6 @@
     self.connections = nil;
     [super dealloc];
 }
-
-//#pragma mark - Drawing
-//
-//-(void) visit
-//{
-//	// quick return if not visible. children won't be drawn.
-//	if (!visible_)
-//		return;
-//    
-//	kmGLPushMatrix();
-//    
-//	if ( grid_ && grid_.active)
-//		[grid_ beforeDraw];
-//    
-//	[self transform];
-//    
-//	if(children_) {
-//        
-//		[self sortAllChildren];
-//        
-//		ccArray *arrayData = children_->data;
-//		NSUInteger i = 0;
-//        
-////		// draw children zOrder < 0
-////		for( ; i < arrayData->num; i++ ) {
-////			CCNode *child = arrayData->arr[i];
-////			if ( [child zOrder] < 0 )
-////				[child visit];
-////			else
-////				break;
-////		}
-//        
-//		// self draw
-//		[self draw];
-//        
-//		// draw children zOrder >= 0
-//		for( ; i < arrayData->num; i++ ) {
-//			CCNode *child =  arrayData->arr[i];
-//            if (child != self.player.sprite){
-//                [child visit];
-//            }
-//		}
-//        
-//	} else
-//		[self draw];
-//    
-//	// reset for next frame
-//	orderOfArrival_ = 0;
-//    
-//	if ( grid_ && grid_.active)
-//		[grid_ afterDraw:self];
-//    
-//	kmGLPopMatrix();
-//
-//}
-//
-//- (void)draw
-//{
-//    [super draw];
-////    [self.player.sprite draw];
-//}
 
 #pragma mark - Console
 
