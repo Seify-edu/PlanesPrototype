@@ -16,26 +16,7 @@
 {
     if (self = [super init])
     {
-//        CGSize winSize = [[CCDirector sharedDirector] winSize];
-//        self.resIndicator1 = [[[MapVertex alloc] initWithPosition:ccp(winSize.width * 0.07, winSize.height * 0.95) SpriteName:@"flowerBase.png" Value:0] autorelease];
-//        self.resIndicator1.scale = 0.5;
-//        self.resIndicator2 = [[[MapVertex alloc] initWithPosition:ccp(winSize.width * 0.14, winSize.height * 0.95) SpriteName:@"flowerBase.png" Value:0] autorelease];
-//        self.resIndicator2.scale = 0.5;
-//        self.resIndicator3 = [[[MapVertex alloc] initWithPosition:ccp(winSize.width * 0.21, winSize.height * 0.95) SpriteName:@"flowerBase.png" Value:0] autorelease];
-//        self.resIndicator3.scale = 0.5;
-//        self.resIndicator4 = [[[MapVertex alloc] initWithPosition:ccp(winSize.width * 0.28, winSize.height * 0.95) SpriteName:@"flowerBase.png" Value:0] autorelease];
-//        self.resIndicator4.scale = 0.5;
-//        self.resIndicator5 = [[[MapVertex alloc] initWithPosition:ccp(winSize.width * 0.35, winSize.height * 0.95) SpriteName:@"flowerBase.png" Value:0] autorelease];
-//        self.resIndicator5.scale = 0.5;
-//        
-//        [self addChild:self.resIndicator1];
-//        [self addChild:self.resIndicator2];
-//        [self addChild:self.resIndicator3];
-//        [self addChild:self.resIndicator4];
-//        [self addChild:self.resIndicator5];
-        
-        [self updateResources];
-        
+        [self recreateInterface];
     }
     
     return self;
@@ -43,11 +24,11 @@
 
 - (void)updateResources
 {
-//    [self.resIndicator1.label setString:[NSString stringWithFormat:@"%d", [self.delegate getNumberOfResource:RESOURCE_TYPE_1]]];
-//    [self.resIndicator2.label setString:[NSString stringWithFormat:@"%d", [self.delegate getNumberOfResource:RESOURCE_TYPE_2]]];
-//    [self.resIndicator3.label setString:[NSString stringWithFormat:@"%d", [self.delegate getNumberOfResource:RESOURCE_TYPE_3]]];
-//    [self.resIndicator4.label setString:[NSString stringWithFormat:@"%d", [self.delegate getNumberOfResource:RESOURCE_TYPE_4]]];
-//    [self.resIndicator5.label setString:[NSString stringWithFormat:@"%d", [self.delegate getNumberOfResource:RESOURCE_TYPE_5]]];
+    [self recreateInterface];
+}
+
+- (void)recreateInterface
+{
     
     [self removeAllChildrenWithCleanup:YES];
     
@@ -78,7 +59,24 @@
         energyBar.opacity = DEFAULT_OPACITY;
         [cell addChild:energyBar];
     }
+    
+    
+    CCSprite *pauseButtonUnpressed = [CCSprite spriteWithFile:@"pauseButtonBase.png"];
+    CCSprite *pauseButtonPressed = [CCSprite spriteWithFile:@"pauseButtonBase.png"];
+    pauseButtonPressed.color = pauseButtonUnpressed.color = UI_COLOR_GREY;
+    
+    CCMenuItemSprite *pauseButton = [CCMenuItemSprite itemWithNormalSprite:pauseButtonUnpressed
+                                                            selectedSprite:pauseButtonPressed
+                                                                    target:self
+                                                                  selector:@selector(pauseButtonPressed)];
+    CCMenu *pauseMenu = [CCMenu menuWithItems:pauseButton, nil];
+    pauseMenu.position = ccp( WIN_SIZE.width * 0.95, WIN_SIZE.height * 0.95);
+    [self addChild:pauseMenu];
+}
 
+- (void)pauseButtonPressed
+{
+    [self.delegate pauseButtonPressed];
 }
 
 @end

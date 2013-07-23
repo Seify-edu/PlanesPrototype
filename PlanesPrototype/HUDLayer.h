@@ -12,6 +12,7 @@
 
 @protocol HUDLayerDelegate
 - (int)getNumberOfResource:(int)resourceID;
+- (void)pauseButtonPressed;
 @end
 
 

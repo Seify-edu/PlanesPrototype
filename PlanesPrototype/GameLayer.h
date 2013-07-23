@@ -15,15 +15,22 @@
 #import "Constants.h"
 #import "MainMenuLayer.h"
 #import "MapNode.h"
+#import "Popup.h"
 
 enum {
     PLAYER_EASY_MOVE_TAG
+};
+
+enum {
+    GAME_STATE_PAUSE,
+    GAME_STATE_RUNNING
 };
 
 @interface GameLayer : CCLayer <HUDLayerDelegate> {
     int resources[NUMBER_OF_RESOURCES];
 }
 @property (assign) CCNode *hud;
+@property int state;
 
 @property (assign) CCLabelTTF *console;
 
@@ -38,10 +45,7 @@ enum {
 @property int currentLevel;
 @property int currentPack;
 
-//@property int resCount1;
-//@property int resCount2;
-//@property int resCount3;
-//@property int resCount4;
+@property (assign) Popup *popup;
 
 // returns a CCScene that contains the GameLayer as the only child
 +(CCScene *) scene;

@@ -35,6 +35,7 @@
 		B13174D8179AEE2F0047E307 /* starBase.png in Resources */ = {isa = PBXBuildFile; fileRef = B13174CB179AEE2F0047E307 /* starBase.png */; };
 		B13174D9179AEE2F0047E307 /* starFrameBase.png in Resources */ = {isa = PBXBuildFile; fileRef = B13174CC179AEE2F0047E307 /* starFrameBase.png */; };
 		B13174DE179C88C50047E307 /* MapNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B13174DD179C88C50047E307 /* MapNode.m */; };
+		B13174E3179F180E0047E307 /* Popup.m in Sources */ = {isa = PBXBuildFile; fileRef = B13174E2179F180D0047E307 /* Popup.m */; };
 		B132921616B8648700AC3436 /* EditorLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B132921516B8648700AC3436 /* EditorLayer.m */; };
 		B1A1FC991714BD42009E3850 /* level2_1 in Resources */ = {isa = PBXBuildFile; fileRef = B1A1FC8D1714BD42009E3850 /* level2_1 */; };
 		B1A1FC9A1714BD42009E3850 /* level2_2 in Resources */ = {isa = PBXBuildFile; fileRef = B1A1FC8E1714BD42009E3850 /* level2_2 */; };
@@ -225,6 +226,8 @@
 		B13174CC179AEE2F0047E307 /* starFrameBase.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = starFrameBase.png; path = "PlanesPrototype/Resources/non-retina/starFrameBase.png"; sourceTree = "<group>"; };
 		B13174DC179C88C50047E307 /* MapNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapNode.h; sourceTree = "<group>"; };
 		B13174DD179C88C50047E307 /* MapNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapNode.m; sourceTree = "<group>"; };
+		B13174E1179F180D0047E307 /* Popup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Popup.h; sourceTree = "<group>"; };
+		B13174E2179F180D0047E307 /* Popup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Popup.m; sourceTree = "<group>"; };
 		B132921416B8648700AC3436 /* EditorLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorLayer.h; sourceTree = "<group>"; };
 		B132921516B8648700AC3436 /* EditorLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorLayer.m; sourceTree = "<group>"; };
 		B1A1FC8D1714BD42009E3850 /* level2_1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level2_1; path = "PlanesPrototype/levels/backup 08.04.2013/levels/level2_1"; sourceTree = "<group>"; };
@@ -610,6 +613,8 @@
 				B132921516B8648700AC3436 /* EditorLayer.m */,
 				B1EA24E716B560DC0021D124 /* HUDLayer.h */,
 				B1EA24E816B560DC0021D124 /* HUDLayer.m */,
+				B13174E1179F180D0047E307 /* Popup.h */,
+				B13174E2179F180D0047E307 /* Popup.m */,
 			);
 			name = Layers;
 			sourceTree = "<group>";
@@ -1329,6 +1334,7 @@
 				B1D76AA216C98333007012E5 /* LevelSelectLayer.m in Sources */,
 				B1B2300316E500A2000EBD19 /* Walkthrough.m in Sources */,
 				B13174DE179C88C50047E307 /* MapNode.m in Sources */,
+				B13174E3179F180E0047E307 /* Popup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

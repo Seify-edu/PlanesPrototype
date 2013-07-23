@@ -7,6 +7,7 @@
 //
 
 #import "GameLayer.h"
+#import "Popup.h"
 
 @implementation GameLayer
 
@@ -165,7 +166,9 @@
 - (id)init
 {
 	if (self = [super init])
-    {        
+    {
+        self.state = GAME_STATE_RUNNING;
+        
 //        CCSprite *bg = [CCSprite spriteWithFile:@"BlueSkyBg.jpg"];
         CCSprite *bg = [CCSprite spriteWithFile:@"background.png"];
         bg.position = ccp (self.contentSize.width / 2.0, self.contentSize.height / 2.0);
@@ -222,6 +225,10 @@
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
+    if (self.state == GAME_STATE_PAUSE) {
+        return YES;
+    }
+    
     CGPoint location = [self convertTouchToNodeSpace:touch];
     for (MapVertex *mv in self.vertexes)
     {
@@ -358,6 +365,60 @@
 - (void)backPressed
 {
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[MainMenuLayer scene] withColor:ccWHITE]];
+}
+
+- (CCMenuItemSprite *)createButtonWithFile:(NSString *)filename Color:(ccColor3B)color Selector:(SEL)sel Text:(NSString *)text
+{
+    CCSprite *resumeButtonUnpressed = [CCSprite spriteWithFile:filename];
+    CCSprite *resumeButtonPressed = [CCSprite spriteWithFile:filename];
+    resumeButtonUnpressed.color = resumeButtonPressed.color = color;
+    resumeButtonUnpressed.opacity = resumeButtonPressed.opacity = DEFAULT_OPACITY;
+    CCMenuItemSprite *resumeButton = [CCMenuItemSprite itemWithNormalSprite:resumeButtonUnpressed selectedSprite:resumeButtonPressed target:self selector:sel];
+    CCLabelTTF *resumeButtonText = [CCLabelTTF labelWithString:text fontName:@"Marker Felt" fontSize:48];
+    resumeButtonText.position = ccp( resumeButton.contentSize.width * 0.5, resumeButton.contentSize.height * 0.5);
+    [resumeButton addChild:resumeButtonText];
+    
+    return resumeButton;
+}
+
+- (void)pauseButtonPressed
+{
+    if (self.state == GAME_STATE_PAUSE) return;
+    
+    self.state = GAME_STATE_PAUSE;
+    
+    self.popup = [Popup node];
+    
+//    CCSprite *resumeButtonUnpressed = [CCSprite spriteWithFile:@"popupButtonBase.png"];
+//    CCSprite *resumeButtonPressed = [CCSprite spriteWithFile:@"popupButtonBase.png"];
+//    resumeButtonUnpressed.color = resumeButtonPressed.color = flowerColors[0];
+//    resumeButtonUnpressed.opacity = resumeButtonPressed.opacity = DEFAULT_OPACITY;
+//    CCMenuItemSprite *resumeButton = [CCMenuItemSprite itemWithNormalSprite:resumeButtonUnpressed selectedSprite:resumeButtonPressed target:self selector:@selector(resumeButtonPressed)];
+//    CCLabelTTF *resumeButtonText = [CCLabelTTF labelWithString:@"Resume" fontName:@"Marker Felt" fontSize:48];
+//    resumeButtonText.position = ccp( resumeButton.contentSize.width * 0.5, resumeButton.contentSize.height * 0.5);
+//    [resumeButton addChild:resumeButtonText];
+    CCMenuItemSprite *resumeButton = [self createButtonWithFile:@"popupButtonBase.png" Color:flowerColors[0] Selector:@selector(resumeButtonPressed) Text:@"Resume"];
+    CCMenuItemSprite *restartButton = [self createButtonWithFile:@"popupButtonBase.png" Color:flowerColors[1] Selector:@selector(restartButtonPressed) Text:@"Restart"];
+    
+    CCMenu *popupMenu = [CCMenu menuWithItems:resumeButton, restartButton, nil];
+    [popupMenu alignItemsVerticallyWithPadding:50];
+    popupMenu.position = ccp( 0, 0 );
+    [self.popup addChild:popupMenu];
+    [self addChild:self.popup];
+}
+
+- (void)resumeButtonPressed
+{
+    self.state = GAME_STATE_RUNNING;
+    
+    [self removeChild:self.popup cleanup:YES];
+}
+
+- (void)restartButtonPressed
+{
+    self.state = GAME_STATE_RUNNING;
+    
+    [self removeChild:self.popup cleanup:YES];
 }
 
 - (void)dealloc
