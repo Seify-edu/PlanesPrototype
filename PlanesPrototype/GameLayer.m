@@ -19,12 +19,6 @@
     gl.tag = 0;
 	[scene addChild: gl];
     
-    HUDLayer *hudl = [HUDLayer node];
-    hudl.delegate = gl;
-    gl.hud = hudl;
-    [hudl updateResources];
-    [scene addChild:hudl];
-	
 	return scene;
 }
 
@@ -197,6 +191,15 @@
         
         [self initResources];
         
+        
+        HudNode *hudl = [HudNode node];
+        hudl.delegate = self;
+        self.hud = hudl;
+        [hudl updateResources];
+        [self addChild:hudl];
+
+        
+        
         self.console = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:32];
         self.console.color = ccBLACK;
         [self addChild:self.console];
@@ -266,18 +269,10 @@
                         
                         if (mv.pictogrammType == MODIFIER_END)
                         {
-                            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                            NSString *levelWonKey = [NSString stringWithFormat:@"pack%dlevel%dWon", self.currentPack, self.currentLevel ];
-                            [defaults setBool:YES forKey:levelWonKey];
-                            NSString *starsCollectedKey = [NSString stringWithFormat:@"starsUnlockedInPack%dLevel%d", self.currentPack, self.currentLevel];
-                            int starsCollectedBefore = [defaults integerForKey:starsCollectedKey];
-                            if (self.flowersCollected > starsCollectedBefore) {
-                                [defaults setInteger:self.flowersCollected forKey:starsCollectedKey];
-                            }
-                            [defaults synchronize];
-                            
-                            [self performSelector:@selector(postConsoleMessage:) withObject:@"You Won!" afterDelay:(NSTimeInterval)timeToTravel];
-                        } else {
+                            [self performSelector:@selector(levelWon) withObject:nil afterDelay:(NSTimeInterval)timeToTravel];
+                        }
+                        else
+                        {
                             BOOL cannotMove = YES;
                             for (VertexConnection *vc2 in self.connections) {
                                 if (vc2.startVertex == mv || vc2.endVertex == mv)
@@ -288,16 +283,15 @@
                                     }
                                 }
                             }
-                            if (cannotMove) {
-                                [self performSelector:@selector(postConsoleMessage:) withObject:@"You Lose!" afterDelay:(NSTimeInterval)timeToTravel];
+                            if (cannotMove)
+                            {
+                                [self performSelector:@selector(levelLose) withObject:nil afterDelay:(NSTimeInterval)timeToTravel];
                             }
 
                             BOOL flowerCollected = (mv.pictogrammType == MODIFIER_BONUS);
                             if (flowerCollected) {
                                 [self performSelector:@selector(collectFlowerFromVertex:) withObject:mv afterDelay:(NSTimeInterval)timeToTravel];
-                            }
-                            
-//                            [self performSelector:@selector(updateAvaiblePathVisual) withObject:nil afterDelay:(NSTimeInterval)timeToTravel];
+                            }                            
                         }
                     }
                     else
@@ -338,21 +332,11 @@
     mv.pictogrammType = MODIFIER_NONE;
     [mv recreatePictogramm];
     self.flowersCollected = self.flowersCollected + 1;
-    CCSprite *starFrame = [CCSprite spriteWithFile:@"starFrameBase.png"];
-    starFrame.color = UI_COLOR_GREY;
-    starFrame.position = ccp(WIN_SIZE.width * (0.33 + 0.08 * self.flowersCollected), WIN_SIZE.height * 0.95);
-    [self addChild:starFrame];
-    
-    CCSprite *star = [CCSprite spriteWithFile:@"starBase.png"];
-    star.color = SIGNS_COLOR_ORANGE;
-    star.opacity = DEFAULT_OPACITY;
-    star.position = ccp( starFrame.contentSize.width/2. , starFrame.contentSize.height/2. );
-    [starFrame addChild:star];
+    [self.hud updateResources];
 }
 
 - (void)updateAvaiblePathVisual
 {
-    
     for (VertexConnection *vc in self.connections)
     {
         vc.sprite.opacity = 255.0f;
@@ -360,6 +344,11 @@
                 vc.sprite.opacity = 122.0f;
             }
     }
+}
+
+- (int)getStarsCollected
+{
+    return self.flowersCollected;
 }
 
 - (void)backPressed
@@ -389,14 +378,6 @@
     
     self.popup = [Popup node];
     
-//    CCSprite *resumeButtonUnpressed = [CCSprite spriteWithFile:@"popupButtonBase.png"];
-//    CCSprite *resumeButtonPressed = [CCSprite spriteWithFile:@"popupButtonBase.png"];
-//    resumeButtonUnpressed.color = resumeButtonPressed.color = flowerColors[0];
-//    resumeButtonUnpressed.opacity = resumeButtonPressed.opacity = DEFAULT_OPACITY;
-//    CCMenuItemSprite *resumeButton = [CCMenuItemSprite itemWithNormalSprite:resumeButtonUnpressed selectedSprite:resumeButtonPressed target:self selector:@selector(resumeButtonPressed)];
-//    CCLabelTTF *resumeButtonText = [CCLabelTTF labelWithString:@"Resume" fontName:@"Marker Felt" fontSize:48];
-//    resumeButtonText.position = ccp( resumeButton.contentSize.width * 0.5, resumeButton.contentSize.height * 0.5);
-//    [resumeButton addChild:resumeButtonText];
     CCMenuItemSprite *resumeButton = [self createButtonWithFile:@"popupButtonBase.png" Color:flowerColors[0] Selector:@selector(resumeButtonPressed) Text:@"Resume"];
     CCMenuItemSprite *restartButton = [self createButtonWithFile:@"popupButtonBase.png" Color:flowerColors[1] Selector:@selector(restartButtonPressed) Text:@"Restart"];
     
@@ -414,11 +395,97 @@
     [self removeChild:self.popup cleanup:YES];
 }
 
+- (void)restartLevel
+{
+    self.flowersCollected = 0;
+    for (int i = 0; i < 5; i++)
+        resources[i] = 0;
+    [self.map removeAllChildrenWithCleanup:YES];
+    [self.hud removeAllChildrenWithCleanup:YES];
+    [self.vertexes removeAllObjects];
+    [self.connections removeAllObjects];
+    self.player = nil;
+    [self.hud updateResources];
+    
+    NSString *levelName = [NSString stringWithFormat:@"level%d_%d", self.currentPack, self.currentLevel];
+    NSDictionary *level = [self loadLevel:levelName];
+    [self parseLevel:level];
+}
+
 - (void)restartButtonPressed
+{
+    [self restartLevel];
+    
+    self.state = GAME_STATE_RUNNING;
+    
+    [self removeChild:self.popup cleanup:YES];
+}
+
+- (void)levelSelectButtonPressed
 {
     self.state = GAME_STATE_RUNNING;
     
     [self removeChild:self.popup cleanup:YES];
+}
+
+- (void)nextLevelButtonPressed
+{
+    self.state = GAME_STATE_RUNNING;
+    
+    [self removeChild:self.popup cleanup:YES];
+}
+
+- (void)levelWon
+{
+    self.state = GAME_STATE_PAUSE;
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *levelWonKey = [NSString stringWithFormat:@"pack%dlevel%dWon", self.currentPack, self.currentLevel ];
+    [defaults setBool:YES forKey:levelWonKey];
+    NSString *starsCollectedKey = [NSString stringWithFormat:@"starsUnlockedInPack%dLevel%d", self.currentPack, self.currentLevel];
+    int starsCollectedBefore = [defaults integerForKey:starsCollectedKey];
+    if (self.flowersCollected > starsCollectedBefore) {
+        [defaults setInteger:self.flowersCollected forKey:starsCollectedKey];
+    }
+    [defaults synchronize];
+        
+    self.popup = [Popup node];
+    
+    CCMenuItemSprite *nextLevelButton = [self createButtonWithFile:@"popupButtonBase.png" Color:flowerColors[0] Selector:@selector(nextLevelButtonPressed) Text:@"Next level"];
+    CCMenuItemSprite *restartButton = [self createButtonWithFile:@"popupButtonBase.png" Color:flowerColors[1] Selector:@selector(restartButtonPressed) Text:@"Restart"];
+    
+    CCMenu *popupMenu = [CCMenu menuWithItems:nextLevelButton, restartButton, nil];
+    [popupMenu alignItemsVerticallyWithPadding:50];
+    popupMenu.position = ccp( 0, 0 );
+    [self.popup addChild:popupMenu];
+    
+    CCLabelTTF *wonText = [CCLabelTTF labelWithString:@"You won!" fontName:@"Marker Felt" fontSize:48];
+    wonText.position = ccp( 0, WIN_SIZE.height * 0.2);
+    [self.popup addChild:wonText];
+
+    
+    [self addChild:self.popup];
+}
+
+- (void)levelLose
+{
+    self.state = GAME_STATE_PAUSE;
+    
+    self.popup = [Popup node];
+    
+    CCLabelTTF *loseText = [CCLabelTTF labelWithString:@"You lose ..." fontName:@"Marker Felt" fontSize:48];
+    loseText.position = ccp( 0, WIN_SIZE.height * 0.2);
+    [self.popup addChild:loseText];
+    
+    CCMenuItemSprite *restartButton = [self createButtonWithFile:@"popupButtonBase.png" Color:flowerColors[0] Selector:@selector(restartButtonPressed) Text:@"Restart"];
+    CCMenuItemSprite *levelSelectButton = [self createButtonWithFile:@"popupButtonBase.png" Color:flowerColors[1] Selector:@selector(levelSelectButtonPressed) Text:@"Select level"];
+    
+    CCMenu *popupMenu = [CCMenu menuWithItems:restartButton, levelSelectButton, nil];
+    [popupMenu alignItemsVerticallyWithPadding:50];
+    popupMenu.position = ccp( 0, 0 );
+    [self.popup addChild:popupMenu];
+    
+    [self addChild:self.popup];
 }
 
 - (void)dealloc

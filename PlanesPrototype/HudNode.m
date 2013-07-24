@@ -1,26 +1,15 @@
 //
-//  HUDLayer.m
+//  HudNode.m
 //  PlanesPrototype
 //
-//  Created by Roman Smirnov on 27.01.13.
+//  Created by Roman Smirnov on 24.07.13.
 //  Copyright 2013 __MyCompanyName__. All rights reserved.
 //
 
-#import "HUDLayer.h"
-#import "Constants.h"
-#import "cocos2d.h"
+#import "HudNode.h"
 
-@implementation HUDLayer
 
-- (id)init
-{
-    if (self = [super init])
-    {
-        [self recreateInterface];
-    }
-    
-    return self;
-}
+@implementation HudNode
 
 - (void)updateResources
 {
@@ -72,6 +61,21 @@
     CCMenu *pauseMenu = [CCMenu menuWithItems:pauseButton, nil];
     pauseMenu.position = ccp( WIN_SIZE.width * 0.95, WIN_SIZE.height * 0.95);
     [self addChild:pauseMenu];
+    
+    for (int i = 0; i < [self.delegate getStarsCollected]; i++)
+    {
+        CCSprite *starFrame = [CCSprite spriteWithFile:@"starFrameBase.png"];
+        starFrame.color = UI_COLOR_GREY;
+        starFrame.position = ccp(WIN_SIZE.width * (0.44 + 0.08 * i), WIN_SIZE.height * 0.95);
+        [self addChild:starFrame];
+        
+        CCSprite *star = [CCSprite spriteWithFile:@"starBase.png"];
+        star.color = SIGNS_COLOR_ORANGE;
+        star.opacity = DEFAULT_OPACITY;
+        star.position = ccp( starFrame.contentSize.width/2. , starFrame.contentSize.height/2. );
+        [starFrame addChild:star];
+    }
+
 }
 
 - (void)pauseButtonPressed
@@ -79,6 +83,5 @@
     [self.delegate pauseButtonPressed];
 }
 
+
 @end
-
-

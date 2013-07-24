@@ -10,7 +10,7 @@
 #import "MapVertex.h"
 #import "VertexConnection.h"
 #import "Player.h"
-#import "HUDLayer.h"
+#import "HudNode.h"
 #import "cocos2d.h"
 #import "Constants.h"
 #import "MainMenuLayer.h"
@@ -26,10 +26,10 @@ enum {
     GAME_STATE_RUNNING
 };
 
-@interface GameLayer : CCLayer <HUDLayerDelegate> {
+@interface GameLayer : CCLayer <HudNodeDelegate> {
     int resources[NUMBER_OF_RESOURCES];
 }
-@property (assign) CCNode *hud;
+@property (assign) HudNode *hud;
 @property int state;
 
 @property (assign) CCLabelTTF *console;

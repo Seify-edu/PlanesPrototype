@@ -36,6 +36,7 @@
 		B13174D9179AEE2F0047E307 /* starFrameBase.png in Resources */ = {isa = PBXBuildFile; fileRef = B13174CC179AEE2F0047E307 /* starFrameBase.png */; };
 		B13174DE179C88C50047E307 /* MapNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B13174DD179C88C50047E307 /* MapNode.m */; };
 		B13174E3179F180E0047E307 /* Popup.m in Sources */ = {isa = PBXBuildFile; fileRef = B13174E2179F180D0047E307 /* Popup.m */; };
+		B13174E917A0692E0047E307 /* HudNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B13174E817A0692D0047E307 /* HudNode.m */; };
 		B132921616B8648700AC3436 /* EditorLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B132921516B8648700AC3436 /* EditorLayer.m */; };
 		B1A1FC991714BD42009E3850 /* level2_1 in Resources */ = {isa = PBXBuildFile; fileRef = B1A1FC8D1714BD42009E3850 /* level2_1 */; };
 		B1A1FC9A1714BD42009E3850 /* level2_2 in Resources */ = {isa = PBXBuildFile; fileRef = B1A1FC8E1714BD42009E3850 /* level2_2 */; };
@@ -192,7 +193,6 @@
 		B1EA24B916B10F300021D124 /* MapVertex.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EA24B816B10F300021D124 /* MapVertex.m */; };
 		B1EA24DD16B321070021D124 /* VertexConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EA24DC16B321060021D124 /* VertexConnection.m */; };
 		B1EA24E616B473130021D124 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EA24E516B473120021D124 /* Player.m */; };
-		B1EA24E916B560DD0021D124 /* HUDLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EA24E816B560DC0021D124 /* HUDLayer.m */; };
 		B1EA251116B701600021D124 /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EA251016B7015F0021D124 /* MainMenuLayer.m */; };
 /* End PBXBuildFile section */
 
@@ -228,6 +228,8 @@
 		B13174DD179C88C50047E307 /* MapNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapNode.m; sourceTree = "<group>"; };
 		B13174E1179F180D0047E307 /* Popup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Popup.h; sourceTree = "<group>"; };
 		B13174E2179F180D0047E307 /* Popup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Popup.m; sourceTree = "<group>"; };
+		B13174E717A0692D0047E307 /* HudNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HudNode.h; sourceTree = "<group>"; };
+		B13174E817A0692D0047E307 /* HudNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HudNode.m; sourceTree = "<group>"; };
 		B132921416B8648700AC3436 /* EditorLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorLayer.h; sourceTree = "<group>"; };
 		B132921516B8648700AC3436 /* EditorLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorLayer.m; sourceTree = "<group>"; };
 		B1A1FC8D1714BD42009E3850 /* level2_1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level2_1; path = "PlanesPrototype/levels/backup 08.04.2013/levels/level2_1"; sourceTree = "<group>"; };
@@ -528,8 +530,6 @@
 		B1EA24DC16B321060021D124 /* VertexConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VertexConnection.m; sourceTree = "<group>"; };
 		B1EA24E416B473120021D124 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		B1EA24E516B473120021D124 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
-		B1EA24E716B560DC0021D124 /* HUDLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUDLayer.h; sourceTree = "<group>"; };
-		B1EA24E816B560DC0021D124 /* HUDLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HUDLayer.m; sourceTree = "<group>"; };
 		B1EA24EA16B576740021D124 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		B1EA250F16B7015D0021D124 /* MainMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuLayer.h; sourceTree = "<group>"; };
 		B1EA251016B7015F0021D124 /* MainMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuLayer.m; sourceTree = "<group>"; };
@@ -599,6 +599,8 @@
 		B13174DA179C40720047E307 /* Layers */ = {
 			isa = PBXGroup;
 			children = (
+				B13174E717A0692D0047E307 /* HudNode.h */,
+				B13174E817A0692D0047E307 /* HudNode.m */,
 				B1EA24AC16B107280021D124 /* IntroLayer.h */,
 				B1EA24AD16B107280021D124 /* IntroLayer.m */,
 				B1EA250F16B7015D0021D124 /* MainMenuLayer.h */,
@@ -611,8 +613,6 @@
 				B1B2300216E500A2000EBD19 /* Walkthrough.m */,
 				B132921416B8648700AC3436 /* EditorLayer.h */,
 				B132921516B8648700AC3436 /* EditorLayer.m */,
-				B1EA24E716B560DC0021D124 /* HUDLayer.h */,
-				B1EA24E816B560DC0021D124 /* HUDLayer.m */,
 				B13174E1179F180D0047E307 /* Popup.h */,
 				B13174E2179F180D0047E307 /* Popup.m */,
 			);
@@ -1327,7 +1327,6 @@
 				B1EA24B916B10F300021D124 /* MapVertex.m in Sources */,
 				B1EA24DD16B321070021D124 /* VertexConnection.m in Sources */,
 				B1EA24E616B473130021D124 /* Player.m in Sources */,
-				B1EA24E916B560DD0021D124 /* HUDLayer.m in Sources */,
 				B1EA251116B701600021D124 /* MainMenuLayer.m in Sources */,
 				B132921616B8648700AC3436 /* EditorLayer.m in Sources */,
 				B1D76A9B16C6C278007012E5 /* GDataXMLNode.m in Sources */,
@@ -1335,6 +1334,7 @@
 				B1B2300316E500A2000EBD19 /* Walkthrough.m in Sources */,
 				B13174DE179C88C50047E307 /* MapNode.m in Sources */,
 				B13174E3179F180E0047E307 /* Popup.m in Sources */,
+				B13174E917A0692E0047E307 /* HudNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
