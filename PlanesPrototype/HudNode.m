@@ -16,10 +16,22 @@
     [self recreateInterface];
 }
 
+- (void)blinkEnergyBar
+{
+    if ([self.energyBar numberOfRunningActions] == 0)
+    {
+        CCBlink *blink = [CCBlink actionWithDuration:0.5 blinks:2];
+        [self.energyBar runAction:blink];
+    }
+}
+
 - (void)recreateInterface
 {
     
     [self removeAllChildrenWithCleanup:YES];
+    
+    self.energyBar = [CCNode node];
+    [self addChild: self.energyBar];
     
     int resType1 = [self.delegate getNumberOfResource:RESOURCE_TYPE_1];
     int resType2 = [self.delegate getNumberOfResource:RESOURCE_TYPE_2];
@@ -33,7 +45,7 @@
         CCSprite *cell = [CCSprite spriteWithFile:@"energySegmentFrameBase.png"];
         cell.color = UI_COLOR_GREY;
         cell.position = ccp( WIN_SIZE.width * ( 0.07 + i * 0.03 ), WIN_SIZE.height * ( 0.95 - ( i % 2) * 0.02 ) );
-        [self addChild:cell];
+        [self.energyBar addChild:cell];
         
         ccColor3B energyColor;
         if (i < resType1) energyColor = flowerColors[0];

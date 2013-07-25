@@ -6,18 +6,18 @@
 //  Copyright 2013 __MyCompanyName__. All rights reserved.
 //
 
+#import "GameLayer.h"
 #import "LevelSelectLayer.h"
 #import "MainMenuLayer.h"
 #import "Constants.h"
 
 @implementation LevelSelectLayer
 
-+(CCScene *) sceneWithNextScene:(id)nextScene
++(CCScene *) scene
 {
 	CCScene *scene = [CCScene node];
     
 	LevelSelectLayer *lsl = [LevelSelectLayer node];
-    lsl.nextScene = nextScene;
 	[scene addChild: lsl];
     
 	return scene;
@@ -53,7 +53,6 @@
         bg.position = ccp(self.contentSize.width / 2.0, self.contentSize.height / 2.0);
         [self addChild:bg];
         
-//#define COLUMNS_COUNT 2
 #define RAWS_COUNT 5
 #define LEVELS_IN_PACK 20
         
@@ -134,79 +133,29 @@
                 [self addChild:menu];
                 [menuItems removeAllObjects];
             }
-        }
-                
-        CCMenuItemSprite *backButton = [self createButtonWithNormalSprite:@"flowerBase.png"
-                                                           selectedSprite:@"flowerBase.png"
-                                                                     Text:@"<-"
-                                                                 Selector:@selector(backPressed)];
-        
-        backButton.color = flowerColors[ rand() % 5 ];
-        backButton.opacity = DEFAULT_OPACITY;
-        CCMenu *backMenu = [CCMenu menuWithItems:backButton, nil];
-		[backMenu alignItemsHorizontallyWithPadding:20];
-		[backMenu setPosition:ccp( WIN_SIZE.width * 0.1, WIN_SIZE.height * 0.1)];
-
-        [self addChild:backMenu];
-        
-        self.currentPageNumber = 1;
-        [self updatePageNumber];
-        
+        }        
     }
     return self;
 }
 
 - (void)buttonPressed:(CCNode *)button
 {
-    NSLog(@"%@ : %@ button = %@", self, NSStringFromSelector(_cmd), button);
     
     //TODO: add real pack number here
-    id <LevelSelectProtocol> nextLayer = [self.nextScene getChildByTag:0];
-    nextLayer.currentLevel = button.tag;
-    nextLayer.currentPack = 1;
-    NSString *levelName = [NSString stringWithFormat:@"level%d_%d", self.currentPageNumber, button.tag];
-    NSDictionary *level = [nextLayer loadLevel:levelName];
-    [nextLayer parseLevel:level];
     
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:(CCScene *)self.nextScene withColor:ccWHITE]];
-    self.nextScene = nil;
-}
+    int packNumber = 1;
 
-- (void)updatePageNumber
-{
-    [self removeChild:self.pageMenu cleanup:YES];
+    CCScene *GameLayerScene = [CCScene node];
+	GameLayer *gl = [GameLayer node];
+    gl.tag = 0;
+	[GameLayerScene addChild: gl];
+    gl.currentLevel = button.tag;
+    gl.currentPack = packNumber;
+    NSString *levelName = [NSString stringWithFormat:@"level%d_%d", packNumber, button.tag];
+    NSDictionary *level = [gl loadLevel:levelName];
+    [gl parseLevel:level];
     
-    CCLabelTTF *currentPageLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", self.currentPageNumber] fontName:@"Marker Felt"  fontSize:64];
-    CCMenuItemLabel *currentPage = [CCMenuItemLabel itemWithLabel:currentPageLabel];
-    CCLabelTTF *leftArrowLabel = [CCLabelTTF labelWithString:@"<--" fontName:@"Marker Felt"  fontSize:64];
-    CCMenuItemFont *leftArrow = [CCMenuItemFont itemWithLabel:leftArrowLabel target:self selector:@selector(leftPressed)];
-    CCLabelTTF *rightArrowLabel = [CCLabelTTF labelWithString:@"-->" fontName:@"Marker Felt"  fontSize:64];
-    CCMenuItemFont *rightArrow = [CCMenuItemFont itemWithLabel:rightArrowLabel target:self selector:@selector(rightPressed)];
-    self.pageMenu = [CCMenu menuWithItems:leftArrow, currentPage, rightArrow, nil];
-    [self.pageMenu alignItemsHorizontallyWithPadding:50];
-    self.pageMenu.position = ccp(WIN_SIZE.width * 0.5, WIN_SIZE.height * 0.9);
-    [self addChild:self.pageMenu];
-}
-
-
-- (void)leftPressed
-{
-    self.currentPageNumber = MAX(self.currentPageNumber - 1, 1);
-    [self updatePageNumber];
-}
-
-- (void)rightPressed
-{
-    self.currentPageNumber++;
-    [self updatePageNumber];
-}
-
-
-
-- (void)backPressed
-{
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[MainMenuLayer scene] withColor:ccWHITE]];
-    self.nextScene = nil;
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:GameLayerScene withColor:ccWHITE]];
 }
 
 @end

@@ -9,6 +9,7 @@
 
 // Import the interfaces
 #import "IntroLayer.h"
+#import "LevelSelectLayer.h"
 #import "GameLayer.h"
 #import "MainMenuLayer.h"
 
@@ -36,7 +37,7 @@
 -(void) onEnter
 {
 	[super onEnter];
-
+    
 	// ask director for the window size
 	CGSize size = [[CCDirector sharedDirector] winSize];
 
@@ -59,6 +60,6 @@
 
 -(void) makeTransition:(ccTime)dt
 {
-	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[MainMenuLayer scene] withColor:ccWHITE]];
+	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[LevelSelectLayer scene] withColor:ccWHITE]];
 }
 @end

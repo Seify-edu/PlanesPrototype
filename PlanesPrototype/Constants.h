@@ -32,6 +32,7 @@ enum
 
 #define UI_COLOR_BLUE ccc3(34, 64, 162);
 #define UI_COLOR_GREY ccc3(122, 125, 136);
+#define UI_COLOR_WHITE ccc3(255, 255, 255);
 
 #define SIGNS_COLOR_ORANGE ccc3(150, 87, 20);
 

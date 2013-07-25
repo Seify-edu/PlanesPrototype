@@ -6,12 +6,15 @@
 //  Copyright 2013 __MyCompanyName__. All rights reserved.
 //
 
+#import "LevelSelectLayer.h"
 #import "GameLayer.h"
 #import "Popup.h"
 
+#define MAX_LEVEL 20
+
 @implementation GameLayer
 
-+(CCScene *) scene
++(CCScene *)scene
 {
 	CCScene *scene = [CCScene node];
     
@@ -163,42 +166,24 @@
     {
         self.state = GAME_STATE_RUNNING;
         
-//        CCSprite *bg = [CCSprite spriteWithFile:@"BlueSkyBg.jpg"];
         CCSprite *bg = [CCSprite spriteWithFile:@"background.png"];
         bg.position = ccp (self.contentSize.width / 2.0, self.contentSize.height / 2.0);
         [self addChild:bg];
-        
-
         
         self.map = [MapNode node];
         self.vertexes = [NSMutableArray array];
         self.connections = [NSMutableArray array];
 
         [self addChild:self.map];
-        
 
         self.map.position = ccp(WIN_SIZE.width / 2.0, WIN_SIZE.height / 2.0);
         self.map.position = ccpSub(self.map.position, self.player.currentVertex.position);
-        
-        CCMenuItemSprite *backButton = [self createButtonWithNormalSprite:@"flowerBase.png"
-                                                           selectedSprite:@"flowerBase.png"
-                                                                     Text:@"<-"
-                                                                 Selector:@selector(backPressed)];
-        CCMenu *backMenu = [CCMenu menuWithItems:backButton, nil];
-		[backMenu alignItemsHorizontallyWithPadding:20];
-		[backMenu setPosition:ccp( WIN_SIZE.width * 0.1, WIN_SIZE.height * 0.1)];
-		[self addChild:backMenu];
-        
-        [self initResources];
-        
         
         HudNode *hudl = [HudNode node];
         hudl.delegate = self;
         self.hud = hudl;
         [hudl updateResources];
         [self addChild:hudl];
-
-        
         
         self.console = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:32];
         self.console.color = ccBLACK;
@@ -209,15 +194,6 @@
         [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:-1 swallowsTouches:YES];
 	}
 	return self;
-}
-
-- (void)initResources
-{
-    for (int i=0; i<NUMBER_OF_RESOURCES; i++) {
-        resources[i] = 1;
-    }
-    
-    [self.hud updateResources];
 }
 
 - (BOOL)point:(CGPoint)point insideMapVertex:(MapVertex *)mv
@@ -245,8 +221,9 @@
                     )
                 {
                     BOOL playerMoving = ([self.player getActionByTag:PLAYER_EASY_MOVE_TAG] != nil);
+                    BOOL enoughResources = ( resources[vc.resourceType] > 0 );
                     
-                    if (!playerMoving && resources[vc.resourceType] > 0)
+                    if (!playerMoving && enoughResources)
                     {
                         float sc = [CCDirector sharedDirector].contentScaleFactor;
                         float timeToTravel = ccpDistance(vc.startVertex.position, vc.endVertex.position) / sc * 0.003;
@@ -297,9 +274,10 @@
                     else
                     {
                         //TODO: play action with resource indicators
-                        
-//                        CCScaleTo *scaleHUD = [CCScaleTo actionWithDuration:0.1 scale:1.2];
-//                        [self.hud runAction:scaleHUD];
+                        if (!enoughResources)
+                        {
+                            [self.hud blinkEnergyBar];
+                        }
                     }
 
                     
@@ -351,11 +329,6 @@
     return self.flowersCollected;
 }
 
-- (void)backPressed
-{
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[MainMenuLayer scene] withColor:ccWHITE]];
-}
-
 - (CCMenuItemSprite *)createButtonWithFile:(NSString *)filename Color:(ccColor3B)color Selector:(SEL)sel Text:(NSString *)text
 {
     CCSprite *resumeButtonUnpressed = [CCSprite spriteWithFile:filename];
@@ -378,10 +351,11 @@
     
     self.popup = [Popup node];
     
-    CCMenuItemSprite *resumeButton = [self createButtonWithFile:@"popupButtonBase.png" Color:flowerColors[0] Selector:@selector(resumeButtonPressed) Text:@"Resume"];
-    CCMenuItemSprite *restartButton = [self createButtonWithFile:@"popupButtonBase.png" Color:flowerColors[1] Selector:@selector(restartButtonPressed) Text:@"Restart"];
+    CCMenuItemSprite *resumeButton = [self createButtonWithFile:@"popupButtonBase.png" Color:flowerColors[FLOWERS_COLOR_GREEN] Selector:@selector(resumeButtonPressed) Text:@"Resume"];
+    CCMenuItemSprite *restartButton = [self createButtonWithFile:@"popupButtonBase.png" Color:flowerColors[FLOWERS_COLOR_PINK] Selector:@selector(restartButtonPressed) Text:@"Restart"];
+    CCMenuItemSprite *levelSelectButton = [self createButtonWithFile:@"popupButtonBase.png" Color:flowerColors[FLOWERS_COLOR_BLUE] Selector:@selector(levelSelectButtonPressed) Text:@"Select level"];
     
-    CCMenu *popupMenu = [CCMenu menuWithItems:resumeButton, restartButton, nil];
+    CCMenu *popupMenu = [CCMenu menuWithItems:resumeButton, restartButton, levelSelectButton, nil];
     [popupMenu alignItemsVerticallyWithPadding:50];
     popupMenu.position = ccp( 0, 0 );
     [self.popup addChild:popupMenu];
@@ -423,16 +397,48 @@
 
 - (void)levelSelectButtonPressed
 {
-    self.state = GAME_STATE_RUNNING;
-    
-    [self removeChild:self.popup cleanup:YES];
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[LevelSelectLayer scene] withColor:ccWHITE]];   
 }
 
 - (void)nextLevelButtonPressed
 {
-    self.state = GAME_STATE_RUNNING;
-    
     [self removeChild:self.popup cleanup:YES];
+
+    if ( self.currentLevel < MAX_LEVEL)
+    {
+        self.currentLevel++;
+        [self restartLevel];
+        self.state = GAME_STATE_RUNNING;
+    }
+    else
+    {
+        [self showComingSoon];
+    }
+    
+}
+
+- (void)showComingSoon
+{
+    self.state = GAME_STATE_PAUSE;
+    
+    self.popup = [Popup node];
+    
+    CCLabelTTF *wonText = [CCLabelTTF labelWithString:@"You won!" fontName:@"Marker Felt" fontSize:48];
+    CCMenuItemLabel *title = [CCMenuItemLabel itemWithLabel:wonText];
+
+    CCLabelTTF *thxText = [CCLabelTTF labelWithString:@"Thx for playing :)" fontName:@"Marker Felt" fontSize:48];
+    CCMenuItemLabel *textThx = [CCMenuItemLabel itemWithLabel:thxText];
+    
+    CCLabelTTF *newLevelsText = [CCLabelTTF labelWithString:@"New levels coming soon..." fontName:@"Marker Felt" fontSize:48];
+    CCMenuItemLabel *textNewLevels = [CCMenuItemLabel itemWithLabel:newLevelsText];
+
+    CCMenuItemSprite *levelSelectButton = [self createButtonWithFile:@"popupButtonBase.png" Color:flowerColors[1] Selector:@selector(levelSelectButtonPressed) Text:@"Select level"];
+    CCMenu *popupMenu = [CCMenu menuWithItems: title, textThx, textNewLevels, levelSelectButton, nil];
+    [popupMenu alignItemsVerticallyWithPadding:50];
+    popupMenu.position = ccp( 0, 0 );
+    [self.popup addChild:popupMenu];
+    [self addChild:self.popup];
+
 }
 
 - (void)levelWon
@@ -450,18 +456,42 @@
     [defaults synchronize];
         
     self.popup = [Popup node];
+
+    CCLabelTTF *wonText = [CCLabelTTF labelWithString:@"You won!" fontName:@"Marker Felt" fontSize:48];
+    CCMenuItemLabel *title = [CCMenuItemLabel itemWithLabel:wonText];
+    title.isEnabled = NO;
+    title.color = UI_COLOR_WHITE;
     
     CCMenuItemSprite *nextLevelButton = [self createButtonWithFile:@"popupButtonBase.png" Color:flowerColors[0] Selector:@selector(nextLevelButtonPressed) Text:@"Next level"];
     CCMenuItemSprite *restartButton = [self createButtonWithFile:@"popupButtonBase.png" Color:flowerColors[1] Selector:@selector(restartButtonPressed) Text:@"Restart"];
     
-    CCMenu *popupMenu = [CCMenu menuWithItems:nextLevelButton, restartButton, nil];
+    CCSprite *starsContainer = [CCSprite spriteWithFile:@"starFrameBase.png"];
+    starsContainer.opacity = 0;
+    CCSprite *starsContainerPressed = [CCSprite spriteWithFile:@"starFrameBase.png"];
+    starsContainerPressed.opacity = 0;
+    for (int i = 0; i < 3; i++) {
+        CCSprite *starFrame = [CCSprite spriteWithFile:@"starFrameBase.png"];
+        starFrame.color = UI_COLOR_WHITE;
+        starFrame.position = ccp( starFrame.contentSize.height * ( -1.0 + 1.5 * i ), starFrame.contentSize.height / 2. );
+        [starsContainer addChild:starFrame];
+        
+        if (i + 1 <= self.flowersCollected)
+        {
+            CCSprite *star = [CCSprite spriteWithFile:@"starBase.png"];
+            star.color = SIGNS_COLOR_ORANGE;
+            star.opacity = DEFAULT_OPACITY;
+            star.position = ccp( starFrame.contentSize.width/2. , starFrame.contentSize.height/2. );
+            [starFrame addChild:star];
+        }
+    }
+    CCMenuItemSprite *stars = [CCMenuItemSprite itemWithNormalSprite:starsContainer selectedSprite:starsContainerPressed];
+    stars.isEnabled = NO;
+                                        
+    CCMenu *popupMenu = [CCMenu menuWithItems:title, stars, nextLevelButton, restartButton, nil];
     [popupMenu alignItemsVerticallyWithPadding:50];
     popupMenu.position = ccp( 0, 0 );
     [self.popup addChild:popupMenu];
     
-    CCLabelTTF *wonText = [CCLabelTTF labelWithString:@"You won!" fontName:@"Marker Felt" fontSize:48];
-    wonText.position = ccp( 0, WIN_SIZE.height * 0.2);
-    [self.popup addChild:wonText];
 
     
     [self addChild:self.popup];
@@ -473,14 +503,15 @@
     
     self.popup = [Popup node];
     
-    CCLabelTTF *loseText = [CCLabelTTF labelWithString:@"You lose ..." fontName:@"Marker Felt" fontSize:48];
-    loseText.position = ccp( 0, WIN_SIZE.height * 0.2);
-    [self.popup addChild:loseText];
+    CCLabelTTF *loseText = [CCLabelTTF labelWithString:@"You lose..." fontName:@"Marker Felt" fontSize:48];
+    CCMenuItemLabel *title = [CCMenuItemLabel itemWithLabel:loseText];
+    title.isEnabled = NO;
+    title.color = UI_COLOR_WHITE;
     
-    CCMenuItemSprite *restartButton = [self createButtonWithFile:@"popupButtonBase.png" Color:flowerColors[0] Selector:@selector(restartButtonPressed) Text:@"Restart"];
-    CCMenuItemSprite *levelSelectButton = [self createButtonWithFile:@"popupButtonBase.png" Color:flowerColors[1] Selector:@selector(levelSelectButtonPressed) Text:@"Select level"];
+    CCMenuItemSprite *restartButton = [self createButtonWithFile:@"popupButtonBase.png" Color:flowerColors[FLOWERS_COLOR_PINK] Selector:@selector(restartButtonPressed) Text:@"Restart"];
+    CCMenuItemSprite *levelSelectButton = [self createButtonWithFile:@"popupButtonBase.png" Color:flowerColors[FLOWERS_COLOR_BLUE] Selector:@selector(levelSelectButtonPressed) Text:@"Select level"];
     
-    CCMenu *popupMenu = [CCMenu menuWithItems:restartButton, levelSelectButton, nil];
+    CCMenu *popupMenu = [CCMenu menuWithItems:title, restartButton, levelSelectButton, nil];
     [popupMenu alignItemsVerticallyWithPadding:50];
     popupMenu.position = ccp( 0, 0 );
     [self.popup addChild:popupMenu];

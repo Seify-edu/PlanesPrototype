@@ -29,6 +29,10 @@ enum {
 @interface GameLayer : CCLayer <HudNodeDelegate> {
     int resources[NUMBER_OF_RESOURCES];
 }
+
+- (NSDictionary *)loadLevel:(NSString *)levelName;
+- (void)parseLevel:(NSDictionary *)level;
+
 @property (assign) HudNode *hud;
 @property int state;
 

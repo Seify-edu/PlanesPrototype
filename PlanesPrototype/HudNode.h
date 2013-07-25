@@ -20,12 +20,9 @@
 
 }
 - (void)updateResources;
+- (void)blinkEnergyBar;
 
 @property (assign) id<HudNodeDelegate> delegate;
-@property (assign) MapVertex *resIndicator1;
-@property (assign) MapVertex *resIndicator2;
-@property (assign) MapVertex *resIndicator3;
-@property (assign) MapVertex *resIndicator4;
-@property (assign) MapVertex *resIndicator5;
+@property (assign) CCNode *energyBar;
 
 @end

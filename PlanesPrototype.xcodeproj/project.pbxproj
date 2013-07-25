@@ -38,28 +38,6 @@
 		B13174E3179F180E0047E307 /* Popup.m in Sources */ = {isa = PBXBuildFile; fileRef = B13174E2179F180D0047E307 /* Popup.m */; };
 		B13174E917A0692E0047E307 /* HudNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B13174E817A0692D0047E307 /* HudNode.m */; };
 		B132921616B8648700AC3436 /* EditorLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B132921516B8648700AC3436 /* EditorLayer.m */; };
-		B1A1FC991714BD42009E3850 /* level2_1 in Resources */ = {isa = PBXBuildFile; fileRef = B1A1FC8D1714BD42009E3850 /* level2_1 */; };
-		B1A1FC9A1714BD42009E3850 /* level2_2 in Resources */ = {isa = PBXBuildFile; fileRef = B1A1FC8E1714BD42009E3850 /* level2_2 */; };
-		B1A1FC9B1714BD42009E3850 /* level2_3 in Resources */ = {isa = PBXBuildFile; fileRef = B1A1FC8F1714BD42009E3850 /* level2_3 */; };
-		B1A1FC9C1714BD42009E3850 /* level2_4 in Resources */ = {isa = PBXBuildFile; fileRef = B1A1FC901714BD42009E3850 /* level2_4 */; };
-		B1A1FC9D1714BD42009E3850 /* level2_5 in Resources */ = {isa = PBXBuildFile; fileRef = B1A1FC911714BD42009E3850 /* level2_5 */; };
-		B1A1FC9E1714BD42009E3850 /* level2_6 in Resources */ = {isa = PBXBuildFile; fileRef = B1A1FC921714BD42009E3850 /* level2_6 */; };
-		B1A1FC9F1714BD42009E3850 /* level2_7 in Resources */ = {isa = PBXBuildFile; fileRef = B1A1FC931714BD42009E3850 /* level2_7 */; };
-		B1A1FCA01714BD42009E3850 /* level2_8 in Resources */ = {isa = PBXBuildFile; fileRef = B1A1FC941714BD42009E3850 /* level2_8 */; };
-		B1A1FCA11714BD42009E3850 /* level2_9 in Resources */ = {isa = PBXBuildFile; fileRef = B1A1FC951714BD42009E3850 /* level2_9 */; };
-		B1A1FCA21714BD42009E3850 /* level2_10 in Resources */ = {isa = PBXBuildFile; fileRef = B1A1FC961714BD42009E3850 /* level2_10 */; };
-		B1A1FCA31714BD42009E3850 /* level3_1 in Resources */ = {isa = PBXBuildFile; fileRef = B1A1FC971714BD42009E3850 /* level3_1 */; };
-		B1A1FCA41714BD42009E3850 /* level3_2 in Resources */ = {isa = PBXBuildFile; fileRef = B1A1FC981714BD42009E3850 /* level3_2 */; };
-		B1A77659171376EB0044AA99 /* level1_1 in Resources */ = {isa = PBXBuildFile; fileRef = B1A77641171376EB0044AA99 /* level1_1 */; };
-		B1A7765A171376EB0044AA99 /* level1_2 in Resources */ = {isa = PBXBuildFile; fileRef = B1A77642171376EB0044AA99 /* level1_2 */; };
-		B1A7765B171376EB0044AA99 /* level1_3 in Resources */ = {isa = PBXBuildFile; fileRef = B1A77643171376EB0044AA99 /* level1_3 */; };
-		B1A7765C171376EB0044AA99 /* level1_4 in Resources */ = {isa = PBXBuildFile; fileRef = B1A77644171376EB0044AA99 /* level1_4 */; };
-		B1A7765D171376EB0044AA99 /* level1_5 in Resources */ = {isa = PBXBuildFile; fileRef = B1A77645171376EB0044AA99 /* level1_5 */; };
-		B1A7765E171376EB0044AA99 /* level1_6 in Resources */ = {isa = PBXBuildFile; fileRef = B1A77646171376EB0044AA99 /* level1_6 */; };
-		B1A7765F171376EB0044AA99 /* level1_7 in Resources */ = {isa = PBXBuildFile; fileRef = B1A77647171376EB0044AA99 /* level1_7 */; };
-		B1A77660171376EB0044AA99 /* level1_8 in Resources */ = {isa = PBXBuildFile; fileRef = B1A77648171376EB0044AA99 /* level1_8 */; };
-		B1A77661171376EB0044AA99 /* level1_9 in Resources */ = {isa = PBXBuildFile; fileRef = B1A77649171376EB0044AA99 /* level1_9 */; };
-		B1A77662171376EB0044AA99 /* level1_10 in Resources */ = {isa = PBXBuildFile; fileRef = B1A7764A171376EB0044AA99 /* level1_10 */; };
 		B1B2300316E500A2000EBD19 /* Walkthrough.m in Sources */ = {isa = PBXBuildFile; fileRef = B1B2300216E500A2000EBD19 /* Walkthrough.m */; };
 		B1D76A9B16C6C278007012E5 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B1D76A9A16C6C278007012E5 /* GDataXMLNode.m */; };
 		B1D76A9F16C6C4A5007012E5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B1D76A9E16C6C4A4007012E5 /* Default-568h@2x.png */; };
@@ -194,6 +172,28 @@
 		B1EA24DD16B321070021D124 /* VertexConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EA24DC16B321060021D124 /* VertexConnection.m */; };
 		B1EA24E616B473130021D124 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EA24E516B473120021D124 /* Player.m */; };
 		B1EA251116B701600021D124 /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EA251016B7015F0021D124 /* MainMenuLayer.m */; };
+		B1FB018F17A1BB2600D05B2B /* level1_1 in Resources */ = {isa = PBXBuildFile; fileRef = B1FB017917A1BB2600D05B2B /* level1_1 */; };
+		B1FB019017A1BB2600D05B2B /* level1_2 in Resources */ = {isa = PBXBuildFile; fileRef = B1FB017A17A1BB2600D05B2B /* level1_2 */; };
+		B1FB019117A1BB2600D05B2B /* level1_3 in Resources */ = {isa = PBXBuildFile; fileRef = B1FB017B17A1BB2600D05B2B /* level1_3 */; };
+		B1FB019217A1BB2600D05B2B /* level1_4 in Resources */ = {isa = PBXBuildFile; fileRef = B1FB017C17A1BB2600D05B2B /* level1_4 */; };
+		B1FB019317A1BB2600D05B2B /* level1_5 in Resources */ = {isa = PBXBuildFile; fileRef = B1FB017D17A1BB2600D05B2B /* level1_5 */; };
+		B1FB019417A1BB2600D05B2B /* level1_6 in Resources */ = {isa = PBXBuildFile; fileRef = B1FB017E17A1BB2600D05B2B /* level1_6 */; };
+		B1FB019517A1BB2600D05B2B /* level1_7 in Resources */ = {isa = PBXBuildFile; fileRef = B1FB017F17A1BB2600D05B2B /* level1_7 */; };
+		B1FB019617A1BB2600D05B2B /* level1_8 in Resources */ = {isa = PBXBuildFile; fileRef = B1FB018017A1BB2600D05B2B /* level1_8 */; };
+		B1FB019717A1BB2600D05B2B /* level1_9 in Resources */ = {isa = PBXBuildFile; fileRef = B1FB018117A1BB2600D05B2B /* level1_9 */; };
+		B1FB019817A1BB2600D05B2B /* level1_10 in Resources */ = {isa = PBXBuildFile; fileRef = B1FB018217A1BB2600D05B2B /* level1_10 */; };
+		B1FB019917A1BB2600D05B2B /* level1_11 in Resources */ = {isa = PBXBuildFile; fileRef = B1FB018317A1BB2600D05B2B /* level1_11 */; };
+		B1FB019A17A1BB2600D05B2B /* level1_12 in Resources */ = {isa = PBXBuildFile; fileRef = B1FB018417A1BB2600D05B2B /* level1_12 */; };
+		B1FB019B17A1BB2600D05B2B /* level1_13 in Resources */ = {isa = PBXBuildFile; fileRef = B1FB018517A1BB2600D05B2B /* level1_13 */; };
+		B1FB019C17A1BB2600D05B2B /* level1_14 in Resources */ = {isa = PBXBuildFile; fileRef = B1FB018617A1BB2600D05B2B /* level1_14 */; };
+		B1FB019D17A1BB2600D05B2B /* level1_15 in Resources */ = {isa = PBXBuildFile; fileRef = B1FB018717A1BB2600D05B2B /* level1_15 */; };
+		B1FB019E17A1BB2600D05B2B /* level1_16 in Resources */ = {isa = PBXBuildFile; fileRef = B1FB018817A1BB2600D05B2B /* level1_16 */; };
+		B1FB019F17A1BB2600D05B2B /* level1_17 in Resources */ = {isa = PBXBuildFile; fileRef = B1FB018917A1BB2600D05B2B /* level1_17 */; };
+		B1FB01A017A1BB2600D05B2B /* level1_18 in Resources */ = {isa = PBXBuildFile; fileRef = B1FB018A17A1BB2600D05B2B /* level1_18 */; };
+		B1FB01A117A1BB2600D05B2B /* level1_19 in Resources */ = {isa = PBXBuildFile; fileRef = B1FB018B17A1BB2600D05B2B /* level1_19 */; };
+		B1FB01A217A1BB2600D05B2B /* level1_20 in Resources */ = {isa = PBXBuildFile; fileRef = B1FB018C17A1BB2600D05B2B /* level1_20 */; };
+		B1FB01A317A1BB2600D05B2B /* level1_21 in Resources */ = {isa = PBXBuildFile; fileRef = B1FB018D17A1BB2600D05B2B /* level1_21 */; };
+		B1FB01A417A1BB2600D05B2B /* level1_22 in Resources */ = {isa = PBXBuildFile; fileRef = B1FB018E17A1BB2600D05B2B /* level1_22 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -232,28 +232,6 @@
 		B13174E817A0692D0047E307 /* HudNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HudNode.m; sourceTree = "<group>"; };
 		B132921416B8648700AC3436 /* EditorLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorLayer.h; sourceTree = "<group>"; };
 		B132921516B8648700AC3436 /* EditorLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorLayer.m; sourceTree = "<group>"; };
-		B1A1FC8D1714BD42009E3850 /* level2_1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level2_1; path = "PlanesPrototype/levels/backup 08.04.2013/levels/level2_1"; sourceTree = "<group>"; };
-		B1A1FC8E1714BD42009E3850 /* level2_2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level2_2; path = "PlanesPrototype/levels/backup 08.04.2013/levels/level2_2"; sourceTree = "<group>"; };
-		B1A1FC8F1714BD42009E3850 /* level2_3 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level2_3; path = "PlanesPrototype/levels/backup 08.04.2013/levels/level2_3"; sourceTree = "<group>"; };
-		B1A1FC901714BD42009E3850 /* level2_4 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level2_4; path = "PlanesPrototype/levels/backup 08.04.2013/levels/level2_4"; sourceTree = "<group>"; };
-		B1A1FC911714BD42009E3850 /* level2_5 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level2_5; path = "PlanesPrototype/levels/backup 08.04.2013/levels/level2_5"; sourceTree = "<group>"; };
-		B1A1FC921714BD42009E3850 /* level2_6 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level2_6; path = "PlanesPrototype/levels/backup 08.04.2013/levels/level2_6"; sourceTree = "<group>"; };
-		B1A1FC931714BD42009E3850 /* level2_7 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level2_7; path = "PlanesPrototype/levels/backup 08.04.2013/levels/level2_7"; sourceTree = "<group>"; };
-		B1A1FC941714BD42009E3850 /* level2_8 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level2_8; path = "PlanesPrototype/levels/backup 08.04.2013/levels/level2_8"; sourceTree = "<group>"; };
-		B1A1FC951714BD42009E3850 /* level2_9 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level2_9; path = "PlanesPrototype/levels/backup 08.04.2013/levels/level2_9"; sourceTree = "<group>"; };
-		B1A1FC961714BD42009E3850 /* level2_10 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level2_10; path = "PlanesPrototype/levels/backup 08.04.2013/levels/level2_10"; sourceTree = "<group>"; };
-		B1A1FC971714BD42009E3850 /* level3_1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level3_1; path = "PlanesPrototype/levels/backup 08.04.2013/levels/level3_1"; sourceTree = "<group>"; };
-		B1A1FC981714BD42009E3850 /* level3_2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level3_2; path = "PlanesPrototype/levels/backup 08.04.2013/levels/level3_2"; sourceTree = "<group>"; };
-		B1A77641171376EB0044AA99 /* level1_1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_1; path = "PlanesPrototype/levels/backup 08.04.2013/levels/level1_1"; sourceTree = "<group>"; };
-		B1A77642171376EB0044AA99 /* level1_2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_2; path = "PlanesPrototype/levels/backup 08.04.2013/levels/level1_2"; sourceTree = "<group>"; };
-		B1A77643171376EB0044AA99 /* level1_3 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_3; path = "PlanesPrototype/levels/backup 08.04.2013/levels/level1_3"; sourceTree = "<group>"; };
-		B1A77644171376EB0044AA99 /* level1_4 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_4; path = "PlanesPrototype/levels/backup 08.04.2013/levels/level1_4"; sourceTree = "<group>"; };
-		B1A77645171376EB0044AA99 /* level1_5 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_5; path = "PlanesPrototype/levels/backup 08.04.2013/levels/level1_5"; sourceTree = "<group>"; };
-		B1A77646171376EB0044AA99 /* level1_6 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_6; path = "PlanesPrototype/levels/backup 08.04.2013/levels/level1_6"; sourceTree = "<group>"; };
-		B1A77647171376EB0044AA99 /* level1_7 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_7; path = "PlanesPrototype/levels/backup 08.04.2013/levels/level1_7"; sourceTree = "<group>"; };
-		B1A77648171376EB0044AA99 /* level1_8 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_8; path = "PlanesPrototype/levels/backup 08.04.2013/levels/level1_8"; sourceTree = "<group>"; };
-		B1A77649171376EB0044AA99 /* level1_9 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_9; path = "PlanesPrototype/levels/backup 08.04.2013/levels/level1_9"; sourceTree = "<group>"; };
-		B1A7764A171376EB0044AA99 /* level1_10 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_10; path = "PlanesPrototype/levels/backup 08.04.2013/levels/level1_10"; sourceTree = "<group>"; };
 		B1B2300116E500A2000EBD19 /* Walkthrough.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Walkthrough.h; sourceTree = "<group>"; };
 		B1B2300216E500A2000EBD19 /* Walkthrough.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Walkthrough.m; sourceTree = "<group>"; };
 		B1D76A9916C6C278007012E5 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GDataXMLNode.h; path = libs/GData/GDataXMLNode.h; sourceTree = "<group>"; };
@@ -533,6 +511,28 @@
 		B1EA24EA16B576740021D124 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		B1EA250F16B7015D0021D124 /* MainMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuLayer.h; sourceTree = "<group>"; };
 		B1EA251016B7015F0021D124 /* MainMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuLayer.m; sourceTree = "<group>"; };
+		B1FB017917A1BB2600D05B2B /* level1_1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_1; path = PlanesPrototype/levels/level1_1; sourceTree = "<group>"; };
+		B1FB017A17A1BB2600D05B2B /* level1_2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_2; path = PlanesPrototype/levels/level1_2; sourceTree = "<group>"; };
+		B1FB017B17A1BB2600D05B2B /* level1_3 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_3; path = PlanesPrototype/levels/level1_3; sourceTree = "<group>"; };
+		B1FB017C17A1BB2600D05B2B /* level1_4 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_4; path = PlanesPrototype/levels/level1_4; sourceTree = "<group>"; };
+		B1FB017D17A1BB2600D05B2B /* level1_5 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_5; path = PlanesPrototype/levels/level1_5; sourceTree = "<group>"; };
+		B1FB017E17A1BB2600D05B2B /* level1_6 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_6; path = PlanesPrototype/levels/level1_6; sourceTree = "<group>"; };
+		B1FB017F17A1BB2600D05B2B /* level1_7 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_7; path = PlanesPrototype/levels/level1_7; sourceTree = "<group>"; };
+		B1FB018017A1BB2600D05B2B /* level1_8 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_8; path = PlanesPrototype/levels/level1_8; sourceTree = "<group>"; };
+		B1FB018117A1BB2600D05B2B /* level1_9 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_9; path = PlanesPrototype/levels/level1_9; sourceTree = "<group>"; };
+		B1FB018217A1BB2600D05B2B /* level1_10 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_10; path = PlanesPrototype/levels/level1_10; sourceTree = "<group>"; };
+		B1FB018317A1BB2600D05B2B /* level1_11 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_11; path = PlanesPrototype/levels/level1_11; sourceTree = "<group>"; };
+		B1FB018417A1BB2600D05B2B /* level1_12 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_12; path = PlanesPrototype/levels/level1_12; sourceTree = "<group>"; };
+		B1FB018517A1BB2600D05B2B /* level1_13 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_13; path = PlanesPrototype/levels/level1_13; sourceTree = "<group>"; };
+		B1FB018617A1BB2600D05B2B /* level1_14 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_14; path = PlanesPrototype/levels/level1_14; sourceTree = "<group>"; };
+		B1FB018717A1BB2600D05B2B /* level1_15 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_15; path = PlanesPrototype/levels/level1_15; sourceTree = "<group>"; };
+		B1FB018817A1BB2600D05B2B /* level1_16 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_16; path = PlanesPrototype/levels/level1_16; sourceTree = "<group>"; };
+		B1FB018917A1BB2600D05B2B /* level1_17 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_17; path = PlanesPrototype/levels/level1_17; sourceTree = "<group>"; };
+		B1FB018A17A1BB2600D05B2B /* level1_18 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_18; path = PlanesPrototype/levels/level1_18; sourceTree = "<group>"; };
+		B1FB018B17A1BB2600D05B2B /* level1_19 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_19; path = PlanesPrototype/levels/level1_19; sourceTree = "<group>"; };
+		B1FB018C17A1BB2600D05B2B /* level1_20 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_20; path = PlanesPrototype/levels/level1_20; sourceTree = "<group>"; };
+		B1FB018D17A1BB2600D05B2B /* level1_21 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_21; path = PlanesPrototype/levels/level1_21; sourceTree = "<group>"; };
+		B1FB018E17A1BB2600D05B2B /* level1_22 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_22; path = PlanesPrototype/levels/level1_22; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -637,28 +637,28 @@
 		B1A77640171376130044AA99 /* Levels */ = {
 			isa = PBXGroup;
 			children = (
-				B1A1FC8D1714BD42009E3850 /* level2_1 */,
-				B1A1FC8E1714BD42009E3850 /* level2_2 */,
-				B1A1FC8F1714BD42009E3850 /* level2_3 */,
-				B1A1FC901714BD42009E3850 /* level2_4 */,
-				B1A1FC911714BD42009E3850 /* level2_5 */,
-				B1A1FC921714BD42009E3850 /* level2_6 */,
-				B1A1FC931714BD42009E3850 /* level2_7 */,
-				B1A1FC941714BD42009E3850 /* level2_8 */,
-				B1A1FC951714BD42009E3850 /* level2_9 */,
-				B1A1FC961714BD42009E3850 /* level2_10 */,
-				B1A1FC971714BD42009E3850 /* level3_1 */,
-				B1A1FC981714BD42009E3850 /* level3_2 */,
-				B1A77641171376EB0044AA99 /* level1_1 */,
-				B1A77642171376EB0044AA99 /* level1_2 */,
-				B1A77643171376EB0044AA99 /* level1_3 */,
-				B1A77644171376EB0044AA99 /* level1_4 */,
-				B1A77645171376EB0044AA99 /* level1_5 */,
-				B1A77646171376EB0044AA99 /* level1_6 */,
-				B1A77647171376EB0044AA99 /* level1_7 */,
-				B1A77648171376EB0044AA99 /* level1_8 */,
-				B1A77649171376EB0044AA99 /* level1_9 */,
-				B1A7764A171376EB0044AA99 /* level1_10 */,
+				B1FB017917A1BB2600D05B2B /* level1_1 */,
+				B1FB017A17A1BB2600D05B2B /* level1_2 */,
+				B1FB017B17A1BB2600D05B2B /* level1_3 */,
+				B1FB017C17A1BB2600D05B2B /* level1_4 */,
+				B1FB017D17A1BB2600D05B2B /* level1_5 */,
+				B1FB017E17A1BB2600D05B2B /* level1_6 */,
+				B1FB017F17A1BB2600D05B2B /* level1_7 */,
+				B1FB018017A1BB2600D05B2B /* level1_8 */,
+				B1FB018117A1BB2600D05B2B /* level1_9 */,
+				B1FB018217A1BB2600D05B2B /* level1_10 */,
+				B1FB018317A1BB2600D05B2B /* level1_11 */,
+				B1FB018417A1BB2600D05B2B /* level1_12 */,
+				B1FB018517A1BB2600D05B2B /* level1_13 */,
+				B1FB018617A1BB2600D05B2B /* level1_14 */,
+				B1FB018717A1BB2600D05B2B /* level1_15 */,
+				B1FB018817A1BB2600D05B2B /* level1_16 */,
+				B1FB018917A1BB2600D05B2B /* level1_17 */,
+				B1FB018A17A1BB2600D05B2B /* level1_18 */,
+				B1FB018B17A1BB2600D05B2B /* level1_19 */,
+				B1FB018C17A1BB2600D05B2B /* level1_20 */,
+				B1FB018D17A1BB2600D05B2B /* level1_21 */,
+				B1FB018E17A1BB2600D05B2B /* level1_22 */,
 			);
 			name = Levels;
 			sourceTree = "<group>";
@@ -677,8 +677,8 @@
 			isa = PBXGroup;
 			children = (
 				B1D76A9E16C6C4A4007012E5 /* Default-568h@2x.png */,
-				B1A77640171376130044AA99 /* Levels */,
 				B1EA232E16B107260021D124 /* PlanesPrototype */,
+				B1A77640171376130044AA99 /* Levels */,
 				B1EA24BA16B1B4A90021D124 /* Resources */,
 				B1EA231B16B107260021D124 /* Frameworks */,
 				B1EA231916B107260021D124 /* Products */,
@@ -1161,28 +1161,6 @@
 				B1EA234816B107260021D124 /* iTunesArtwork in Resources */,
 				B1EA248616B107280021D124 /* ChangeLog in Resources */,
 				B1D76A9F16C6C4A5007012E5 /* Default-568h@2x.png in Resources */,
-				B1A77659171376EB0044AA99 /* level1_1 in Resources */,
-				B1A7765A171376EB0044AA99 /* level1_2 in Resources */,
-				B1A7765B171376EB0044AA99 /* level1_3 in Resources */,
-				B1A7765C171376EB0044AA99 /* level1_4 in Resources */,
-				B1A7765D171376EB0044AA99 /* level1_5 in Resources */,
-				B1A7765E171376EB0044AA99 /* level1_6 in Resources */,
-				B1A7765F171376EB0044AA99 /* level1_7 in Resources */,
-				B1A77660171376EB0044AA99 /* level1_8 in Resources */,
-				B1A77661171376EB0044AA99 /* level1_9 in Resources */,
-				B1A77662171376EB0044AA99 /* level1_10 in Resources */,
-				B1A1FC991714BD42009E3850 /* level2_1 in Resources */,
-				B1A1FC9A1714BD42009E3850 /* level2_2 in Resources */,
-				B1A1FC9B1714BD42009E3850 /* level2_3 in Resources */,
-				B1A1FC9C1714BD42009E3850 /* level2_4 in Resources */,
-				B1A1FC9D1714BD42009E3850 /* level2_5 in Resources */,
-				B1A1FC9E1714BD42009E3850 /* level2_6 in Resources */,
-				B1A1FC9F1714BD42009E3850 /* level2_7 in Resources */,
-				B1A1FCA01714BD42009E3850 /* level2_8 in Resources */,
-				B1A1FCA11714BD42009E3850 /* level2_9 in Resources */,
-				B1A1FCA21714BD42009E3850 /* level2_10 in Resources */,
-				B1A1FCA31714BD42009E3850 /* level3_1 in Resources */,
-				B1A1FCA41714BD42009E3850 /* level3_2 in Resources */,
 				B13174B0179AEC810047E307 /* background@2x.png in Resources */,
 				B13174B1179AEC810047E307 /* bee@2x.png in Resources */,
 				B13174B2179AEC810047E307 /* Colors.txt in Resources */,
@@ -1210,6 +1188,28 @@
 				B13174D7179AEE2F0047E307 /* roadBase.png in Resources */,
 				B13174D8179AEE2F0047E307 /* starBase.png in Resources */,
 				B13174D9179AEE2F0047E307 /* starFrameBase.png in Resources */,
+				B1FB018F17A1BB2600D05B2B /* level1_1 in Resources */,
+				B1FB019017A1BB2600D05B2B /* level1_2 in Resources */,
+				B1FB019117A1BB2600D05B2B /* level1_3 in Resources */,
+				B1FB019217A1BB2600D05B2B /* level1_4 in Resources */,
+				B1FB019317A1BB2600D05B2B /* level1_5 in Resources */,
+				B1FB019417A1BB2600D05B2B /* level1_6 in Resources */,
+				B1FB019517A1BB2600D05B2B /* level1_7 in Resources */,
+				B1FB019617A1BB2600D05B2B /* level1_8 in Resources */,
+				B1FB019717A1BB2600D05B2B /* level1_9 in Resources */,
+				B1FB019817A1BB2600D05B2B /* level1_10 in Resources */,
+				B1FB019917A1BB2600D05B2B /* level1_11 in Resources */,
+				B1FB019A17A1BB2600D05B2B /* level1_12 in Resources */,
+				B1FB019B17A1BB2600D05B2B /* level1_13 in Resources */,
+				B1FB019C17A1BB2600D05B2B /* level1_14 in Resources */,
+				B1FB019D17A1BB2600D05B2B /* level1_15 in Resources */,
+				B1FB019E17A1BB2600D05B2B /* level1_16 in Resources */,
+				B1FB019F17A1BB2600D05B2B /* level1_17 in Resources */,
+				B1FB01A017A1BB2600D05B2B /* level1_18 in Resources */,
+				B1FB01A117A1BB2600D05B2B /* level1_19 in Resources */,
+				B1FB01A217A1BB2600D05B2B /* level1_20 in Resources */,
+				B1FB01A317A1BB2600D05B2B /* level1_21 in Resources */,
+				B1FB01A417A1BB2600D05B2B /* level1_22 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1357,7 +1357,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				"HEADER_SEARCH_PATHS[arch=*]" = /usr/include/libxml2;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				"LIBRARY_SEARCH_PATHS[arch=*]" = /usr/include/libxml2;
 				"OTHER_LDFLAGS[arch=*]" = "-lxml2";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C744DCC3-BB38-4BE4-9DE8-7874BD406CA2";
@@ -1380,7 +1380,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				"HEADER_SEARCH_PATHS[arch=*]" = /usr/include/libxml2;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				"LIBRARY_SEARCH_PATHS[arch=*]" = /usr/include/libxml2;
 				"OTHER_LDFLAGS[arch=*]" = "-lxml2";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C744DCC3-BB38-4BE4-9DE8-7874BD406CA2";

@@ -17,9 +17,5 @@
 @interface LevelSelectLayer : CCLayer {
     
 }
-@property (retain) id nextScene;
-//@property (assign) id delegate;
-@property (assign) CCMenu *pageMenu;
-@property int currentPageNumber;
-+(CCScene *) sceneWithNextScene:(id)nextScene;
++(CCScene *) scene;
 @end
