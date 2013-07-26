@@ -4,15 +4,25 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>PlanesPrototype.xcscheme</key>
+		<key>Beegle.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>1</integer>
+		</dict>
+		<key>Editor.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>B1EA231716B107260021D124</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B1FB01A817A2F6D300D05B2B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

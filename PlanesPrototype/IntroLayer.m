@@ -13,7 +13,6 @@
 #import "GameLayer.h"
 #import "MainMenuLayer.h"
 
-
 #pragma mark - IntroLayer
 
 @implementation IntroLayer
@@ -60,6 +59,10 @@
 
 -(void) makeTransition:(ccTime)dt
 {
+#ifdef EDITOR
+	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[MainMenuLayer scene] withColor:ccWHITE]];
+#else
 	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[LevelSelectLayer scene] withColor:ccWHITE]];
+#endif
 }
 @end

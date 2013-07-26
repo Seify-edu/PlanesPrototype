@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B1EA231716B107260021D124"
-               BuildableName = "PlanesPrototype.app"
-               BlueprintName = "PlanesPrototype"
-               ReferencedContainer = "container:PlanesPrototype.xcodeproj">
+               BuildableName = "Beegle.app"
+               BlueprintName = "Beegle"
+               ReferencedContainer = "container:Beegle.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B1EA231716B107260021D124"
-            BuildableName = "PlanesPrototype.app"
-            BlueprintName = "PlanesPrototype"
-            ReferencedContainer = "container:PlanesPrototype.xcodeproj">
+            BuildableName = "Beegle.app"
+            BlueprintName = "Beegle"
+            ReferencedContainer = "container:Beegle.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -52,9 +52,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B1EA231716B107260021D124"
-            BuildableName = "PlanesPrototype.app"
-            BlueprintName = "PlanesPrototype"
-            ReferencedContainer = "container:PlanesPrototype.xcodeproj">
+            BuildableName = "Beegle.app"
+            BlueprintName = "Beegle"
+            ReferencedContainer = "container:Beegle.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -70,9 +70,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B1EA231716B107260021D124"
-            BuildableName = "PlanesPrototype.app"
-            BlueprintName = "PlanesPrototype"
-            ReferencedContainer = "container:PlanesPrototype.xcodeproj">
+            BuildableName = "Beegle.app"
+            BlueprintName = "Beegle"
+            ReferencedContainer = "container:Beegle.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
