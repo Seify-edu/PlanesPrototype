@@ -37,8 +37,6 @@
 		B13174DE179C88C50047E307 /* MapNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B13174DD179C88C50047E307 /* MapNode.m */; };
 		B13174E3179F180E0047E307 /* Popup.m in Sources */ = {isa = PBXBuildFile; fileRef = B13174E2179F180D0047E307 /* Popup.m */; };
 		B13174E917A0692E0047E307 /* HudNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B13174E817A0692D0047E307 /* HudNode.m */; };
-		B132921616B8648700AC3436 /* EditorLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B132921516B8648700AC3436 /* EditorLayer.m */; };
-		B1B2300316E500A2000EBD19 /* Walkthrough.m in Sources */ = {isa = PBXBuildFile; fileRef = B1B2300216E500A2000EBD19 /* Walkthrough.m */; };
 		B1CD67E517A2FDA100535E41 /* CCAction.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EA234C16B107260021D124 /* CCAction.m */; };
 		B1CD67E617A2FDA100535E41 /* CCActionCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EA234F16B107260021D124 /* CCActionCamera.m */; };
 		B1CD67E717A2FDA100535E41 /* CCActionCatmullRom.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EA235216B107260021D124 /* CCActionCatmullRom.m */; };
@@ -210,6 +208,8 @@
 		B1CD688D17A2FFDF00535E41 /* level1_20 in Resources */ = {isa = PBXBuildFile; fileRef = B1FB018C17A1BB2600D05B2B /* level1_20 */; };
 		B1CD688E17A2FFDF00535E41 /* level1_21 in Resources */ = {isa = PBXBuildFile; fileRef = B1FB018D17A1BB2600D05B2B /* level1_21 */; };
 		B1CD688F17A2FFDF00535E41 /* level1_22 in Resources */ = {isa = PBXBuildFile; fileRef = B1FB018E17A1BB2600D05B2B /* level1_22 */; };
+		B1CD689017A3096100535E41 /* EditorLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B132921516B8648700AC3436 /* EditorLayer.m */; };
+		B1CD689117A3096100535E41 /* Walkthrough.m in Sources */ = {isa = PBXBuildFile; fileRef = B1B2300216E500A2000EBD19 /* Walkthrough.m */; };
 		B1D76A9F16C6C4A5007012E5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B1D76A9E16C6C4A4007012E5 /* Default-568h@2x.png */; };
 		B1D76AA216C98333007012E5 /* LevelSelectLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B1D76AA116C98333007012E5 /* LevelSelectLayer.m */; };
 		B1EA231D16B107260021D124 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1EA231C16B107260021D124 /* QuartzCore.framework */; };
@@ -411,10 +411,10 @@
 		B13174E2179F180D0047E307 /* Popup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Popup.m; sourceTree = "<group>"; };
 		B13174E717A0692D0047E307 /* HudNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HudNode.h; sourceTree = "<group>"; };
 		B13174E817A0692D0047E307 /* HudNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HudNode.m; sourceTree = "<group>"; };
-		B132921416B8648700AC3436 /* EditorLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorLayer.h; sourceTree = "<group>"; };
-		B132921516B8648700AC3436 /* EditorLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorLayer.m; sourceTree = "<group>"; };
-		B1B2300116E500A2000EBD19 /* Walkthrough.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Walkthrough.h; sourceTree = "<group>"; };
-		B1B2300216E500A2000EBD19 /* Walkthrough.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Walkthrough.m; sourceTree = "<group>"; };
+		B132921416B8648700AC3436 /* EditorLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditorLayer.h; path = ../PlanesPrototype/EditorLayer.h; sourceTree = "<group>"; };
+		B132921516B8648700AC3436 /* EditorLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditorLayer.m; path = ../PlanesPrototype/EditorLayer.m; sourceTree = "<group>"; };
+		B1B2300116E500A2000EBD19 /* Walkthrough.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Walkthrough.h; path = ../PlanesPrototype/Walkthrough.h; sourceTree = "<group>"; };
+		B1B2300216E500A2000EBD19 /* Walkthrough.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Walkthrough.m; path = ../PlanesPrototype/Walkthrough.m; sourceTree = "<group>"; };
 		B1D76A9E16C6C4A4007012E5 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		B1D76AA016C98333007012E5 /* LevelSelectLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelSelectLayer.h; sourceTree = "<group>"; };
 		B1D76AA116C98333007012E5 /* LevelSelectLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelSelectLayer.m; sourceTree = "<group>"; };
@@ -687,8 +687,8 @@
 		B1EA24E416B473120021D124 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		B1EA24E516B473120021D124 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		B1EA24EA16B576740021D124 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = PlanesPrototype/Constants.h; sourceTree = "<group>"; };
-		B1EA250F16B7015D0021D124 /* MainMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuLayer.h; sourceTree = "<group>"; };
-		B1EA251016B7015F0021D124 /* MainMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuLayer.m; sourceTree = "<group>"; };
+		B1EA250F16B7015D0021D124 /* MainMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainMenuLayer.h; path = ../PlanesPrototype/MainMenuLayer.h; sourceTree = "<group>"; };
+		B1EA251016B7015F0021D124 /* MainMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainMenuLayer.m; path = ../PlanesPrototype/MainMenuLayer.m; sourceTree = "<group>"; };
 		B1FB017917A1BB2600D05B2B /* level1_1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_1; path = PlanesPrototype/levels/level1_1; sourceTree = "<group>"; };
 		B1FB017A17A1BB2600D05B2B /* level1_2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_2; path = PlanesPrototype/levels/level1_2; sourceTree = "<group>"; };
 		B1FB017B17A1BB2600D05B2B /* level1_3 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_3; path = PlanesPrototype/levels/level1_3; sourceTree = "<group>"; };
@@ -799,16 +799,10 @@
 				B13174E817A0692D0047E307 /* HudNode.m */,
 				B1EA24AC16B107280021D124 /* IntroLayer.h */,
 				B1EA24AD16B107280021D124 /* IntroLayer.m */,
-				B1EA250F16B7015D0021D124 /* MainMenuLayer.h */,
-				B1EA251016B7015F0021D124 /* MainMenuLayer.m */,
 				B1EA24B416B1093B0021D124 /* GameLayer.h */,
 				B1EA24B516B1093B0021D124 /* GameLayer.m */,
 				B1D76AA016C98333007012E5 /* LevelSelectLayer.h */,
 				B1D76AA116C98333007012E5 /* LevelSelectLayer.m */,
-				B1B2300116E500A2000EBD19 /* Walkthrough.h */,
-				B1B2300216E500A2000EBD19 /* Walkthrough.m */,
-				B132921416B8648700AC3436 /* EditorLayer.h */,
-				B132921516B8648700AC3436 /* EditorLayer.m */,
 				B13174E1179F180D0047E307 /* Popup.h */,
 				B13174E2179F180D0047E307 /* Popup.m */,
 			);
@@ -1260,6 +1254,12 @@
 		B1FB01B317A2F6D300D05B2B /* Editor */ = {
 			isa = PBXGroup;
 			children = (
+				B1EA250F16B7015D0021D124 /* MainMenuLayer.h */,
+				B1EA251016B7015F0021D124 /* MainMenuLayer.m */,
+				B132921416B8648700AC3436 /* EditorLayer.h */,
+				B132921516B8648700AC3436 /* EditorLayer.m */,
+				B1B2300116E500A2000EBD19 /* Walkthrough.h */,
+				B1B2300216E500A2000EBD19 /* Walkthrough.m */,
 				B1FB01CB17A2F6D300D05B2B /* Info.plist */,
 			);
 			name = Editor;
@@ -1616,12 +1616,12 @@
 				B1EA24DD16B321070021D124 /* VertexConnection.m in Sources */,
 				B1EA24E616B473130021D124 /* Player.m in Sources */,
 				B1EA251116B701600021D124 /* MainMenuLayer.m in Sources */,
-				B132921616B8648700AC3436 /* EditorLayer.m in Sources */,
 				B1D76AA216C98333007012E5 /* LevelSelectLayer.m in Sources */,
-				B1B2300316E500A2000EBD19 /* Walkthrough.m in Sources */,
 				B13174DE179C88C50047E307 /* MapNode.m in Sources */,
 				B13174E3179F180E0047E307 /* Popup.m in Sources */,
 				B13174E917A0692E0047E307 /* HudNode.m in Sources */,
+				B1CD689017A3096100535E41 /* EditorLayer.m in Sources */,
+				B1CD689117A3096100535E41 /* Walkthrough.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

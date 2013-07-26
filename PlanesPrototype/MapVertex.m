@@ -36,25 +36,22 @@
     switch (self.pictogrammType) {
         case MODIFIER_START:
         {
-//            spriteName = @"play.png";
+#ifdef EDITOR
+            self.pictogramm = [CCSprite spriteWithFile:@"bee.png"];
+#endif
             break;
         }
 
         case MODIFIER_END:
         {
-//            spriteName = @"stop.png";
-//            spriteName = @"bee_home.png";
             self.pictogramm = [CCSprite spriteWithFile:@"exclamationMarkBase.png"];
             self.pictogramm.color = SIGNS_COLOR_ORANGE;
-//            self.pictogramm.opacity = DEFAULT_OPACITY;
 
             break;
         }
             
         case MODIFIER_BONUS:
         {
-//            spriteName = @"Flower.png";
-//            spriteName = @"drop.png";
             self.pictogramm = [CCSprite spriteWithFile:@"starBase.png"];
             self.pictogramm.color = SIGNS_COLOR_ORANGE;
             self.pictogramm.opacity = DEFAULT_OPACITY;
@@ -69,8 +66,8 @@
         }
     }
 
-    if (self.pictogramm) {
-//        self.pictogramm.zOrder = -1; // hack for alpha-sorting
+    if (self.pictogramm)
+    {
         [self addChild:self.pictogramm];
     }
 }

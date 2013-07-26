@@ -12,6 +12,7 @@
 #import <Foundation/Foundation.h>
 #import "MainMenuLayer.h"
 #import "Walkthrough.h"
+#import "Popup.h"
 
 enum
 {
@@ -47,7 +48,7 @@ enum
 
 @property (assign) CCLabelTTF *console;
 
-@property (assign) CCNode *popup;
+@property (assign) Popup *popup;
 @property (assign) CCMenuItemFont *redIndicator;
 @property (assign) CCMenuItemFont *greenIndicator;
 @property (assign) CCMenuItemFont *blueIndicator;

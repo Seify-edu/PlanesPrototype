@@ -136,77 +136,92 @@
         
 		[CCMenuItemFont setFontSize:28];
         
-        CCMenuItemSprite *addVertexButton = [self createButtonWithNormalSprite:@"greenVertex.png"
-                                                                selectedSprite:@"greenVertex.png"
+        CCMenuItemSprite *addVertexButton = [self createButtonWithNormalSprite:@"flowerBase.png"
+                                                                selectedSprite:@"flowerBase.png"
                                                                           Text:@"+V"
                                                                       Selector:@selector(addVertexPressed)];
+        addVertexButton.color = flowerColors[FLOWERS_COLOR_GREEN];
         
-        CCMenuItemSprite *addConnectionButton = [self createButtonWithNormalSprite:@"greenVertex.png"
-                                                                    selectedSprite:@"greenVertex.png"
+        CCMenuItemSprite *addConnectionButton = [self createButtonWithNormalSprite:@"flowerBase.png"
+                                                                    selectedSprite:@"flowerBase.png"
                                                                               Text:@"+C"
                                                                           Selector:@selector(addConnectionPressed)];
+        addConnectionButton.color = flowerColors[FLOWERS_COLOR_GREEN];
         
-        CCMenuItemSprite *deleteVertexButton = [self createButtonWithNormalSprite:@"redVertex.png"
-                                                                   selectedSprite:@"redVertex.png"
+        CCMenuItemSprite *deleteVertexButton = [self createButtonWithNormalSprite:@"flowerBase.png"
+                                                                   selectedSprite:@"flowerBase.png"
                                                                              Text:@"-V"
                                                                          Selector:@selector(deleteVertexPressed)];
+        deleteVertexButton.color = flowerColors[FLOWERS_COLOR_PINK];
         
-        CCMenuItemSprite *deleteConnectionButton = [self createButtonWithNormalSprite:@"redVertex.png"
-                                                                   selectedSprite:@"redVertex.png"
+        CCMenuItemSprite *deleteConnectionButton = [self createButtonWithNormalSprite:@"flowerBase.png"
+                                                                   selectedSprite:@"flowerBase.png"
                                                                              Text:@"-C"
                                                                          Selector:@selector(deleteConnectionPressed)];
+        deleteConnectionButton.color = flowerColors[FLOWERS_COLOR_PINK];
         
-        CCMenuItemSprite *colorVertexButton = [self createButtonWithNormalSprite:@"blueVertex.png"
-                                                                   selectedSprite:@"blueVertex.png"
+        
+        CCMenuItemSprite *colorVertexButton = [self createButtonWithNormalSprite:@"flowerBase.png"
+                                                                   selectedSprite:@"flowerBase.png"
                                                                              Text:@"~V"
                                                                          Selector:@selector(colorVertexPressed)];
+        colorVertexButton.color = flowerColors[FLOWERS_COLOR_BLUE];
         
-        CCMenuItemSprite *colorConnectionButton = [self createButtonWithNormalSprite:@"blueVertex.png"
-                                                                       selectedSprite:@"blueVertex.png"
+        CCMenuItemSprite *colorConnectionButton = [self createButtonWithNormalSprite:@"flowerBase.png"
+                                                                       selectedSprite:@"flowerBase.png"
                                                                                  Text:@"~C"
                                                                              Selector:@selector(colorConnectionPressed)];
+        colorConnectionButton.color = flowerColors[FLOWERS_COLOR_BLUE];
         
-        CCMenuItemSprite *modifyVertexButton = [self createButtonWithNormalSprite:@"brownVertex.png"
-                                                                  selectedSprite:@"brownVertex.png"
+        CCMenuItemSprite *modifyVertexButton = [self createButtonWithNormalSprite:@"flowerBase.png"
+                                                                  selectedSprite:@"flowerBase.png"
                                                                             Text:@">V"
                                                                         Selector:@selector(modifyVertexPressed)];
+        modifyVertexButton.color = flowerColors[FLOWERS_COLOR_YELLOW];
         
-        CCMenuItemSprite *modifyConnectionButton = [self createButtonWithNormalSprite:@"brownVertex.png"
-                                                                      selectedSprite:@"brownVertex.png"
+        CCMenuItemSprite *modifyConnectionButton = [self createButtonWithNormalSprite:@"flowerBase.png"
+                                                                      selectedSprite:@"flowerBase.png"
                                                                                 Text:@">C"
                                                                             Selector:@selector(modifyConnectionPressed)];
+        modifyConnectionButton.color = flowerColors[FLOWERS_COLOR_YELLOW];
         
-        CCMenuItemSprite *recourcesButton = [self createButtonWithNormalSprite:@"greenVertex.png"
-                                                                selectedSprite:@"greenVertex.png"
+        CCMenuItemSprite *resourcesButton = [self createButtonWithNormalSprite:@"flowerBase.png"
+                                                                selectedSprite:@"flowerBase.png"
                                                                           Text:@"R"
                                                                       Selector:@selector(resourcesPressed)];
+        resourcesButton.color = flowerColors[FLOWERS_COLOR_GREEN];
         
         
-		CCMenu *menu = [CCMenu menuWithItems:addVertexButton, addConnectionButton, deleteVertexButton, deleteConnectionButton, colorVertexButton, colorConnectionButton, modifyVertexButton, modifyConnectionButton, recourcesButton, nil];
+		CCMenu *menu = [CCMenu menuWithItems:addVertexButton, addConnectionButton, deleteVertexButton, deleteConnectionButton, colorVertexButton, colorConnectionButton, modifyVertexButton, modifyConnectionButton, resourcesButton, nil];
 		[menu alignItemsHorizontallyWithPadding:20];
         CGSize size = [[CCDirector sharedDirector] winSize];
 		[menu setPosition:ccp( size.width / 2.0, size.height * 0.9)];
 		
 
         
-        CCMenuItemSprite *saveButton = [self createButtonWithNormalSprite:@"greenVertex.png"
-                                                                selectedSprite:@"greenVertex.png"
+        CCMenuItemSprite *saveButton = [self createButtonWithNormalSprite:@"flowerBase.png"
+                                                                selectedSprite:@"flowerBase.png"
                                                                           Text:@"S"
                                                                       Selector:@selector(savePressed)];
-        CCMenuItemSprite *testButton = [self createButtonWithNormalSprite:@"greenVertex.png"
-                                                           selectedSprite:@"greenVertex.png"
+        saveButton.color = flowerColors[FLOWERS_COLOR_GREEN];
+        
+        CCMenuItemSprite *testButton = [self createButtonWithNormalSprite:@"flowerBase.png"
+                                                           selectedSprite:@"flowerBase.png"
                                                                      Text:@"T"
                                                                  Selector:@selector(testPressed)];
+        testButton.color = flowerColors[FLOWERS_COLOR_GREEN];
         
         CCMenu *saveMenu = [CCMenu menuWithItems:saveButton, testButton, nil];
 		[saveMenu alignItemsHorizontallyWithPadding:20];
 		[saveMenu setPosition:ccp( WIN_SIZE.width * 0.85, WIN_SIZE.height * 0.1)];
 
         
-        CCMenuItemSprite *backButton = [self createButtonWithNormalSprite:@"redVertex.png"
-                                                           selectedSprite:@"redVertex.png"
+        CCMenuItemSprite *backButton = [self createButtonWithNormalSprite:@"flowerBase.png"
+                                                           selectedSprite:@"flowerBase.png"
                                                                      Text:@"<-"
                                                                  Selector:@selector(backPressed)];
+        testButton.color = flowerColors[FLOWERS_COLOR_PINK];
+        
         CCMenu *backMenu = [CCMenu menuWithItems:backButton, nil];
 		[backMenu alignItemsHorizontallyWithPadding:20];
 		[backMenu setPosition:ccp( WIN_SIZE.width * 0.1, WIN_SIZE.height * 0.1)];
@@ -330,90 +345,88 @@
 
 - (void)resourcesPressed
 {
-    self.popup = [CCNode node];
+    self.popup = [Popup node];
     [self addChild:self.popup];
-    self.popup.position = ccp(WIN_SIZE.width * 0.5, WIN_SIZE.height * 0.5);
     
-    
-    CCSprite *popupBg = [CCSprite spriteWithFile:@"popupBg.jpeg"];
-    popupBg.scaleY = 2.5;
-    popupBg.scaleX = 1.5;
-    [self.popup addChild:popupBg];
-    
-    CCMenuItemSprite *redPlusButton = [self createButtonWithNormalSprite:@"redVertex.png"
-                                                          selectedSprite:@"redVertex.png"
+    CCMenuItemSprite *redPlusButton = [self createButtonWithNormalSprite:@"flowerBase.png"
+                                                          selectedSprite:@"flowerBase.png"
                                                                     Text:@"+"
                                                                 Selector:@selector(redPlusPressed)];
-    CCMenuItemSprite *redMinusButton = [self createButtonWithNormalSprite:@"redVertex.png"
-                                                           selectedSprite:@"redVertex.png"
+    CCMenuItemSprite *redMinusButton = [self createButtonWithNormalSprite:@"flowerBase.png"
+                                                           selectedSprite:@"flowerBase.png"
                                                                      Text:@"-"
                                                                  Selector:@selector(redMinusPressed)];
+    redPlusButton.color = redMinusButton.color = flowerColors[FLOWERS_COLOR_PINK];
     self.redIndicator = [CCMenuItemFont itemWithString:[NSString stringWithFormat:@"%d", resources[0]]];
     CCMenu *redMenu = [CCMenu menuWithItems:redMinusButton, self.redIndicator, redPlusButton, nil];
     [redMenu alignItemsHorizontallyWithPadding:20];
-    [redMenu setPosition:ccp( 0, popupBg.contentSize.height * 0.6)];
+    [redMenu setPosition:ccp( 0, WIN_SIZE.height * 0.2)];
     [self.popup addChild:redMenu];
     
-    CCMenuItemSprite *greenPlusButton = [self createButtonWithNormalSprite:@"greenVertex.png"
-                                                            selectedSprite:@"greenVertex.png"
+    CCMenuItemSprite *greenPlusButton = [self createButtonWithNormalSprite:@"flowerBase.png"
+                                                            selectedSprite:@"flowerBase.png"
                                                                       Text:@"+"
                                                                   Selector:@selector(greenPlusPressed)];
-    CCMenuItemSprite *greenMinusButton = [self createButtonWithNormalSprite:@"greenVertex.png"
-                                                             selectedSprite:@"greenVertex.png"
+    CCMenuItemSprite *greenMinusButton = [self createButtonWithNormalSprite:@"flowerBase.png"
+                                                             selectedSprite:@"flowerBase.png"
                                                                        Text:@"-"
                                                                    Selector:@selector(greenMinusPressed)];
+    greenPlusButton.color = greenMinusButton.color = flowerColors[FLOWERS_COLOR_GREEN];
     self.greenIndicator = [CCMenuItemFont itemWithString:[NSString stringWithFormat:@"%d", resources[1]]];
     CCMenu *greenMenu = [CCMenu menuWithItems:greenMinusButton, self.greenIndicator, greenPlusButton, nil];
     [greenMenu alignItemsHorizontallyWithPadding:20];
-    [greenMenu setPosition:ccp( 0, popupBg.contentSize.height * 0.2)];
+    [greenMenu setPosition:ccp( 0, WIN_SIZE.height * 0.1)];
     [self.popup addChild:greenMenu];
     
-    CCMenuItemSprite *bluePlusButton = [self createButtonWithNormalSprite:@"blueVertex.png"
-                                                            selectedSprite:@"blueVertex.png"
+    CCMenuItemSprite *bluePlusButton = [self createButtonWithNormalSprite:@"flowerBase.png"
+                                                            selectedSprite:@"flowerBase.png"
                                                                       Text:@"+"
                                                                   Selector:@selector(bluePlusPressed)];
-    CCMenuItemSprite *blueMinusButton = [self createButtonWithNormalSprite:@"blueVertex.png"
-                                                             selectedSprite:@"blueVertex.png"
+    CCMenuItemSprite *blueMinusButton = [self createButtonWithNormalSprite:@"flowerBase.png"
+                                                             selectedSprite:@"flowerBase.png"
                                                                        Text:@"-"
                                                                    Selector:@selector(blueMinusPressed)];
+    bluePlusButton.color = blueMinusButton.color = flowerColors[FLOWERS_COLOR_BLUE];
     self.blueIndicator = [CCMenuItemFont itemWithString:[NSString stringWithFormat:@"%d", resources[2]]];
     CCMenu *blueMenu = [CCMenu menuWithItems:blueMinusButton, self.blueIndicator, bluePlusButton, nil];
     [blueMenu alignItemsHorizontallyWithPadding:20];
-    [blueMenu setPosition:ccp( 0, - popupBg.contentSize.height * 0.2)];
+    [blueMenu setPosition:ccp( 0, WIN_SIZE.height * 0.0)];
     [self.popup addChild:blueMenu];
     
-    CCMenuItemSprite *brownPlusButton = [self createButtonWithNormalSprite:@"brownVertex.png"
-                                                            selectedSprite:@"brownVertex.png"
+    CCMenuItemSprite *brownPlusButton = [self createButtonWithNormalSprite:@"flowerBase.png"
+                                                            selectedSprite:@"flowerBase.png"
                                                                       Text:@"+"
                                                                   Selector:@selector(brownPlusPressed)];
-    CCMenuItemSprite *brownMinusButton = [self createButtonWithNormalSprite:@"brownVertex.png"
-                                                             selectedSprite:@"brownVertex.png"
+    CCMenuItemSprite *brownMinusButton = [self createButtonWithNormalSprite:@"flowerBase.png"
+                                                             selectedSprite:@"flowerBase.png"
                                                                        Text:@"-"
                                                                    Selector:@selector(brownMinusPressed)];
+    brownPlusButton.color = brownMinusButton.color = flowerColors[FLOWERS_COLOR_PURPLE];
     self.brownIndicator = [CCMenuItemFont itemWithString:[NSString stringWithFormat:@"%d", resources[3]]];
     CCMenu *brownMenu = [CCMenu menuWithItems:brownMinusButton, self.brownIndicator, brownPlusButton, nil];
     [brownMenu alignItemsHorizontallyWithPadding:20];
-    [brownMenu setPosition:ccp( 0, - popupBg.contentSize.height * 0.6)];
+    [brownMenu setPosition:ccp( 0, -WIN_SIZE.height * 0.1)];
     [self.popup addChild:brownMenu];
     
-    CCMenuItemSprite *goldPlusButton = [self createButtonWithNormalSprite:@"goldVertex.png"
-                                                            selectedSprite:@"goldVertex.png"
+    CCMenuItemSprite *goldPlusButton = [self createButtonWithNormalSprite:@"flowerBase.png"
+                                                            selectedSprite:@"flowerBase.png"
                                                                       Text:@"+"
                                                                   Selector:@selector(goldPlusPressed)];
-    CCMenuItemSprite *goldMinusButton = [self createButtonWithNormalSprite:@"goldVertex.png"
-                                                             selectedSprite:@"goldVertex.png"
+    CCMenuItemSprite *goldMinusButton = [self createButtonWithNormalSprite:@"flowerBase.png"
+                                                             selectedSprite:@"flowerBase.png"
                                                                        Text:@"-"
                                                                    Selector:@selector(goldMinusPressed)];
+    goldPlusButton.color = goldMinusButton.color = flowerColors[FLOWERS_COLOR_YELLOW];
     self.goldIndicator = [CCMenuItemFont itemWithString:[NSString stringWithFormat:@"%d", resources[4]]];
     CCMenu *goldMenu = [CCMenu menuWithItems:goldMinusButton, self.goldIndicator, goldPlusButton, nil];
     [goldMenu alignItemsHorizontallyWithPadding:20];
-    [goldMenu setPosition:ccp( 0, - popupBg.contentSize.height * 1.0)];
+    [goldMenu setPosition:ccp( 0, -WIN_SIZE.height * 0.2)];
     [self.popup addChild:goldMenu];
     
     CCMenuItemFont *closeB = [CCMenuItemFont itemWithString:@"Close" target:self selector:@selector(closePopupPressed)];
     CCMenu *closeMenu = [CCMenu menuWithItems:closeB, nil];
     [closeMenu alignItemsHorizontallyWithPadding:20];
-    [closeMenu setPosition:ccp( popupBg.contentSize.width * 0.5, popupBg.contentSize.height * 1.0)];
+    [closeMenu setPosition:ccp( 0, -WIN_SIZE.height * 0.3)];
     [self.popup addChild:closeMenu];
     
 }

@@ -25,26 +25,10 @@
 	return scene;
 }
 
-- (CCMenuItemSprite *)createButtonWithNormalSprite:(NSString *)normS selectedSprite:(NSString *)selS Text:(NSString *)text Selector:(SEL)sel;
-{
-    CCSprite *normalSprite = [CCSprite spriteWithFile:normS];
-    CCLabelTTF *label = [CCLabelTTF labelWithString:text fontName:@"Marker Felt" fontSize:64];
-    label.position = ccp(normalSprite.contentSize.width * 0.5, normalSprite.contentSize.height * 0.5);
-    [normalSprite addChild:label];
-    
-    CCSprite *selectedSprite = [CCSprite spriteWithFile:selS];
-    CCLabelTTF *label2 = [CCLabelTTF labelWithString:text fontName:@"Marker Felt" fontSize:64];
-    label2.position = ccp(selectedSprite.contentSize.width * 0.5, selectedSprite.contentSize.height * 0.5);
-    [selectedSprite addChild:label2];
-    
-    CCMenuItemSprite *sp = [CCMenuItemSprite itemWithNormalSprite:normalSprite selectedSprite:selectedSprite target:self selector: sel];
-    sp.scale = 0.7;
-    
-    return sp;
-}
-
 - (NSDictionary *)loadLevel:(NSString *)levelName
 {
+    
+#ifdef EDITOR
 //    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 //    NSString *documentsDirectory = [paths objectAtIndex:0];
 //    NSString *levelsDir = [documentsDirectory stringByAppendingPathComponent:@"levels/"];
@@ -53,10 +37,22 @@
 //        NSLog(@"level file %@ does not exist", levelName);
 //    NSDictionary *level = [NSDictionary dictionaryWithContentsOfFile:levelFile];
     
+    self.levelName = levelName;
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *levelsDir = [documentsDirectory stringByAppendingPathComponent:@"levels/"];
+    NSString *levelFile = [levelsDir stringByAppendingPathComponent:self.levelName];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:levelsDir])
+        NSLog(@"test level file does not exist");
+    NSDictionary *level = [NSDictionary dictionaryWithContentsOfFile:levelFile];
+    return level;
+#else
     NSURL* url = [[NSBundle mainBundle] URLForResource:levelName withExtension:@""];
     if (![[NSFileManager defaultManager] fileExistsAtPath:[url path]])
         NSLog(@"level file %@ does not exist", levelName);
     NSDictionary *level = [NSDictionary dictionaryWithContentsOfURL:url];
+#endif
     
     return level;
 }
@@ -397,7 +393,11 @@
 
 - (void)levelSelectButtonPressed
 {
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[LevelSelectLayer scene] withColor:ccWHITE]];   
+    LevelSelectLayer *newLayer = [[[LevelSelectLayer alloc] initWithMode:LEVEL_SELECT_MODE_GAME] autorelease];
+    CCScene *newScene = [CCScene node];
+	[newScene addChild: newLayer];
+    
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:newScene withColor:ccWHITE]];
 }
 
 - (void)nextLevelButtonPressed

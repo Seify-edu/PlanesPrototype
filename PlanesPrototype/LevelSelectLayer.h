@@ -9,7 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
+enum {LEVEL_SELECT_MODE_GAME, LEVEL_SELECT_MODE_EDITOR};
+
 @protocol LevelSelectProtocol
+    - (NSDictionary *)loadLevel:(NSString *)levelName;
+    - (void)parseLevel:(NSDictionary *)level;
     @property int currentLevel;
     @property int currentPack;
 @end
@@ -17,5 +21,6 @@
 @interface LevelSelectLayer : CCLayer {
     
 }
-+(CCScene *) scene;
+- (id)initWithMode:(int) mode;
+@property int mode;
 @end

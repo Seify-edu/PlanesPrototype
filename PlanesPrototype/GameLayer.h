@@ -49,6 +49,8 @@ enum {
 @property int currentLevel;
 @property int currentPack;
 
+@property (retain) NSString *levelName;
+
 @property (assign) Popup *popup;
 
 // returns a CCScene that contains the GameLayer as the only child

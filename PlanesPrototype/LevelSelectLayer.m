@@ -10,18 +10,9 @@
 #import "LevelSelectLayer.h"
 #import "MainMenuLayer.h"
 #import "Constants.h"
+#import "EditorLayer.h"
 
 @implementation LevelSelectLayer
-
-+(CCScene *) scene
-{
-	CCScene *scene = [CCScene node];
-    
-	LevelSelectLayer *lsl = [LevelSelectLayer node];
-	[scene addChild: lsl];
-    
-	return scene;
-}
 
 - (CCMenuItemSprite *)createButtonWithNormalSprite:(NSString *)normS selectedSprite:(NSString *)selS Text:(NSString *)text Selector:(SEL)sel;
 {
@@ -46,8 +37,14 @@
 
 - (id)init
 {
+    return [self initWithMode:LEVEL_SELECT_MODE_GAME];
+}
+
+- (id)initWithMode:(int)mode
+{
     if (self = [super init])
     {
+        self.mode = mode;
         
         CCSprite *bg = [CCSprite spriteWithFile:@"background.png"];
         bg.position = ccp(self.contentSize.width / 2.0, self.contentSize.height / 2.0);
@@ -74,6 +71,10 @@
                 NSString *levWonKey = [NSString stringWithFormat:@"pack%dlevel%dWon", 1, prevLevelNumber ];
                 levelEnabled = [defaults boolForKey:levWonKey];
             }
+            
+#ifdef EDITOR
+            levelEnabled |= (LEVEL_SELECT_MODE_EDITOR == self.mode);
+#endif
             
             NSString *buttonText = levelEnabled ? [NSString stringWithFormat:@"%d", levelNumber] : @"?";
             
@@ -142,20 +143,28 @@
 {
     
     //TODO: add real pack number here
-    
     int packNumber = 1;
 
-    CCScene *GameLayerScene = [CCScene node];
-	GameLayer *gl = [GameLayer node];
-    gl.tag = 0;
-	[GameLayerScene addChild: gl];
-    gl.currentLevel = button.tag;
-    gl.currentPack = packNumber;
-    NSString *levelName = [NSString stringWithFormat:@"level%d_%d", packNumber, button.tag];
-    NSDictionary *level = [gl loadLevel:levelName];
-    [gl parseLevel:level];
     
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:GameLayerScene withColor:ccWHITE]];
+    CCLayer<LevelSelectProtocol> *newLayer;
+    if (self.mode == LEVEL_SELECT_MODE_EDITOR)
+    {
+        newLayer = [EditorLayer node];
+    }
+    else
+    {
+        newLayer = [GameLayer node];
+    }
+    
+    CCScene *newScene = [CCScene node];
+	[newScene addChild: newLayer];
+    newLayer.currentLevel = button.tag;
+    newLayer.currentPack = packNumber;
+    NSString *levelName = [NSString stringWithFormat:@"level%d_%d", packNumber, button.tag];
+    NSDictionary *level = [newLayer loadLevel:levelName];
+    [newLayer parseLevel:level];
+    
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:newScene withColor:ccWHITE]];
 }
 
 @end
