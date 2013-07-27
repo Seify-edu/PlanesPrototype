@@ -45,6 +45,7 @@
         case MODIFIER_END:
         {
             CCSprite *houseBody = [CCSprite spriteWithFile:@"homeBodyBase.png"];
+            houseBody.position = ccp( 0, 16 );
             houseBody.color = SIGNS_COLOR_ORANGE;
             CCSprite *houseEntrance = [CCSprite spriteWithFile:@"homeEnterBase.png"];
             houseEntrance.color = flowerColors[FLOWERS_COLOR_YELLOW];

@@ -18,12 +18,14 @@
 #import "Popup.h"
 
 enum {
-    PLAYER_EASY_MOVE_TAG
+    PLAYER_MOVE_TAG
 };
 
 enum {
+    GAME_STATE_TUTORIAL,
+    GAME_STATE_RUNNING,
     GAME_STATE_PAUSE,
-    GAME_STATE_RUNNING
+    GAME_STATE_ENDING
 };
 
 @interface GameLayer : CCLayer <HudNodeDelegate> {

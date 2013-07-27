@@ -197,7 +197,7 @@
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
-    if (self.state == GAME_STATE_PAUSE) {
+    if (self.state != GAME_STATE_RUNNING) {
         return YES;
     }
     
@@ -213,7 +213,7 @@
                     (vc.startVertex == self.player.currentVertex && vc.endVertex == mv)
                     )
                 {
-                    BOOL playerMoving = ([self.player getActionByTag:PLAYER_EASY_MOVE_TAG] != nil);
+                    BOOL playerMoving = ([self.player getActionByTag:PLAYER_MOVE_TAG] != nil);
                     BOOL enoughResources = ( resources[vc.resourceType] > 0 );
                     
                     if (!playerMoving && enoughResources)
@@ -222,8 +222,11 @@
                         float timeToTravel = ccpDistance(vc.startVertex.position, vc.endVertex.position) / sc * 0.003;
                         CCMoveTo *movePlayer = [CCMoveTo actionWithDuration:timeToTravel position:mv.position];
                         CCEaseOut *easyMove = [CCEaseOut actionWithAction:movePlayer rate:2];
-                        easyMove.tag = PLAYER_EASY_MOVE_TAG;
-                        [self.player runAction:easyMove];
+                        easyMove.tag = PLAYER_MOVE_TAG;
+                        CCCallFunc *cf = [CCCallFunc actionWithTarget:self selector:@selector(updateAvaiblePathVisual)];
+                        CCSequence *movePlayerToNextFlower = [CCSequence actionOne:easyMove two:cf];
+    
+                        [self.player runAction:movePlayerToNextFlower];
                         self.player.currentVertex = mv;
 
                         
@@ -231,8 +234,7 @@
                         resources[vc.resourceType] -= 1;
                         [self.hud updateResources];
                         
-                        [self updateAvaiblePathVisual];
-
+                        [self.player.sprite removeAllChildrenWithCleanup:YES];
 
 //                        TODO: uncomment this to keep player in the center of the screen
 //                        CGPoint mapOffset = ccpSub(self.player.position, mv.position);
@@ -242,7 +244,31 @@
                         
                         if (mv.pictogrammType == MODIFIER_END)
                         {
-                            [self performSelector:@selector(levelWon) withObject:nil afterDelay:(NSTimeInterval)timeToTravel];
+                            self.state = GAME_STATE_ENDING;
+                            [self.player stopAllActions];
+                            
+                            CGPoint vectorEndToStart = ccpSub(mv.position, self.player.position);
+                            CGPoint normalizedVectorEndToStart = ccpNormalize(vectorEndToStart);
+                            CGPoint vectorEndToTargetPoint = ccpMult(normalizedVectorEndToStart, 20);
+                            CGPoint targetPoint = ccpSub(mv.position, vectorEndToTargetPoint);
+                            
+                            float sc = [CCDirector sharedDirector].contentScaleFactor;
+                            float timeToTravel = ccpDistance(self.player.position, targetPoint) / sc * 0.003;
+                            CCMoveTo *movePlayer = [CCMoveTo actionWithDuration:timeToTravel position:targetPoint];
+                            CCEaseOut *easyMove = [CCEaseOut actionWithAction:movePlayer rate:2];
+                            
+                            int spawnDuration = 1;
+
+                            CCScaleTo *scalePlayer = [CCScaleTo actionWithDuration:spawnDuration scale:0.6];
+                            CCMoveTo *movePlayerToFinish = [CCMoveTo actionWithDuration:spawnDuration position:mv.position];
+                            CCSpawn *finishSpawn = [CCSpawn actionOne:scalePlayer two:movePlayerToFinish];
+                            
+                            CCSequence *finalSequence = [CCSequence actionOne:easyMove two:finishSpawn];
+                            finalSequence.tag = PLAYER_MOVE_TAG;
+
+                            [self.player runAction:finalSequence];
+                            
+                            [self performSelector:@selector(levelWon) withObject:nil afterDelay:(NSTimeInterval)(timeToTravel + spawnDuration)];
                         }
                         else
                         {
@@ -264,18 +290,16 @@
                             BOOL flowerCollected = (mv.pictogrammType == MODIFIER_BONUS);
                             if (flowerCollected) {
                                 [self performSelector:@selector(collectFlowerFromVertex:) withObject:mv afterDelay:(NSTimeInterval)timeToTravel];
-                            }                            
+                            }
                         }
                     }
                     else
                     {
-                        //TODO: play action with resource indicators
                         if (!enoughResources)
                         {
                             [self.hud blinkEnergyBar];
                         }
                     }
-
                     
                     break;
                 }
@@ -314,23 +338,11 @@
 {
     [self.player.sprite removeAllChildrenWithCleanup:YES];
     
+//    BOOL playerMoving = ([self.player getActionByTag:PLAYER_MOVE_TAG] != nil);
+//    if (playerMoving) return;
+    
     for (VertexConnection *vc in self.connections)
     {
-//        vc.sprite.opacity = 255.0f;
-//            if (resources[vc.resourceType] <= 0) {
-//                vc.sprite.opacity = 122.0f;
-//            }
-        
-//        vc.sprite.scaleX = 1.0f;
-//        if (resources[vc.resourceType] <= 0) {
-//            vc.sprite.scaleX = 0.2f;
-//        }
-
-//        vc.sprite.scaleY = 1.0f;
-//        if (resources[vc.resourceType] <= 0) {
-//            vc.sprite.scaleY = 0.2f;
-//        }
-        
         BOOL playerAtStart = (vc.startVertex == self.player.currentVertex);
         BOOL playerAtEnd = (vc.endVertex == self.player.currentVertex);
 
@@ -347,8 +359,8 @@
                 arrow.position = ccp(self.player.sprite.contentSize.width / 2., self.player.sprite.contentSize.height / 2.);
                 arrow.position = ccpAdd(arrow.position, arrowOffset);
                 [self.player.sprite addChild:arrow];
-                CCFadeTo *fadeToLow = [CCFadeTo actionWithDuration:0.8 opacity:120];
-                CCFadeTo *fadeToHigh = [CCFadeTo actionWithDuration:0.8 opacity:DEFAULT_OPACITY];
+                CCFadeTo *fadeToLow = [CCFadeTo actionWithDuration:0.65 opacity:120];
+                CCFadeTo *fadeToHigh = [CCFadeTo actionWithDuration:0.65 opacity:DEFAULT_OPACITY];
                 CCSequence *fade = [CCSequence actionOne:fadeToLow two:fadeToHigh];
                 CCRepeatForever *repeatFade = [CCRepeatForever actionWithAction:fade];
                 [arrow runAction:repeatFade];
@@ -558,8 +570,6 @@
     [popupMenu alignItemsVerticallyWithPadding:50];
     popupMenu.position = ccp( 0, 0 );
     [self.popup addChild:popupMenu];
-    
-
     
     [self addChild:self.popup];
 }
