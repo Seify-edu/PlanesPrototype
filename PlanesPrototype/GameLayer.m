@@ -29,17 +29,9 @@
 - (NSDictionary *)loadLevel:(NSString *)levelName
 {
     
-#ifdef EDITOR
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString *documentsDirectory = [paths objectAtIndex:0];
-//    NSString *levelsDir = [documentsDirectory stringByAppendingPathComponent:@"levels/"];
-//    NSString *levelFile = [levelsDir stringByAppendingPathComponent:levelName];
-//    if (![[NSFileManager defaultManager] fileExistsAtPath:levelsDir])
-//        NSLog(@"level file %@ does not exist", levelName);
-//    NSDictionary *level = [NSDictionary dictionaryWithContentsOfFile:levelFile];
-    
     self.levelName = levelName;
     
+#ifdef EDITOR
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *levelsDir = [documentsDirectory stringByAppendingPathComponent:@"levels/"];
@@ -69,6 +61,8 @@
         resources[i] = [[levelResources objectAtIndex:i] intValue];
     }
     [self.hud updateResources];
+    [self updateAvaiblePathVisual];
+
     
     //load vertexes
     NSArray *vertexes = [level objectForKey:@"vertexes"];
@@ -153,7 +147,7 @@
 //    CCRepeatForever *repeat = [CCRepeatForever actionWithAction:rotateInYan];
 //    [self.player runAction:repeat];
     
-//    [self updateAvaiblePathVisual];
+    [self updateAvaiblePathVisual];
     
 }
 
@@ -181,6 +175,8 @@
         self.hud = hudl;
         [hudl updateResources];
         [self addChild:hudl];
+        
+        [self updateAvaiblePathVisual];
         
         self.console = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:32];
         self.console.color = ccBLACK;
@@ -234,6 +230,9 @@
                         resources[mv.resourceType] += 1;
                         resources[vc.resourceType] -= 1;
                         [self.hud updateResources];
+                        
+                        [self updateAvaiblePathVisual];
+
 
 //                        TODO: uncomment this to keep player in the center of the screen
 //                        CGPoint mapOffset = ccpSub(self.player.position, mv.position);
@@ -308,16 +307,27 @@
     [mv recreatePictogramm];
     self.flowersCollected = self.flowersCollected + 1;
     [self.hud updateResources];
+    [self updateAvaiblePathVisual];
 }
 
 - (void)updateAvaiblePathVisual
 {
     for (VertexConnection *vc in self.connections)
     {
-        vc.sprite.opacity = 255.0f;
-            if (resources[vc.resourceType] <= 0) {
-                vc.sprite.opacity = 122.0f;
-            }
+//        vc.sprite.opacity = 255.0f;
+//            if (resources[vc.resourceType] <= 0) {
+//                vc.sprite.opacity = 122.0f;
+//            }
+        
+//        vc.sprite.scaleX = 1.0f;
+//        if (resources[vc.resourceType] <= 0) {
+//            vc.sprite.scaleX = 0.2f;
+//        }
+
+//        vc.sprite.scaleY = 1.0f;
+//        if (resources[vc.resourceType] <= 0) {
+//            vc.sprite.scaleY = 0.2f;
+//        }        
     }
 }
 
@@ -385,9 +395,10 @@
     [self.connections removeAllObjects];
     self.player = nil;
     [self.hud updateResources];
+    [self updateAvaiblePathVisual];
     
-    NSString *levelName = [NSString stringWithFormat:@"level%d_%d", self.currentPack, self.currentLevel];
-    NSDictionary *level = [self loadLevel:levelName];
+//    NSString *levelName = [NSString stringWithFormat:@"level%d_%d", self.currentPack, self.currentLevel];
+    NSDictionary *level = [self loadLevel:self.levelName];
     [self parseLevel:level];
 }
 
@@ -437,6 +448,7 @@
     if ( self.currentLevel < MAX_LEVEL)
     {
         self.currentLevel++;
+        self.levelName = [NSString stringWithFormat:@"level%d_%d", self.currentPack, self.currentLevel];
         [self restartLevel];
         self.state = GAME_STATE_RUNNING;
     }
