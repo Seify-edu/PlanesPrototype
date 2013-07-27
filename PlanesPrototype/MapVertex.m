@@ -44,8 +44,13 @@
 
         case MODIFIER_END:
         {
-            self.pictogramm = [CCSprite spriteWithFile:@"exclamationMarkBase.png"];
-            self.pictogramm.color = SIGNS_COLOR_ORANGE;
+            CCSprite *houseBody = [CCSprite spriteWithFile:@"homeBodyBase.png"];
+            houseBody.color = SIGNS_COLOR_ORANGE;
+            CCSprite *houseEntrance = [CCSprite spriteWithFile:@"homeEnterBase.png"];
+            houseEntrance.color = flowerColors[FLOWERS_COLOR_YELLOW];
+            houseEntrance.position = ccp(houseBody.contentSize.width / 2., houseBody.contentSize.height / 2. );
+            [houseBody addChild:houseEntrance];
+            self.pictogramm = houseBody;
 
             break;
         }

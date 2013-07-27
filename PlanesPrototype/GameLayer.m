@@ -80,9 +80,9 @@
         MapVertex *mv = [[[MapVertex alloc] initWithPosition:CGPointMake(positionX, positionY) ResourceType:vertexResourceType] autorelease];
         mv.index = index;
         mv.pictogrammType = pictogrammType;
-//        if (mv.pictogrammType == MODIFIER_END) {
-//            mv.sprite.visible = NO;
-//        }
+        if (mv.pictogrammType == MODIFIER_END) {
+            mv.sprite.visible = NO;
+        }
         [mv recreatePictogramm];
         [self.vertexes addObject:mv];
     }
@@ -312,6 +312,8 @@
 
 - (void)updateAvaiblePathVisual
 {
+    [self.player.sprite removeAllChildrenWithCleanup:YES];
+    
     for (VertexConnection *vc in self.connections)
     {
 //        vc.sprite.opacity = 255.0f;
@@ -327,7 +329,27 @@
 //        vc.sprite.scaleY = 1.0f;
 //        if (resources[vc.resourceType] <= 0) {
 //            vc.sprite.scaleY = 0.2f;
-//        }        
+//        }
+        
+        BOOL playerAtStart = (vc.startVertex == self.player.currentVertex);
+        BOOL playerAtEnd = (vc.endVertex == self.player.currentVertex);
+
+        if (playerAtStart || playerAtEnd)
+        {
+            if ( resources[vc.resourceType] > 0 )
+            {
+                CCSprite *arrow = [CCSprite spriteWithFile:@"arrowBase.png"];
+                arrow.color = UI_COLOR_GREY;
+                arrow.opacity = DEFAULT_OPACITY;
+                arrow.rotation = playerAtStart ? vc.sprite.rotation : vc.sprite.rotation + 180;
+                
+                CGPoint arrowOffset = ccp(50, 0);
+                arrowOffset = ccpRotateByAngle(arrowOffset, ccp(0,0), CC_DEGREES_TO_RADIANS(360 - arrow.rotation) );
+                arrow.position = ccp(self.player.sprite.contentSize.width / 2., self.player.sprite.contentSize.height / 2.);
+                arrow.position = ccpAdd(arrow.position, arrowOffset);
+                [self.player.sprite addChild:arrow];
+            }
+        }
     }
 }
 
