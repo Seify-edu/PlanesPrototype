@@ -7,6 +7,7 @@
 //
 
 #import "EditorLayer.h"
+#import "GameLayer.h"
 
 @interface EditorLayer()
 {
@@ -58,6 +59,7 @@
     if (![[NSFileManager defaultManager] fileExistsAtPath:levelsDir])
         NSLog(@"test level file does not exist");
     NSDictionary *level = [NSDictionary dictionaryWithContentsOfFile:levelFile];
+    
     return level;
 }
 
@@ -210,8 +212,15 @@
                                                                      Text:@"T"
                                                                  Selector:@selector(testPressed)];
         testButton.color = flowerColors[FLOWERS_COLOR_GREEN];
+
+        CCMenuItemSprite *playButton = [self createButtonWithNormalSprite:@"flowerBase.png"
+                                                           selectedSprite:@"flowerBase.png"
+                                                                     Text:@"P"
+                                                                 Selector:@selector(playPressed)];
+        playButton.color = flowerColors[FLOWERS_COLOR_YELLOW];
+
         
-        CCMenu *saveMenu = [CCMenu menuWithItems:saveButton, testButton, nil];
+        CCMenu *saveMenu = [CCMenu menuWithItems:saveButton, testButton, playButton, nil];
 		[saveMenu alignItemsHorizontallyWithPadding:20];
 		[saveMenu setPosition:ccp( WIN_SIZE.width * 0.85, WIN_SIZE.height * 0.1)];
 
@@ -220,7 +229,7 @@
                                                            selectedSprite:@"flowerBase.png"
                                                                      Text:@"<-"
                                                                  Selector:@selector(backPressed)];
-        testButton.color = flowerColors[FLOWERS_COLOR_PINK];
+        backButton.color = flowerColors[FLOWERS_COLOR_PINK];
         
         CCMenu *backMenu = [CCMenu menuWithItems:backButton, nil];
 		[backMenu alignItemsHorizontallyWithPadding:20];
@@ -848,6 +857,18 @@
     
     
     
+}
+
+- (void)playPressed
+{
+    GameLayer *newLayer = [GameLayer node];
+    CCScene *newScene = [CCScene node];
+    NSDictionary *level = [newLayer loadLevel:self.levelName];
+    [newLayer parseLevel:level];
+	[newScene addChild: newLayer];
+    
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:newScene withColor:ccWHITE]];
+
 }
 
 - (void)backPressed

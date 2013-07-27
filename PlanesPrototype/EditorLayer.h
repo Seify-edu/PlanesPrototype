@@ -13,6 +13,7 @@
 #import "MainMenuLayer.h"
 #import "Walkthrough.h"
 #import "Popup.h"
+#import "LevelSelectLayer.h"
 
 enum
 {
@@ -32,7 +33,7 @@ enum
     TAG_VERTEX_INDEX,
 };
 
-@interface EditorLayer : CCLayer
+@interface EditorLayer : CCLayer <LevelSelectProtocol>
 {
     int resources[NUMBER_OF_RESOURCES];
 }

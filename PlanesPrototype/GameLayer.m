@@ -9,6 +9,7 @@
 #import "LevelSelectLayer.h"
 #import "GameLayer.h"
 #import "Popup.h"
+#import "EditorLayer.h"
 
 #define MAX_LEVEL 20
 
@@ -350,8 +351,16 @@
     CCMenuItemSprite *resumeButton = [self createButtonWithFile:@"popupButtonBase.png" Color:flowerColors[FLOWERS_COLOR_GREEN] Selector:@selector(resumeButtonPressed) Text:@"Resume"];
     CCMenuItemSprite *restartButton = [self createButtonWithFile:@"popupButtonBase.png" Color:flowerColors[FLOWERS_COLOR_PINK] Selector:@selector(restartButtonPressed) Text:@"Restart"];
     CCMenuItemSprite *levelSelectButton = [self createButtonWithFile:@"popupButtonBase.png" Color:flowerColors[FLOWERS_COLOR_BLUE] Selector:@selector(levelSelectButtonPressed) Text:@"Select level"];
+#ifdef EDITOR
+    CCMenuItemSprite *editorButton = [self createButtonWithFile:@"popupButtonBase.png" Color:flowerColors[FLOWERS_COLOR_PINK] Selector:@selector(editorButtonPressed) Text:@"Editor"];
+    CCMenuItemSprite *mainMenuButton = [self createButtonWithFile:@"popupButtonBase.png" Color:flowerColors[FLOWERS_COLOR_PINK] Selector:@selector(mainMenuButtonPressed) Text:@"Main Menu"];
     
-    CCMenu *popupMenu = [CCMenu menuWithItems:resumeButton, restartButton, levelSelectButton, nil];
+#endif
+    CCMenu *popupMenu = [CCMenu menuWithItems:resumeButton, restartButton, levelSelectButton,
+#ifdef EDITOR
+                                editorButton, mainMenuButton,
+#endif
+                         nil];
     [popupMenu alignItemsVerticallyWithPadding:50];
     popupMenu.position = ccp( 0, 0 );
     [self.popup addChild:popupMenu];
@@ -400,6 +409,27 @@
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:newScene withColor:ccWHITE]];
 }
 
+- (void)editorButtonPressed
+{
+    EditorLayer *newLayer = [EditorLayer node];
+    CCScene *newScene = [CCScene node];
+    NSDictionary *level = [newLayer loadLevel:self.levelName];
+    [newLayer parseLevel:level];
+	[newScene addChild: newLayer];
+
+    
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:newScene withColor:ccWHITE]];
+}
+
+- (void)mainMenuButtonPressed
+{
+    MainMenuLayer *newLayer = [MainMenuLayer node];
+    CCScene *newScene = [CCScene node];
+	[newScene addChild: newLayer];
+    
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:newScene withColor:ccWHITE]];
+}
+
 - (void)nextLevelButtonPressed
 {
     [self removeChild:self.popup cleanup:YES];
@@ -414,7 +444,6 @@
     {
         [self showComingSoon];
     }
-    
 }
 
 - (void)showComingSoon
