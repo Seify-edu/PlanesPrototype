@@ -342,12 +342,16 @@
                 arrow.color = UI_COLOR_GREY;
                 arrow.opacity = DEFAULT_OPACITY;
                 arrow.rotation = playerAtStart ? vc.sprite.rotation : vc.sprite.rotation + 180;
-                
-                CGPoint arrowOffset = ccp(50, 0);
+                CGPoint arrowOffset = ccp(55, 0);
                 arrowOffset = ccpRotateByAngle(arrowOffset, ccp(0,0), CC_DEGREES_TO_RADIANS(360 - arrow.rotation) );
                 arrow.position = ccp(self.player.sprite.contentSize.width / 2., self.player.sprite.contentSize.height / 2.);
                 arrow.position = ccpAdd(arrow.position, arrowOffset);
                 [self.player.sprite addChild:arrow];
+                CCFadeTo *fadeToLow = [CCFadeTo actionWithDuration:0.8 opacity:120];
+                CCFadeTo *fadeToHigh = [CCFadeTo actionWithDuration:0.8 opacity:DEFAULT_OPACITY];
+                CCSequence *fade = [CCSequence actionOne:fadeToLow two:fadeToHigh];
+                CCRepeatForever *repeatFade = [CCRepeatForever actionWithAction:fade];
+                [arrow runAction:repeatFade];
             }
         }
     }
