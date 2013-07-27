@@ -28,6 +28,11 @@ enum {
     GAME_STATE_ENDING
 };
 
+enum {
+    TUTOTIAL_HOME,
+    TUTOTIAL_STARS,
+};
+
 @interface GameLayer : CCLayer <HudNodeDelegate> {
     int resources[NUMBER_OF_RESOURCES];
 }

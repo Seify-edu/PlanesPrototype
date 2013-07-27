@@ -61,8 +61,6 @@
         resources[i] = [[levelResources objectAtIndex:i] intValue];
     }
     [self.hud updateResources];
-    [self updateAvaiblePathVisual];
-
     
     //load vertexes
     NSArray *vertexes = [level objectForKey:@"vertexes"];
@@ -147,8 +145,6 @@
 //    CCRepeatForever *repeat = [CCRepeatForever actionWithAction:rotateInYan];
 //    [self.player runAction:repeat];
     
-    [self updateAvaiblePathVisual];
-    
 }
 
 - (id)init
@@ -175,9 +171,7 @@
         self.hud = hudl;
         [hudl updateResources];
         [self addChild:hudl];
-        
-        [self updateAvaiblePathVisual];
-        
+                
         self.console = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:32];
         self.console.color = ccBLACK;
         [self addChild:self.console];
@@ -187,6 +181,97 @@
         [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:-1 swallowsTouches:YES];
 	}
 	return self;
+}
+
+- (void)playTutorialIfNeeded
+{
+    if (self.currentPack == 1 && self.currentLevel == 1)
+    {
+        [self playTutorial:TUTOTIAL_HOME];
+    }
+    else if (self.currentPack == 1 && self.currentLevel == 2)
+    {
+        [self playTutorial:TUTOTIAL_STARS];
+    }
+}
+
+- (void)onEnterTransitionDidFinish
+{
+    [super onEnterTransitionDidFinish];
+    
+    [self updateAvaiblePathVisual];
+    [self playTutorialIfNeeded];
+}
+
+
+- (void)playTutorial:(int)tutorial
+{
+    if (tutorial != TUTOTIAL_HOME && tutorial != TUTOTIAL_STARS) return;
+    
+    self.state = GAME_STATE_TUTORIAL;
+    
+    [self.player.sprite removeAllChildrenWithCleanup:YES];
+    
+    CCSprite *bubble = [CCSprite spriteWithFile:@"Bubble.png"];
+    bubble.opacity = 0;
+    [self.player.sprite addChild:bubble];
+    bubble.anchorPoint = ccp( 0, 0 );
+    bubble.position = ccp( self.player.sprite.contentSize.width, self.player.sprite.contentSize.height );
+    
+    CCDelayTime *pause1 = [CCDelayTime actionWithDuration:0.5];
+    CCFadeIn *fadeIn = [CCFadeIn actionWithDuration: 1.0];
+    CCDelayTime *pause2 = [CCDelayTime actionWithDuration:2.5];
+    CCFadeOut *fadeOut = [CCFadeOut actionWithDuration: 1.0];
+    CCCallFunc *callback = [CCCallFunc actionWithTarget:self selector:@selector(tutorialFinished)];
+    CCSequence *tutotialSequence = [CCSequence actions:pause1, fadeIn, pause2, fadeOut, callback, nil];
+    [bubble runAction:tutotialSequence];
+    
+    switch (tutorial) {
+        case TUTOTIAL_HOME:
+        {
+            CCSprite *houseBody = [CCSprite spriteWithFile:@"homeBodyBase.png"];
+            houseBody.color = SIGNS_COLOR_ORANGE;
+            CCSprite *houseEntrance = [CCSprite spriteWithFile:@"homeEnterBase.png"];
+            houseEntrance.color = flowerColors[FLOWERS_COLOR_YELLOW];
+            houseEntrance.position = ccp(houseBody.contentSize.width / 2., houseBody.contentSize.height / 2. );
+            [houseBody addChild:houseEntrance];
+            houseBody.opacity = houseEntrance.opacity = 0;
+            houseBody.position = ccp( bubble.contentSize.width * 0.55, bubble.contentSize.height * 0.62 );
+            houseBody.scale = 0.8;
+            [bubble addChild:houseBody];
+            
+            [houseEntrance runAction:[CCSequence actions:[[pause1 copy] autorelease],[[fadeIn copy] autorelease], [[pause2 copy] autorelease], [[fadeOut copy] autorelease], nil]];
+            [houseBody runAction:[CCSequence actions:[[pause1 copy] autorelease], [[fadeIn copy] autorelease], [[pause2 copy] autorelease], [[fadeOut copy] autorelease], nil]];
+            
+            break;
+        }
+            
+        case TUTOTIAL_STARS:
+        {
+            for (int i = 0; i < 3; i++) {
+                CCSprite *star = [CCSprite spriteWithFile:@"starBase.png"];
+                star.color = SIGNS_COLOR_ORANGE;
+                star.opacity = 0;
+                star.position = ccp( bubble.contentSize.width * ( 0.3 + i * 0.25 ), bubble.contentSize.height * 0.62 );
+                [bubble addChild:star];
+                [star runAction:[CCSequence actions:[[pause1 copy] autorelease],[[fadeIn copy] autorelease], [[pause2 copy] autorelease], [[fadeOut copy] autorelease], nil]];
+            }
+
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
+
+- (void)tutorialFinished
+{
+    [self.player.sprite removeAllChildrenWithCleanup:YES];
+    
+    self.state = GAME_STATE_RUNNING;
+    
+    [self updateAvaiblePathVisual];
 }
 
 - (BOOL)point:(CGPoint)point insideMapVertex:(MapVertex *)mv
@@ -222,9 +307,9 @@
                         float timeToTravel = ccpDistance(vc.startVertex.position, vc.endVertex.position) / sc * 0.003;
                         CCMoveTo *movePlayer = [CCMoveTo actionWithDuration:timeToTravel position:mv.position];
                         CCEaseOut *easyMove = [CCEaseOut actionWithAction:movePlayer rate:2];
-                        easyMove.tag = PLAYER_MOVE_TAG;
                         CCCallFunc *cf = [CCCallFunc actionWithTarget:self selector:@selector(updateAvaiblePathVisual)];
                         CCSequence *movePlayerToNextFlower = [CCSequence actionOne:easyMove two:cf];
+                        movePlayerToNextFlower.tag = PLAYER_MOVE_TAG;
     
                         [self.player runAction:movePlayerToNextFlower];
                         self.player.currentVertex = mv;
@@ -432,12 +517,13 @@
     [self.vertexes removeAllObjects];
     [self.connections removeAllObjects];
     self.player = nil;
-    [self.hud updateResources];
-    [self updateAvaiblePathVisual];
     
 //    NSString *levelName = [NSString stringWithFormat:@"level%d_%d", self.currentPack, self.currentLevel];
     NSDictionary *level = [self loadLevel:self.levelName];
     [self parseLevel:level];
+    
+    [self.hud updateResources];
+    [self updateAvaiblePathVisual];
 }
 
 - (void)restartButtonPressed
@@ -488,7 +574,10 @@
         self.currentLevel++;
         self.levelName = [NSString stringWithFormat:@"level%d_%d", self.currentPack, self.currentLevel];
         [self restartLevel];
+        
         self.state = GAME_STATE_RUNNING;
+        
+        [self playTutorialIfNeeded];
     }
     else
     {
