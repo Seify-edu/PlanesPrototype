@@ -226,6 +226,8 @@
 		B1CD68A717A40D4E00535E41 /* homeBodyBase@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B1CD68A017A40D4E00535E41 /* homeBodyBase@2x.png */; };
 		B1CD68A817A40D4E00535E41 /* homeEnterBase@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B1CD68A117A40D4E00535E41 /* homeEnterBase@2x.png */; };
 		B1CD68A917A40D4E00535E41 /* homeEnterBase@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B1CD68A117A40D4E00535E41 /* homeEnterBase@2x.png */; };
+		B1CD68AC17A515A300535E41 /* EnergyIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = B1CD68AB17A515A300535E41 /* EnergyIndicator.m */; };
+		B1CD68AD17A515A300535E41 /* EnergyIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = B1CD68AB17A515A300535E41 /* EnergyIndicator.m */; };
 		B1D76A9F16C6C4A5007012E5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B1D76A9E16C6C4A4007012E5 /* Default-568h@2x.png */; };
 		B1D76AA216C98333007012E5 /* LevelSelectLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B1D76AA116C98333007012E5 /* LevelSelectLayer.m */; };
 		B1EA231D16B107260021D124 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1EA231C16B107260021D124 /* QuartzCore.framework */; };
@@ -427,10 +429,10 @@
 		B13174E2179F180D0047E307 /* Popup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Popup.m; sourceTree = "<group>"; };
 		B13174E717A0692D0047E307 /* HudNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HudNode.h; sourceTree = "<group>"; };
 		B13174E817A0692D0047E307 /* HudNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HudNode.m; sourceTree = "<group>"; };
-		B132921416B8648700AC3436 /* EditorLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditorLayer.h; path = ../PlanesPrototype/EditorLayer.h; sourceTree = "<group>"; };
-		B132921516B8648700AC3436 /* EditorLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditorLayer.m; path = ../PlanesPrototype/EditorLayer.m; sourceTree = "<group>"; };
-		B1B2300116E500A2000EBD19 /* Walkthrough.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Walkthrough.h; path = ../PlanesPrototype/Walkthrough.h; sourceTree = "<group>"; };
-		B1B2300216E500A2000EBD19 /* Walkthrough.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Walkthrough.m; path = ../PlanesPrototype/Walkthrough.m; sourceTree = "<group>"; };
+		B132921416B8648700AC3436 /* EditorLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorLayer.h; sourceTree = "<group>"; };
+		B132921516B8648700AC3436 /* EditorLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorLayer.m; sourceTree = "<group>"; };
+		B1B2300116E500A2000EBD19 /* Walkthrough.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Walkthrough.h; sourceTree = "<group>"; };
+		B1B2300216E500A2000EBD19 /* Walkthrough.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Walkthrough.m; sourceTree = "<group>"; };
 		B1CD689217A40D3C00535E41 /* arrowBase.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arrowBase.png; path = "PlanesPrototype/Resources/non-retina/arrowBase.png"; sourceTree = "<group>"; };
 		B1CD689317A40D3C00535E41 /* Bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Bubble.png; path = "PlanesPrototype/Resources/non-retina/Bubble.png"; sourceTree = "<group>"; };
 		B1CD689417A40D3C00535E41 /* homeBodyBase.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = homeBodyBase.png; path = "PlanesPrototype/Resources/non-retina/homeBodyBase.png"; sourceTree = "<group>"; };
@@ -439,6 +441,8 @@
 		B1CD689F17A40D4E00535E41 /* Bubble@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Bubble@2x.png"; path = "PlanesPrototype/Resources/retina/Bubble@2x.png"; sourceTree = "<group>"; };
 		B1CD68A017A40D4E00535E41 /* homeBodyBase@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "homeBodyBase@2x.png"; path = "PlanesPrototype/Resources/retina/homeBodyBase@2x.png"; sourceTree = "<group>"; };
 		B1CD68A117A40D4E00535E41 /* homeEnterBase@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "homeEnterBase@2x.png"; path = "PlanesPrototype/Resources/retina/homeEnterBase@2x.png"; sourceTree = "<group>"; };
+		B1CD68AA17A515A300535E41 /* EnergyIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnergyIndicator.h; sourceTree = "<group>"; };
+		B1CD68AB17A515A300535E41 /* EnergyIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnergyIndicator.m; sourceTree = "<group>"; };
 		B1D76A9E16C6C4A4007012E5 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		B1D76AA016C98333007012E5 /* LevelSelectLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelSelectLayer.h; sourceTree = "<group>"; };
 		B1D76AA116C98333007012E5 /* LevelSelectLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelSelectLayer.m; sourceTree = "<group>"; };
@@ -711,8 +715,8 @@
 		B1EA24E416B473120021D124 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		B1EA24E516B473120021D124 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		B1EA24EA16B576740021D124 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = PlanesPrototype/Constants.h; sourceTree = "<group>"; };
-		B1EA250F16B7015D0021D124 /* MainMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainMenuLayer.h; path = ../PlanesPrototype/MainMenuLayer.h; sourceTree = "<group>"; };
-		B1EA251016B7015F0021D124 /* MainMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainMenuLayer.m; path = ../PlanesPrototype/MainMenuLayer.m; sourceTree = "<group>"; };
+		B1EA250F16B7015D0021D124 /* MainMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuLayer.h; sourceTree = "<group>"; };
+		B1EA251016B7015F0021D124 /* MainMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuLayer.m; sourceTree = "<group>"; };
 		B1FB017917A1BB2600D05B2B /* level1_1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_1; path = PlanesPrototype/levels/level1_1; sourceTree = "<group>"; };
 		B1FB017A17A1BB2600D05B2B /* level1_2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_2; path = PlanesPrototype/levels/level1_2; sourceTree = "<group>"; };
 		B1FB017B17A1BB2600D05B2B /* level1_3 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = level1_3; path = PlanesPrototype/levels/level1_3; sourceTree = "<group>"; };
@@ -837,6 +841,14 @@
 				B1D76AA116C98333007012E5 /* LevelSelectLayer.m */,
 				B13174E1179F180D0047E307 /* Popup.h */,
 				B13174E2179F180D0047E307 /* Popup.m */,
+				B1EA250F16B7015D0021D124 /* MainMenuLayer.h */,
+				B1EA251016B7015F0021D124 /* MainMenuLayer.m */,
+				B132921416B8648700AC3436 /* EditorLayer.h */,
+				B132921516B8648700AC3436 /* EditorLayer.m */,
+				B1B2300116E500A2000EBD19 /* Walkthrough.h */,
+				B1B2300216E500A2000EBD19 /* Walkthrough.m */,
+				B1CD68AA17A515A300535E41 /* EnergyIndicator.h */,
+				B1CD68AB17A515A300535E41 /* EnergyIndicator.m */,
 			);
 			name = Views;
 			path = PlanesPrototype;
@@ -1286,12 +1298,6 @@
 		B1FB01B317A2F6D300D05B2B /* Editor */ = {
 			isa = PBXGroup;
 			children = (
-				B1EA250F16B7015D0021D124 /* MainMenuLayer.h */,
-				B1EA251016B7015F0021D124 /* MainMenuLayer.m */,
-				B132921416B8648700AC3436 /* EditorLayer.h */,
-				B132921516B8648700AC3436 /* EditorLayer.m */,
-				B1B2300116E500A2000EBD19 /* Walkthrough.h */,
-				B1B2300216E500A2000EBD19 /* Walkthrough.m */,
 				B1FB01CB17A2F6D300D05B2B /* Info.plist */,
 			);
 			name = Editor;
@@ -1670,6 +1676,7 @@
 				B13174E917A0692E0047E307 /* HudNode.m in Sources */,
 				B1CD689017A3096100535E41 /* EditorLayer.m in Sources */,
 				B1CD689117A3096100535E41 /* Walkthrough.m in Sources */,
+				B1CD68AC17A515A300535E41 /* EnergyIndicator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1787,6 +1794,7 @@
 				B1CD684F17A2FF4300535E41 /* CCGLView.m in Sources */,
 				B1CD685017A2FF4600535E41 /* CCWindow.m in Sources */,
 				B1CD685117A2FF5900535E41 /* CCGrid.m in Sources */,
+				B1CD68AD17A515A300535E41 /* EnergyIndicator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

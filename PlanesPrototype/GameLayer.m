@@ -60,7 +60,7 @@
     for (int i = 0; i < [levelResources count]; i++) {
         resources[i] = [[levelResources objectAtIndex:i] intValue];
     }
-    [self.hud updateResources];
+    [self.hud recreateInterface];
     
     //load vertexes
     NSArray *vertexes = [level objectForKey:@"vertexes"];
@@ -169,7 +169,7 @@
         HudNode *hudl = [HudNode node];
         hudl.delegate = self;
         self.hud = hudl;
-        [hudl updateResources];
+        [hudl recreateInterface];
         [self addChild:hudl];
                 
         self.console = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:32];
@@ -317,7 +317,8 @@
                         
                         resources[mv.resourceType] += 1;
                         resources[vc.resourceType] -= 1;
-                        [self.hud updateResources];
+//                        [self.hud recreateInterface];
+                        [self.hud animateResourceRemoved:vc.resourceType ResourceAdded:mv.resourceType Duration:timeToTravel];
                         
                         [self.player.sprite removeAllChildrenWithCleanup:YES];
 
@@ -415,7 +416,7 @@
     mv.pictogrammType = MODIFIER_NONE;
     [mv recreatePictogramm];
     self.flowersCollected = self.flowersCollected + 1;
-    [self.hud updateResources];
+    [self.hud recreateStars];
     [self updateAvaiblePathVisual];
 }
 
@@ -522,7 +523,7 @@
     NSDictionary *level = [self loadLevel:self.levelName];
     [self parseLevel:level];
     
-    [self.hud updateResources];
+    [self.hud recreateInterface];
     [self updateAvaiblePathVisual];
 }
 

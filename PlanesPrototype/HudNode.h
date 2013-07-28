@@ -19,10 +19,14 @@
 @interface HudNode : CCNode {
 
 }
-- (void)updateResources;
+- (void)recreateInterface;
+- (void)recreateStars;
 - (void)blinkEnergyBar;
+- (void)animateResourceRemoved:(int)removedRes ResourceAdded:(int)addedRes Duration:(float)duration;
 
 @property (assign) id<HudNodeDelegate> delegate;
 @property (assign) CCNode *energyBar;
+@property (retain) NSArray *energyBars;
+@property (retain) NSArray *stars;
 
 @end
