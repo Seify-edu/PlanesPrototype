@@ -221,15 +221,16 @@
     [self.player.sprite addChild:bubble];
     bubble.anchorPoint = ccp( 0, 0 );
     bubble.position = ccp( self.player.sprite.contentSize.width, self.player.sprite.contentSize.height );
-    
+
+#define PAUSE_1_DURATION (0.5)
 #define PAUSE_2_DURATION (2.5)
     
-    CCDelayTime *pause1 = [CCDelayTime actionWithDuration:0.5];
+//    CCDelayTime *pause1 = [CCDelayTime actionWithDuration:PAUSE_1_DURATION];
     CCFadeIn *fadeIn = [CCFadeIn actionWithDuration: 1.0];
     CCDelayTime *pause2 = [CCDelayTime actionWithDuration:PAUSE_2_DURATION];
     CCFadeOut *fadeOut = [CCFadeOut actionWithDuration: 1.0];
     CCCallFunc *callback = [CCCallFunc actionWithTarget:self selector:@selector(tutorialFinished)];
-    CCSequence *tutotialSequence = [CCSequence actions:pause1, fadeIn, pause2, fadeOut, callback, nil];
+    CCSequence *tutotialSequence = [CCSequence actions:/*pause1,*/ fadeIn, pause2, fadeOut, callback, nil];
     [bubble runAction:tutotialSequence];
     
     switch (tutorial) {
@@ -246,8 +247,8 @@
             houseBody.scale = 0.8;
             [bubble addChild:houseBody];
             
-            [houseEntrance runAction:[CCSequence actions:[[pause1 copy] autorelease],[[fadeIn copy] autorelease], [[pause2 copy] autorelease], [[fadeOut copy] autorelease], nil]];
-            [houseBody runAction:[CCSequence actions:[[pause1 copy] autorelease], [[fadeIn copy] autorelease], [[pause2 copy] autorelease], [[fadeOut copy] autorelease], nil]];
+            [houseEntrance runAction:[CCSequence actions:/*[[pause1 copy] autorelease],*/ [[fadeIn copy] autorelease], [[pause2 copy] autorelease], [[fadeOut copy] autorelease], nil]];
+            [houseBody runAction:[CCSequence actions:/*[[pause1 copy] autorelease],*/ [[fadeIn copy] autorelease], [[pause2 copy] autorelease], [[fadeOut copy] autorelease], nil]];
             
             break;
         }
@@ -260,7 +261,7 @@
                 star.opacity = 0;
                 star.position = ccp( bubble.contentSize.width * ( 0.3 + i * 0.25 ), bubble.contentSize.height * 0.62 );
                 [bubble addChild:star];
-                [star runAction:[CCSequence actions:[[pause1 copy] autorelease],[[fadeIn copy] autorelease], [[pause2 copy] autorelease], [[fadeOut copy] autorelease], nil]];
+                [star runAction:[CCSequence actions:/*[[pause1 copy] autorelease],*/ [[fadeIn copy] autorelease], [[pause2 copy] autorelease], [[fadeOut copy] autorelease], nil]];
             }
 
             break;
@@ -300,11 +301,11 @@
             CCTintTo *clearIndicator = [CCTintTo actionWithDuration:0 red:255 green:255 blue:255];
             CCTintTo *changeIndicatorColor = [CCTintTo actionWithDuration:0 red:flowerColors[FLOWERS_COLOR_PINK].r green:flowerColors[FLOWERS_COLOR_PINK].g blue:flowerColors[FLOWERS_COLOR_PINK].b];
             
-            [indicator.cell runAction:[CCSequence actions:[[pause1 copy] autorelease],[[fadeIn copy] autorelease], [[pause2_1 copy] autorelease], clearIndicator, [[pause2_2 copy] autorelease], changeIndicatorColor, [[pause2_3 copy] autorelease], [[fadeOut copy] autorelease], nil]];
-            [indicator.frame runAction:[CCSequence actions:[[pause1 copy] autorelease],[[fadeIn copy] autorelease], [[pause2 copy] autorelease], [[fadeOut copy] autorelease], nil]];
-            [road runAction:[CCSequence actions:[[pause1 copy] autorelease],[[fadeIn copy] autorelease], [[pause2 copy] autorelease], [[fadeOut copy] autorelease], nil]];
-            [flower runAction:[CCSequence actions:[[pause1 copy] autorelease],[[fadeIn copy] autorelease], [[pause2 copy] autorelease], [[fadeOut copy] autorelease], nil]];
-            [bee runAction:[CCSequence actions:[[pause1 copy] autorelease],[[fadeIn copy] autorelease], pause2_1, moveBeeToRoad, pause2_2, moveBeeToFlower, pause2_3, [[fadeOut copy] autorelease], nil]];
+            [indicator.cell runAction:[CCSequence actions:/*[[pause1 copy] autorelease],*/ [[fadeIn copy] autorelease], /*[[pause1 copy] autorelease],*/ [[pause2_1 copy] autorelease], clearIndicator, [[pause2_2 copy] autorelease], changeIndicatorColor, [[pause2_3 copy] autorelease], [[fadeOut copy] autorelease], nil]];
+            [indicator.frame runAction:[CCSequence actions:/*[[pause1 copy] autorelease],*/ [[fadeIn copy] autorelease], [[pause2 copy] autorelease], [[fadeOut copy] autorelease], nil]];
+            [road runAction:[CCSequence actions:/*[[pause1 copy] autorelease],*/ [[fadeIn copy] autorelease], [[pause2 copy] autorelease], [[fadeOut copy] autorelease], nil]];
+            [flower runAction:[CCSequence actions:/*[[pause1 copy] autorelease],*/ [[fadeIn copy] autorelease], [[pause2 copy] autorelease], [[fadeOut copy] autorelease], nil]];
+            [bee runAction:[CCSequence actions:/*[[pause1 copy] autorelease],*/ [[fadeIn copy] autorelease], pause2_1, moveBeeToRoad, pause2_2, moveBeeToFlower, pause2_3, [[fadeOut copy] autorelease], nil]];
 
             break;
         }
@@ -420,7 +421,8 @@
                             }
                             if (cannotMove)
                             {
-                                [self performSelector:@selector(levelLose) withObject:nil afterDelay:(NSTimeInterval)timeToTravel];
+                                float loseDelay = 1.0;
+                                [self performSelector:@selector(levelLose) withObject:nil afterDelay:(NSTimeInterval)( timeToTravel + loseDelay )];
                             }
 
                             BOOL flowerCollected = (mv.pictogrammType == MODIFIER_BONUS);
@@ -598,6 +600,8 @@
 - (void)editorButtonPressed
 {
     EditorLayer *newLayer = [EditorLayer node];
+    newLayer.currentPack = self.currentPack;
+    newLayer.currentLevel = self.currentLevel;
     CCScene *newScene = [CCScene node];
     NSDictionary *level = [newLayer loadLevel:self.levelName];
     [newLayer parseLevel:level];
@@ -720,7 +724,7 @@
     
     self.popup = [Popup node];
     
-    CCLabelTTF *loseText = [CCLabelTTF labelWithString:@"You lose..." fontName:@"Marker Felt" fontSize:48];
+    CCLabelTTF *loseText = [CCLabelTTF labelWithString:@"No ways left" fontName:@"Marker Felt" fontSize:48];
     CCMenuItemLabel *title = [CCMenuItemLabel itemWithLabel:loseText];
     title.isEnabled = NO;
     title.color = UI_COLOR_WHITE;

@@ -8,29 +8,45 @@
 			<key>endVertex.index</key>
 			<integer>1</integer>
 			<key>resourceType</key>
-			<integer>0</integer>
-			<key>startVertex.index</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>endVertex.index</key>
-			<integer>5</integer>
-			<key>resourceType</key>
-			<integer>3</integer>
-			<key>startVertex.index</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>endVertex.index</key>
-			<integer>5</integer>
-			<key>resourceType</key>
 			<integer>1</integer>
 			<key>startVertex.index</key>
-			<integer>3</integer>
+			<integer>0</integer>
 		</dict>
 		<dict>
 			<key>endVertex.index</key>
 			<integer>2</integer>
+			<key>resourceType</key>
+			<integer>0</integer>
+			<key>startVertex.index</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>endVertex.index</key>
+			<integer>3</integer>
+			<key>resourceType</key>
+			<integer>3</integer>
+			<key>startVertex.index</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>endVertex.index</key>
+			<integer>1</integer>
+			<key>resourceType</key>
+			<integer>4</integer>
+			<key>startVertex.index</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>endVertex.index</key>
+			<integer>4</integer>
+			<key>resourceType</key>
+			<integer>2</integer>
+			<key>startVertex.index</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>endVertex.index</key>
+			<integer>5</integer>
 			<key>resourceType</key>
 			<integer>3</integer>
 			<key>startVertex.index</key>
@@ -38,52 +54,44 @@
 		</dict>
 		<dict>
 			<key>endVertex.index</key>
-			<integer>2</integer>
+			<integer>5</integer>
 			<key>resourceType</key>
-			<integer>2</integer>
+			<integer>0</integer>
 			<key>startVertex.index</key>
 			<integer>4</integer>
 		</dict>
 		<dict>
 			<key>endVertex.index</key>
-			<integer>1</integer>
+			<integer>7</integer>
 			<key>resourceType</key>
 			<integer>0</integer>
+			<key>startVertex.index</key>
+			<integer>5</integer>
+		</dict>
+		<dict>
+			<key>endVertex.index</key>
+			<integer>6</integer>
+			<key>resourceType</key>
+			<integer>1</integer>
 			<key>startVertex.index</key>
 			<integer>4</integer>
 		</dict>
 		<dict>
 			<key>endVertex.index</key>
-			<integer>5</integer>
-			<key>resourceType</key>
-			<integer>0</integer>
-			<key>startVertex.index</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>endVertex.index</key>
-			<integer>5</integer>
-			<key>resourceType</key>
-			<integer>1</integer>
-			<key>startVertex.index</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>endVertex.index</key>
-			<integer>1</integer>
+			<integer>7</integer>
 			<key>resourceType</key>
 			<integer>2</integer>
 			<key>startVertex.index</key>
-			<integer>2</integer>
+			<integer>6</integer>
 		</dict>
 	</array>
 	<key>levelResources</key>
 	<array>
-		<integer>1</integer>
-		<integer>1</integer>
-		<integer>1</integer>
-		<integer>1</integer>
 		<integer>0</integer>
+		<integer>1</integer>
+		<integer>1</integer>
+		<integer>1</integer>
+		<integer>1</integer>
 	</array>
 	<key>vertexes</key>
 	<array>
@@ -93,33 +101,33 @@
 			<key>pictogrammType</key>
 			<integer>3</integer>
 			<key>position.x</key>
-			<integer>-31</integer>
+			<integer>-337</integer>
 			<key>position.y</key>
-			<integer>-287</integer>
+			<integer>64</integer>
 			<key>resourceType</key>
-			<integer>2</integer>
+			<integer>4</integer>
 		</dict>
 		<dict>
 			<key>index</key>
 			<integer>1</integer>
 			<key>pictogrammType</key>
-			<integer>3</integer>
+			<integer>1</integer>
 			<key>position.x</key>
-			<integer>-278</integer>
+			<integer>-327</integer>
 			<key>position.y</key>
-			<integer>-150</integer>
+			<integer>-96</integer>
 			<key>resourceType</key>
-			<integer>3</integer>
+			<integer>0</integer>
 		</dict>
 		<dict>
 			<key>index</key>
 			<integer>2</integer>
 			<key>pictogrammType</key>
-			<integer>3</integer>
+			<integer>0</integer>
 			<key>position.x</key>
-			<integer>-31</integer>
+			<integer>-4</integer>
 			<key>position.y</key>
-			<integer>208</integer>
+			<integer>68</integer>
 			<key>resourceType</key>
 			<integer>1</integer>
 		</dict>
@@ -127,37 +135,61 @@
 			<key>index</key>
 			<integer>3</integer>
 			<key>pictogrammType</key>
-			<integer>0</integer>
+			<integer>3</integer>
 			<key>position.x</key>
-			<integer>208</integer>
+			<integer>-2</integer>
 			<key>position.y</key>
-			<integer>70</integer>
+			<integer>-95</integer>
 			<key>resourceType</key>
-			<integer>0</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>index</key>
 			<integer>4</integer>
 			<key>pictogrammType</key>
-			<integer>2</integer>
-			<key>position.x</key>
-			<integer>-279</integer>
-			<key>position.y</key>
-			<integer>78</integer>
-			<key>resourceType</key>
 			<integer>0</integer>
+			<key>position.x</key>
+			<integer>131</integer>
+			<key>position.y</key>
+			<integer>188</integer>
+			<key>resourceType</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>index</key>
 			<integer>5</integer>
 			<key>pictogrammType</key>
-			<integer>1</integer>
+			<integer>3</integer>
 			<key>position.x</key>
-			<integer>206</integer>
+			<integer>146</integer>
 			<key>position.y</key>
-			<integer>-152</integer>
+			<integer>-211</integer>
 			<key>resourceType</key>
+			<integer>4</integer>
+		</dict>
+		<dict>
+			<key>index</key>
+			<integer>6</integer>
+			<key>pictogrammType</key>
+			<integer>0</integer>
+			<key>position.x</key>
+			<integer>311</integer>
+			<key>position.y</key>
+			<integer>192</integer>
+			<key>resourceType</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>index</key>
+			<integer>7</integer>
+			<key>pictogrammType</key>
 			<integer>2</integer>
+			<key>position.x</key>
+			<integer>321</integer>
+			<key>position.y</key>
+			<integer>-214</integer>
+			<key>resourceType</key>
+			<integer>1</integer>
 		</dict>
 	</array>
 </dict>

@@ -862,6 +862,8 @@
 - (void)playPressed
 {
     GameLayer *newLayer = [GameLayer node];
+    newLayer.currentLevel = self.currentLevel;
+    newLayer.currentPack = self.currentPack;
     CCScene *newScene = [CCScene node];
     NSDictionary *level = [newLayer loadLevel:self.levelName];
     [newLayer parseLevel:level];
