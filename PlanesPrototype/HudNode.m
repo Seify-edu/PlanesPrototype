@@ -26,6 +26,8 @@
 
 - (void)recreateStars
 {
+    [self.starsParent removeAllChildrenWithCleanup:YES];
+    
     NSMutableArray *tempArrayStars = [NSMutableArray array];
     
     for (int i = 0; i < [self.delegate getStarsCollected]; i++)
@@ -33,7 +35,7 @@
         CCSprite *starFrame = [CCSprite spriteWithFile:@"starFrameBase.png"];
         starFrame.color = UI_COLOR_GREY;
         starFrame.position = ccp(WIN_SIZE.width * (0.44 + 0.08 * i), WIN_SIZE.height * 0.95);
-        [self addChild:starFrame];
+        [self.starsParent addChild:starFrame];
         
         CCSprite *star = [CCSprite spriteWithFile:@"starBase.png"];
         star.color = SIGNS_COLOR_ORANGE;
@@ -52,7 +54,6 @@
     [self removeAllChildrenWithCleanup:YES];
     self.energyBars = nil;
     self.stars = nil;
-    
     
     // create energy bars
     self.energyBar = [CCNode node];
@@ -85,6 +86,9 @@
     
     self.energyBars = [NSArray arrayWithArray:tempArrayEnergy];
     
+    self.starsParent = [CCNode node];
+    [self addChild:self.starsParent];
+
     [self recreateStars];
     
     CCSprite *pauseButtonUnpressed = [CCSprite spriteWithFile:@"pauseButtonBase.png"];

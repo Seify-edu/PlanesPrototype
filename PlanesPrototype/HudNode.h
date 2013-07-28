@@ -27,6 +27,7 @@
 
 @property (assign) id<HudNodeDelegate> delegate;
 @property (assign) CCNode *energyBar;
+@property (assign) CCNode *starsParent;
 @property (retain) NSArray *energyBars;
 @property (retain) NSArray *stars;
 
