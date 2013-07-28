@@ -50,8 +50,8 @@
         bg.position = ccp(self.contentSize.width / 2.0, self.contentSize.height / 2.0);
         [self addChild:bg];
         
-#define RAWS_COUNT 5
-#define LEVELS_IN_PACK 20
+#define RAWS_COUNT 6
+#define LEVELS_IN_PACK 30
         
         int row = 0;
         
@@ -129,7 +129,7 @@
             if ( ( buttonIndex + 1 ) % RAWS_COUNT == 0) {
                 CCMenu *menu = [CCMenu menuWithArray:menuItems];
                 [menu alignItemsHorizontallyWithPadding:59];
-                [menu setPosition:ccp( WIN_SIZE.width / 2.0, WIN_SIZE.height * ( 0.8 - 0.2 * row ) - 15)];
+                [menu setPosition:ccp( WIN_SIZE.width / 2.0 + 15, WIN_SIZE.height * ( 0.9 - 0.2 * row ) )];
                 row++;
                 [self addChild:menu];
                 [menuItems removeAllObjects];
