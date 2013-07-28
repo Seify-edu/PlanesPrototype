@@ -31,6 +31,7 @@ enum {
 enum {
     TUTOTIAL_HOME,
     TUTOTIAL_STARS,
+    TUTOTIAL_RESOURCES,
 };
 
 @interface GameLayer : CCLayer <HudNodeDelegate> {

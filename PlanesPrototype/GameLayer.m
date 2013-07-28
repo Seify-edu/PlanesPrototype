@@ -193,6 +193,10 @@
     {
         [self playTutorial:TUTOTIAL_STARS];
     }
+    else if (self.currentPack == 1 && self.currentLevel == 3)
+    {
+        [self playTutorial:TUTOTIAL_RESOURCES];
+    }
 }
 
 - (void)onEnterTransitionDidFinish
@@ -206,7 +210,7 @@
 
 - (void)playTutorial:(int)tutorial
 {
-    if (tutorial != TUTOTIAL_HOME && tutorial != TUTOTIAL_STARS) return;
+    if (tutorial != TUTOTIAL_HOME && tutorial != TUTOTIAL_STARS && tutorial != TUTOTIAL_RESOURCES) return;
     
     self.state = GAME_STATE_TUTORIAL;
     
@@ -218,9 +222,11 @@
     bubble.anchorPoint = ccp( 0, 0 );
     bubble.position = ccp( self.player.sprite.contentSize.width, self.player.sprite.contentSize.height );
     
+#define PAUSE_2_DURATION (2.5)
+    
     CCDelayTime *pause1 = [CCDelayTime actionWithDuration:0.5];
     CCFadeIn *fadeIn = [CCFadeIn actionWithDuration: 1.0];
-    CCDelayTime *pause2 = [CCDelayTime actionWithDuration:2.5];
+    CCDelayTime *pause2 = [CCDelayTime actionWithDuration:PAUSE_2_DURATION];
     CCFadeOut *fadeOut = [CCFadeOut actionWithDuration: 1.0];
     CCCallFunc *callback = [CCCallFunc actionWithTarget:self selector:@selector(tutorialFinished)];
     CCSequence *tutotialSequence = [CCSequence actions:pause1, fadeIn, pause2, fadeOut, callback, nil];
@@ -256,6 +262,49 @@
                 [bubble addChild:star];
                 [star runAction:[CCSequence actions:[[pause1 copy] autorelease],[[fadeIn copy] autorelease], [[pause2 copy] autorelease], [[fadeOut copy] autorelease], nil]];
             }
+
+            break;
+        }
+            
+        case TUTOTIAL_RESOURCES:
+        {
+            bubble.scale = 1.5;
+            
+            EnergyIndicator *indicator = [EnergyIndicator node];
+            indicator.resourceType = RESOURCE_TYPE_BLUE;
+            indicator.position = ccp( bubble.contentSize.width * 0.6, bubble.contentSize.height * 0.8 );
+            CCSprite *bee = [CCSprite spriteWithFile:@"bee.png"];
+            bee.position = ccp( bubble.contentSize.width * 0.25, bubble.contentSize.height * 0.55 );
+            CCSprite *road = [CCSprite spriteWithFile:@"roadBase.png" rect:CGRectMake(0, 0, 250, 32)];
+            road.position = ccp( bubble.contentSize.width * 0.55, bubble.contentSize.height * 0.55 );
+            road.color = flowerColors[FLOWERS_COLOR_BLUE];
+            CCSprite *flower = [CCSprite spriteWithFile:@"flowerBase.png"];
+            flower.color = flowerColors[FLOWERS_COLOR_PINK];
+            flower.position = ccp( bubble.contentSize.width * 0.8, bubble.contentSize.height * 0.55 );
+
+            [bubble addChild:indicator];
+            [bubble addChild:road];
+            [bubble addChild:flower];
+            [bubble addChild:bee];
+            
+            indicator.cell.opacity = indicator.frame.opacity = road.opacity = flower.opacity = bee.opacity = 0;
+            indicator.scale = 0.7;
+            road.scale = flower.scale = bee.scale = 0.4;
+            
+            CCMoveTo *moveBeeToRoad = [CCMoveTo actionWithDuration:0 position:ccp( bubble.contentSize.width * 0.55, bubble.contentSize.height * 0.55 )];
+            CCMoveTo *moveBeeToFlower = [CCMoveTo actionWithDuration:0 position:flower.position];
+            CCDelayTime *pause2_1 = [CCDelayTime actionWithDuration:PAUSE_2_DURATION / 3.];
+            CCDelayTime *pause2_2 = [CCDelayTime actionWithDuration:PAUSE_2_DURATION / 3.];
+            CCDelayTime *pause2_3 = [CCDelayTime actionWithDuration:PAUSE_2_DURATION / 3.];
+            
+            CCTintTo *clearIndicator = [CCTintTo actionWithDuration:0 red:255 green:255 blue:255];
+            CCTintTo *changeIndicatorColor = [CCTintTo actionWithDuration:0 red:flowerColors[FLOWERS_COLOR_PINK].r green:flowerColors[FLOWERS_COLOR_PINK].g blue:flowerColors[FLOWERS_COLOR_PINK].b];
+            
+            [indicator.cell runAction:[CCSequence actions:[[pause1 copy] autorelease],[[fadeIn copy] autorelease], [[pause2_1 copy] autorelease], clearIndicator, [[pause2_2 copy] autorelease], changeIndicatorColor, [[pause2_3 copy] autorelease], [[fadeOut copy] autorelease], nil]];
+            [indicator.frame runAction:[CCSequence actions:[[pause1 copy] autorelease],[[fadeIn copy] autorelease], [[pause2 copy] autorelease], [[fadeOut copy] autorelease], nil]];
+            [road runAction:[CCSequence actions:[[pause1 copy] autorelease],[[fadeIn copy] autorelease], [[pause2 copy] autorelease], [[fadeOut copy] autorelease], nil]];
+            [flower runAction:[CCSequence actions:[[pause1 copy] autorelease],[[fadeIn copy] autorelease], [[pause2 copy] autorelease], [[fadeOut copy] autorelease], nil]];
+            [bee runAction:[CCSequence actions:[[pause1 copy] autorelease],[[fadeIn copy] autorelease], pause2_1, moveBeeToRoad, pause2_2, moveBeeToFlower, pause2_3, [[fadeOut copy] autorelease], nil]];
 
             break;
         }
@@ -301,6 +350,8 @@
                     BOOL playerMoving = ([self.player getActionByTag:PLAYER_MOVE_TAG] != nil);
                     BOOL enoughResources = ( resources[vc.resourceType] > 0 );
                     
+                    BOOL endVertex = (mv.pictogrammType == MODIFIER_END);
+                    
                     if (!playerMoving && enoughResources)
                     {
                         float sc = [CCDirector sharedDirector].contentScaleFactor;
@@ -314,11 +365,10 @@
                         [self.player runAction:movePlayerToNextFlower];
                         self.player.currentVertex = mv;
 
-                        
-                        resources[mv.resourceType] += 1;
+                        if (!endVertex) resources[mv.resourceType] += 1;
                         resources[vc.resourceType] -= 1;
-//                        [self.hud recreateInterface];
-                        [self.hud animateResourceRemoved:vc.resourceType ResourceAdded:mv.resourceType Duration:timeToTravel];
+                        int resourceAdded = endVertex ? UNDEFINED : mv.resourceType;
+                        [self.hud animateResourceRemoved:vc.resourceType ResourceAdded:resourceAdded Duration:timeToTravel];
                         
                         [self.player.sprite removeAllChildrenWithCleanup:YES];
 

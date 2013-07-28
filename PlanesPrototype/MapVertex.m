@@ -89,38 +89,33 @@
 //    self.sprite.opacity = DEFAULT_OPACITY;
     
     switch (self.resourceType) {
-        case RESOURCE_TYPE_1:
+        case RESOURCE_TYPE_PINK:
         {
-//            spriteName = @"redVertex.png";
             self.sprite.color = flowerColors[FLOWERS_COLOR_PINK];
             break;
         }
             
-        case RESOURCE_TYPE_2:
+        case RESOURCE_TYPE_GREEN:
         {
-//            spriteName = @"greenVertex.png";
             self.sprite.color = flowerColors[FLOWERS_COLOR_GREEN];
             break;
         }
             
-        case RESOURCE_TYPE_3:
+        case RESOURCE_TYPE_BLUE:
         {
-//            spriteName = @"blueVertex.png";
             self.sprite.color = flowerColors[FLOWERS_COLOR_BLUE];
             break;
         }
             
-        case RESOURCE_TYPE_4:
+        case RESOURCE_TYPE_PURPLE:
         {
-//            spriteName = @"brownVertex.png";
             self.sprite.color = flowerColors[FLOWERS_COLOR_PURPLE];
 
             break;
         }
             
-        case RESOURCE_TYPE_5:
+        case RESOURCE_TYPE_YELLOW:
         {
-//            spriteName = @"goldVertex.png";
             self.sprite.color = flowerColors[FLOWERS_COLOR_YELLOW];
             break;
         }

@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MapVertex.h"
 #import "cocos2d.h"
+#import "MapVertex.h"
+#import "EnergyIndicator.h"
 
 @protocol HudNodeDelegate
 - (int)getNumberOfResource:(int)resourceID;

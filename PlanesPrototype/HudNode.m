@@ -7,7 +7,6 @@
 //
 
 #import "HudNode.h"
-#import "EnergyIndicator.h"
 
 @implementation HudNode
 
@@ -59,11 +58,11 @@
     self.energyBar = [CCNode node];
     [self addChild: self.energyBar];
     
-    int resType1 = [self.delegate getNumberOfResource:RESOURCE_TYPE_1];
-    int resType2 = [self.delegate getNumberOfResource:RESOURCE_TYPE_2];
-    int resType3 = [self.delegate getNumberOfResource:RESOURCE_TYPE_3];
-    int resType4 = [self.delegate getNumberOfResource:RESOURCE_TYPE_4];
-    int resType5 = [self.delegate getNumberOfResource:RESOURCE_TYPE_5];
+    int resType1 = [self.delegate getNumberOfResource:RESOURCE_TYPE_PINK];
+    int resType2 = [self.delegate getNumberOfResource:RESOURCE_TYPE_GREEN];
+    int resType3 = [self.delegate getNumberOfResource:RESOURCE_TYPE_BLUE];
+    int resType4 = [self.delegate getNumberOfResource:RESOURCE_TYPE_PURPLE];
+    int resType5 = [self.delegate getNumberOfResource:RESOURCE_TYPE_YELLOW];
     
     int totalResources = resType1 + resType2 + resType3 + resType4 + resType5;
     
@@ -75,11 +74,11 @@
         indicator.position = ccp( WIN_SIZE.width * ( 0.07 + i * 0.03 ), WIN_SIZE.height * ( 0.95 - ( i % 2) * 0.02 ) );
         [self.energyBar addChild:indicator];
         
-        if (i < resType1) indicator.resourceType = RESOURCE_TYPE_1;
-        else if (i < resType1 + resType2) indicator.resourceType = RESOURCE_TYPE_2;
-        else if (i < resType1 + resType2 + resType3) indicator.resourceType = RESOURCE_TYPE_3;
-        else if (i < resType1 + resType2 + resType3 + resType4) indicator.resourceType = RESOURCE_TYPE_4;
-        else indicator.resourceType = RESOURCE_TYPE_5;
+        if (i < resType1) indicator.resourceType = RESOURCE_TYPE_PINK;
+        else if (i < resType1 + resType2) indicator.resourceType = RESOURCE_TYPE_GREEN;
+        else if (i < resType1 + resType2 + resType3) indicator.resourceType = RESOURCE_TYPE_BLUE;
+        else if (i < resType1 + resType2 + resType3 + resType4) indicator.resourceType = RESOURCE_TYPE_PURPLE;
+        else indicator.resourceType = RESOURCE_TYPE_YELLOW;
                 
         [tempArrayEnergy addObject:indicator];
     }
@@ -111,11 +110,14 @@
             indicatorToHide = indicator;
         }
     }
-    
     indicatorToHide.cell.opacity = 0;
-    indicatorToHide.resourceType = addedRes;
-    CCFadeIn *fadeIn = [CCFadeIn actionWithDuration:duration];
-    [indicatorToHide.cell runAction:fadeIn];
+    
+    if (addedRes != UNDEFINED)
+    {
+        indicatorToHide.resourceType = addedRes;
+        CCFadeTo *fadeTo = [CCFadeTo actionWithDuration:duration opacity:DEFAULT_OPACITY];
+        [indicatorToHide.cell runAction:fadeTo];
+    }
 };
 
 
