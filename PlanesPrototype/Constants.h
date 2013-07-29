@@ -6,17 +6,19 @@
 //
 //
 
+#define UNDEFINED -1
+
 #define NUMBER_OF_RESOURCES 5
 
 #define WIN_SIZE [[CCDirector sharedDirector] winSize]
 
 enum
 {
-    RESOURCE_TYPE_1,
-    RESOURCE_TYPE_2,
-    RESOURCE_TYPE_3,
-    RESOURCE_TYPE_4,
-    RESOURCE_TYPE_5,
+    RESOURCE_TYPE_PINK,
+    RESOURCE_TYPE_GREEN,
+    RESOURCE_TYPE_BLUE,
+    RESOURCE_TYPE_PURPLE,
+    RESOURCE_TYPE_YELLOW,
 };
 
 enum

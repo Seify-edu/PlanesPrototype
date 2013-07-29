@@ -44,8 +44,14 @@
 
         case MODIFIER_END:
         {
-            self.pictogramm = [CCSprite spriteWithFile:@"exclamationMarkBase.png"];
-            self.pictogramm.color = SIGNS_COLOR_ORANGE;
+            CCSprite *houseBody = [CCSprite spriteWithFile:@"homeBodyBase.png"];
+            houseBody.position = ccp( 0, 16 );
+            houseBody.color = SIGNS_COLOR_ORANGE;
+            CCSprite *houseEntrance = [CCSprite spriteWithFile:@"homeEnterBase.png"];
+            houseEntrance.color = flowerColors[FLOWERS_COLOR_YELLOW];
+            houseEntrance.position = ccp(houseBody.contentSize.width / 2., houseBody.contentSize.height / 2. );
+            [houseBody addChild:houseEntrance];
+            self.pictogramm = houseBody;
 
             break;
         }
@@ -83,38 +89,33 @@
 //    self.sprite.opacity = DEFAULT_OPACITY;
     
     switch (self.resourceType) {
-        case RESOURCE_TYPE_1:
+        case RESOURCE_TYPE_PINK:
         {
-//            spriteName = @"redVertex.png";
             self.sprite.color = flowerColors[FLOWERS_COLOR_PINK];
             break;
         }
             
-        case RESOURCE_TYPE_2:
+        case RESOURCE_TYPE_GREEN:
         {
-//            spriteName = @"greenVertex.png";
             self.sprite.color = flowerColors[FLOWERS_COLOR_GREEN];
             break;
         }
             
-        case RESOURCE_TYPE_3:
+        case RESOURCE_TYPE_BLUE:
         {
-//            spriteName = @"blueVertex.png";
             self.sprite.color = flowerColors[FLOWERS_COLOR_BLUE];
             break;
         }
             
-        case RESOURCE_TYPE_4:
+        case RESOURCE_TYPE_PURPLE:
         {
-//            spriteName = @"brownVertex.png";
             self.sprite.color = flowerColors[FLOWERS_COLOR_PURPLE];
 
             break;
         }
             
-        case RESOURCE_TYPE_5:
+        case RESOURCE_TYPE_YELLOW:
         {
-//            spriteName = @"goldVertex.png";
             self.sprite.color = flowerColors[FLOWERS_COLOR_YELLOW];
             break;
         }

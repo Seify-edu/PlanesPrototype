@@ -60,9 +60,7 @@
     for (int i = 0; i < [levelResources count]; i++) {
         resources[i] = [[levelResources objectAtIndex:i] intValue];
     }
-    [self.hud updateResources];
-    [self updateAvaiblePathVisual];
-
+    [self.hud recreateInterface];
     
     //load vertexes
     NSArray *vertexes = [level objectForKey:@"vertexes"];
@@ -80,9 +78,9 @@
         MapVertex *mv = [[[MapVertex alloc] initWithPosition:CGPointMake(positionX, positionY) ResourceType:vertexResourceType] autorelease];
         mv.index = index;
         mv.pictogrammType = pictogrammType;
-//        if (mv.pictogrammType == MODIFIER_END) {
-//            mv.sprite.visible = NO;
-//        }
+        if (mv.pictogrammType == MODIFIER_END) {
+            mv.sprite.visible = NO;
+        }
         [mv recreatePictogramm];
         [self.vertexes addObject:mv];
     }
@@ -147,8 +145,6 @@
 //    CCRepeatForever *repeat = [CCRepeatForever actionWithAction:rotateInYan];
 //    [self.player runAction:repeat];
     
-    [self updateAvaiblePathVisual];
-    
 }
 
 - (id)init
@@ -173,11 +169,9 @@
         HudNode *hudl = [HudNode node];
         hudl.delegate = self;
         self.hud = hudl;
-        [hudl updateResources];
+        [hudl recreateInterface];
         [self addChild:hudl];
-        
-        [self updateAvaiblePathVisual];
-        
+                
         self.console = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:32];
         self.console.color = ccBLACK;
         [self addChild:self.console];
@@ -189,6 +183,147 @@
 	return self;
 }
 
+- (void)playTutorialIfNeeded
+{
+    if (self.currentPack == 1 && self.currentLevel == 1)
+    {
+        [self playTutorial:TUTOTIAL_HOME];
+    }
+    else if (self.currentPack == 1 && self.currentLevel == 2)
+    {
+        [self playTutorial:TUTOTIAL_STARS];
+    }
+    else if (self.currentPack == 1 && self.currentLevel == 3)
+    {
+        [self playTutorial:TUTOTIAL_RESOURCES];
+    }
+}
+
+- (void)onEnterTransitionDidFinish
+{
+    [super onEnterTransitionDidFinish];
+    
+    [self updateAvaiblePathVisual];
+    [self playTutorialIfNeeded];
+}
+
+
+- (void)playTutorial:(int)tutorial
+{
+    if (tutorial != TUTOTIAL_HOME && tutorial != TUTOTIAL_STARS && tutorial != TUTOTIAL_RESOURCES) return;
+    
+    self.state = GAME_STATE_TUTORIAL;
+    
+    [self.player.sprite removeAllChildrenWithCleanup:YES];
+    
+    CCSprite *bubble = [CCSprite spriteWithFile:@"Bubble.png"];
+    bubble.opacity = 0;
+    [self.player.sprite addChild:bubble];
+    bubble.anchorPoint = ccp( 0, 0 );
+    bubble.position = ccp( self.player.sprite.contentSize.width, self.player.sprite.contentSize.height );
+
+#define PAUSE_1_DURATION (0.5)
+#define PAUSE_2_DURATION (2.5)
+    
+//    CCDelayTime *pause1 = [CCDelayTime actionWithDuration:PAUSE_1_DURATION];
+    CCFadeIn *fadeIn = [CCFadeIn actionWithDuration: 1.0];
+    CCDelayTime *pause2 = [CCDelayTime actionWithDuration:PAUSE_2_DURATION];
+    CCFadeOut *fadeOut = [CCFadeOut actionWithDuration: 1.0];
+    CCCallFunc *callback = [CCCallFunc actionWithTarget:self selector:@selector(tutorialFinished)];
+    CCSequence *tutotialSequence = [CCSequence actions:/*pause1,*/ fadeIn, pause2, fadeOut, callback, nil];
+    [bubble runAction:tutotialSequence];
+    
+    switch (tutorial) {
+        case TUTOTIAL_HOME:
+        {
+            CCSprite *houseBody = [CCSprite spriteWithFile:@"homeBodyBase.png"];
+            houseBody.color = SIGNS_COLOR_ORANGE;
+            CCSprite *houseEntrance = [CCSprite spriteWithFile:@"homeEnterBase.png"];
+            houseEntrance.color = flowerColors[FLOWERS_COLOR_YELLOW];
+            houseEntrance.position = ccp(houseBody.contentSize.width / 2., houseBody.contentSize.height / 2. );
+            [houseBody addChild:houseEntrance];
+            houseBody.opacity = houseEntrance.opacity = 0;
+            houseBody.position = ccp( bubble.contentSize.width * 0.55, bubble.contentSize.height * 0.62 );
+            houseBody.scale = 0.8;
+            [bubble addChild:houseBody];
+            
+            [houseEntrance runAction:[CCSequence actions:/*[[pause1 copy] autorelease],*/ [[fadeIn copy] autorelease], [[pause2 copy] autorelease], [[fadeOut copy] autorelease], nil]];
+            [houseBody runAction:[CCSequence actions:/*[[pause1 copy] autorelease],*/ [[fadeIn copy] autorelease], [[pause2 copy] autorelease], [[fadeOut copy] autorelease], nil]];
+            
+            break;
+        }
+            
+        case TUTOTIAL_STARS:
+        {
+            for (int i = 0; i < 3; i++) {
+                CCSprite *star = [CCSprite spriteWithFile:@"starBase.png"];
+                star.color = SIGNS_COLOR_ORANGE;
+                star.opacity = 0;
+                star.position = ccp( bubble.contentSize.width * ( 0.3 + i * 0.25 ), bubble.contentSize.height * 0.62 );
+                [bubble addChild:star];
+                [star runAction:[CCSequence actions:/*[[pause1 copy] autorelease],*/ [[fadeIn copy] autorelease], [[pause2 copy] autorelease], [[fadeOut copy] autorelease], nil]];
+            }
+
+            break;
+        }
+            
+        case TUTOTIAL_RESOURCES:
+        {
+            bubble.scale = 1.5;
+            
+            EnergyIndicator *indicator = [EnergyIndicator node];
+            indicator.resourceType = RESOURCE_TYPE_BLUE;
+            indicator.position = ccp( bubble.contentSize.width * 0.6, bubble.contentSize.height * 0.8 );
+            CCSprite *bee = [CCSprite spriteWithFile:@"bee.png"];
+            bee.position = ccp( bubble.contentSize.width * 0.25, bubble.contentSize.height * 0.55 );
+            CCSprite *road = [CCSprite spriteWithFile:@"roadBase.png" rect:CGRectMake(0, 0, 250, 32)];
+            road.position = ccp( bubble.contentSize.width * 0.55, bubble.contentSize.height * 0.55 );
+            road.color = flowerColors[FLOWERS_COLOR_BLUE];
+            CCSprite *flower = [CCSprite spriteWithFile:@"flowerBase.png"];
+            flower.color = flowerColors[FLOWERS_COLOR_PINK];
+            flower.position = ccp( bubble.contentSize.width * 0.8, bubble.contentSize.height * 0.55 );
+
+            [bubble addChild:indicator];
+            [bubble addChild:road];
+            [bubble addChild:flower];
+            [bubble addChild:bee];
+            
+            indicator.cell.opacity = indicator.frame.opacity = road.opacity = flower.opacity = bee.opacity = 0;
+            indicator.scale = 0.7;
+            road.scale = flower.scale = bee.scale = 0.4;
+            
+            CCMoveTo *moveBeeToRoad = [CCMoveTo actionWithDuration:0 position:ccp( bubble.contentSize.width * 0.55, bubble.contentSize.height * 0.55 )];
+            CCMoveTo *moveBeeToFlower = [CCMoveTo actionWithDuration:0 position:flower.position];
+            CCDelayTime *pause2_1 = [CCDelayTime actionWithDuration:PAUSE_2_DURATION / 3.];
+            CCDelayTime *pause2_2 = [CCDelayTime actionWithDuration:PAUSE_2_DURATION / 3.];
+            CCDelayTime *pause2_3 = [CCDelayTime actionWithDuration:PAUSE_2_DURATION / 3.];
+            
+            CCTintTo *clearIndicator = [CCTintTo actionWithDuration:0 red:255 green:255 blue:255];
+            CCTintTo *changeIndicatorColor = [CCTintTo actionWithDuration:0 red:flowerColors[FLOWERS_COLOR_PINK].r green:flowerColors[FLOWERS_COLOR_PINK].g blue:flowerColors[FLOWERS_COLOR_PINK].b];
+            
+            [indicator.cell runAction:[CCSequence actions:/*[[pause1 copy] autorelease],*/ [[fadeIn copy] autorelease], /*[[pause1 copy] autorelease],*/ [[pause2_1 copy] autorelease], clearIndicator, [[pause2_2 copy] autorelease], changeIndicatorColor, [[pause2_3 copy] autorelease], [[fadeOut copy] autorelease], nil]];
+            [indicator.frame runAction:[CCSequence actions:/*[[pause1 copy] autorelease],*/ [[fadeIn copy] autorelease], [[pause2 copy] autorelease], [[fadeOut copy] autorelease], nil]];
+            [road runAction:[CCSequence actions:/*[[pause1 copy] autorelease],*/ [[fadeIn copy] autorelease], [[pause2 copy] autorelease], [[fadeOut copy] autorelease], nil]];
+            [flower runAction:[CCSequence actions:/*[[pause1 copy] autorelease],*/ [[fadeIn copy] autorelease], [[pause2 copy] autorelease], [[fadeOut copy] autorelease], nil]];
+            [bee runAction:[CCSequence actions:/*[[pause1 copy] autorelease],*/ [[fadeIn copy] autorelease], pause2_1, moveBeeToRoad, pause2_2, moveBeeToFlower, pause2_3, [[fadeOut copy] autorelease], nil]];
+
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
+
+- (void)tutorialFinished
+{
+    [self.player.sprite removeAllChildrenWithCleanup:YES];
+    
+    self.state = GAME_STATE_RUNNING;
+    
+    [self updateAvaiblePathVisual];
+}
+
 - (BOOL)point:(CGPoint)point insideMapVertex:(MapVertex *)mv
 {
     CGRect testRect = CGRectMake(self.map.position.x + mv.position.x + mv.sprite.boundingBox.origin.x, self.map.position.y + mv.position.y + mv.sprite.boundingBox.origin.y, mv.sprite.boundingBox.size.width, mv.sprite.boundingBox.size.height);
@@ -197,7 +332,7 @@
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
-    if (self.state == GAME_STATE_PAUSE) {
+    if (self.state != GAME_STATE_RUNNING) {
         return YES;
     }
     
@@ -213,8 +348,10 @@
                     (vc.startVertex == self.player.currentVertex && vc.endVertex == mv)
                     )
                 {
-                    BOOL playerMoving = ([self.player getActionByTag:PLAYER_EASY_MOVE_TAG] != nil);
+                    BOOL playerMoving = ([self.player getActionByTag:PLAYER_MOVE_TAG] != nil);
                     BOOL enoughResources = ( resources[vc.resourceType] > 0 );
+                    
+                    BOOL endVertex = (mv.pictogrammType == MODIFIER_END);
                     
                     if (!playerMoving && enoughResources)
                     {
@@ -222,17 +359,19 @@
                         float timeToTravel = ccpDistance(vc.startVertex.position, vc.endVertex.position) / sc * 0.003;
                         CCMoveTo *movePlayer = [CCMoveTo actionWithDuration:timeToTravel position:mv.position];
                         CCEaseOut *easyMove = [CCEaseOut actionWithAction:movePlayer rate:2];
-                        easyMove.tag = PLAYER_EASY_MOVE_TAG;
-                        [self.player runAction:easyMove];
+                        CCCallFunc *cf = [CCCallFunc actionWithTarget:self selector:@selector(updateAvaiblePathVisual)];
+                        CCSequence *movePlayerToNextFlower = [CCSequence actionOne:easyMove two:cf];
+                        movePlayerToNextFlower.tag = PLAYER_MOVE_TAG;
+    
+                        [self.player runAction:movePlayerToNextFlower];
                         self.player.currentVertex = mv;
 
-                        
-                        resources[mv.resourceType] += 1;
+                        if (!endVertex) resources[mv.resourceType] += 1;
                         resources[vc.resourceType] -= 1;
-                        [self.hud updateResources];
+                        int resourceAdded = endVertex ? UNDEFINED : mv.resourceType;
+                        [self.hud animateResourceRemoved:vc.resourceType ResourceAdded:resourceAdded Duration:timeToTravel];
                         
-                        [self updateAvaiblePathVisual];
-
+                        [self.player.sprite removeAllChildrenWithCleanup:YES];
 
 //                        TODO: uncomment this to keep player in the center of the screen
 //                        CGPoint mapOffset = ccpSub(self.player.position, mv.position);
@@ -242,7 +381,31 @@
                         
                         if (mv.pictogrammType == MODIFIER_END)
                         {
-                            [self performSelector:@selector(levelWon) withObject:nil afterDelay:(NSTimeInterval)timeToTravel];
+                            self.state = GAME_STATE_ENDING;
+                            [self.player stopAllActions];
+                            
+                            CGPoint vectorEndToStart = ccpSub(mv.position, self.player.position);
+                            CGPoint normalizedVectorEndToStart = ccpNormalize(vectorEndToStart);
+                            CGPoint vectorEndToTargetPoint = ccpMult(normalizedVectorEndToStart, 20);
+                            CGPoint targetPoint = ccpSub(mv.position, vectorEndToTargetPoint);
+                            
+                            float sc = [CCDirector sharedDirector].contentScaleFactor;
+                            float timeToTravel = ccpDistance(self.player.position, targetPoint) / sc * 0.003;
+                            CCMoveTo *movePlayer = [CCMoveTo actionWithDuration:timeToTravel position:targetPoint];
+                            CCEaseOut *easyMove = [CCEaseOut actionWithAction:movePlayer rate:2];
+                            
+                            int spawnDuration = 1;
+
+                            CCScaleTo *scalePlayer = [CCScaleTo actionWithDuration:spawnDuration scale:0.6];
+                            CCMoveTo *movePlayerToFinish = [CCMoveTo actionWithDuration:spawnDuration position:mv.position];
+                            CCSpawn *finishSpawn = [CCSpawn actionOne:scalePlayer two:movePlayerToFinish];
+                            
+                            CCSequence *finalSequence = [CCSequence actionOne:easyMove two:finishSpawn];
+                            finalSequence.tag = PLAYER_MOVE_TAG;
+
+                            [self.player runAction:finalSequence];
+                            
+                            [self performSelector:@selector(levelWon) withObject:nil afterDelay:(NSTimeInterval)(timeToTravel + spawnDuration)];
                         }
                         else
                         {
@@ -258,24 +421,23 @@
                             }
                             if (cannotMove)
                             {
-                                [self performSelector:@selector(levelLose) withObject:nil afterDelay:(NSTimeInterval)timeToTravel];
+                                float loseDelay = 1.0;
+                                [self performSelector:@selector(levelLose) withObject:nil afterDelay:(NSTimeInterval)( timeToTravel + loseDelay )];
                             }
 
                             BOOL flowerCollected = (mv.pictogrammType == MODIFIER_BONUS);
                             if (flowerCollected) {
                                 [self performSelector:@selector(collectFlowerFromVertex:) withObject:mv afterDelay:(NSTimeInterval)timeToTravel];
-                            }                            
+                            }
                         }
                     }
                     else
                     {
-                        //TODO: play action with resource indicators
                         if (!enoughResources)
                         {
                             [self.hud blinkEnergyBar];
                         }
                     }
-
                     
                     break;
                 }
@@ -306,28 +468,42 @@
     mv.pictogrammType = MODIFIER_NONE;
     [mv recreatePictogramm];
     self.flowersCollected = self.flowersCollected + 1;
-    [self.hud updateResources];
+    [self.hud recreateStars];
     [self updateAvaiblePathVisual];
 }
 
 - (void)updateAvaiblePathVisual
 {
+    [self.player.sprite removeAllChildrenWithCleanup:YES];
+    
+//    BOOL playerMoving = ([self.player getActionByTag:PLAYER_MOVE_TAG] != nil);
+//    if (playerMoving) return;
+    
     for (VertexConnection *vc in self.connections)
     {
-//        vc.sprite.opacity = 255.0f;
-//            if (resources[vc.resourceType] <= 0) {
-//                vc.sprite.opacity = 122.0f;
-//            }
-        
-//        vc.sprite.scaleX = 1.0f;
-//        if (resources[vc.resourceType] <= 0) {
-//            vc.sprite.scaleX = 0.2f;
-//        }
+        BOOL playerAtStart = (vc.startVertex == self.player.currentVertex);
+        BOOL playerAtEnd = (vc.endVertex == self.player.currentVertex);
 
-//        vc.sprite.scaleY = 1.0f;
-//        if (resources[vc.resourceType] <= 0) {
-//            vc.sprite.scaleY = 0.2f;
-//        }        
+        if (playerAtStart || playerAtEnd)
+        {
+            if ( resources[vc.resourceType] > 0 )
+            {
+                CCSprite *arrow = [CCSprite spriteWithFile:@"arrowBase.png"];
+                arrow.color = UI_COLOR_GREY;
+                arrow.opacity = DEFAULT_OPACITY;
+                arrow.rotation = playerAtStart ? vc.sprite.rotation : vc.sprite.rotation + 180;
+                CGPoint arrowOffset = ccp(55, 0);
+                arrowOffset = ccpRotateByAngle(arrowOffset, ccp(0,0), CC_DEGREES_TO_RADIANS(360 - arrow.rotation) );
+                arrow.position = ccp(self.player.sprite.contentSize.width / 2., self.player.sprite.contentSize.height / 2.);
+                arrow.position = ccpAdd(arrow.position, arrowOffset);
+                [self.player.sprite addChild:arrow];
+                CCFadeTo *fadeToLow = [CCFadeTo actionWithDuration:0.65 opacity:120];
+                CCFadeTo *fadeToHigh = [CCFadeTo actionWithDuration:0.65 opacity:DEFAULT_OPACITY];
+                CCSequence *fade = [CCSequence actionOne:fadeToLow two:fadeToHigh];
+                CCRepeatForever *repeatFade = [CCRepeatForever actionWithAction:fade];
+                [arrow runAction:repeatFade];
+            }
+        }
     }
 }
 
@@ -394,12 +570,13 @@
     [self.vertexes removeAllObjects];
     [self.connections removeAllObjects];
     self.player = nil;
-    [self.hud updateResources];
-    [self updateAvaiblePathVisual];
     
 //    NSString *levelName = [NSString stringWithFormat:@"level%d_%d", self.currentPack, self.currentLevel];
     NSDictionary *level = [self loadLevel:self.levelName];
     [self parseLevel:level];
+    
+    [self.hud recreateInterface];
+    [self updateAvaiblePathVisual];
 }
 
 - (void)restartButtonPressed
@@ -423,6 +600,8 @@
 - (void)editorButtonPressed
 {
     EditorLayer *newLayer = [EditorLayer node];
+    newLayer.currentPack = self.currentPack;
+    newLayer.currentLevel = self.currentLevel;
     CCScene *newScene = [CCScene node];
     NSDictionary *level = [newLayer loadLevel:self.levelName];
     [newLayer parseLevel:level];
@@ -450,7 +629,10 @@
         self.currentLevel++;
         self.levelName = [NSString stringWithFormat:@"level%d_%d", self.currentPack, self.currentLevel];
         [self restartLevel];
+        
         self.state = GAME_STATE_RUNNING;
+        
+        [self playTutorialIfNeeded];
     }
     else
     {
@@ -533,8 +715,6 @@
     popupMenu.position = ccp( 0, 0 );
     [self.popup addChild:popupMenu];
     
-
-    
     [self addChild:self.popup];
 }
 
@@ -544,7 +724,7 @@
     
     self.popup = [Popup node];
     
-    CCLabelTTF *loseText = [CCLabelTTF labelWithString:@"You lose..." fontName:@"Marker Felt" fontSize:48];
+    CCLabelTTF *loseText = [CCLabelTTF labelWithString:@"No ways left" fontName:@"Marker Felt" fontSize:48];
     CCMenuItemLabel *title = [CCMenuItemLabel itemWithLabel:loseText];
     title.isEnabled = NO;
     title.color = UI_COLOR_WHITE;

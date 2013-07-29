@@ -8,7 +8,6 @@
 
 #import "HudNode.h"
 
-
 @implementation HudNode
 
 - (void)updateResources
@@ -25,42 +24,72 @@
     }
 }
 
+- (void)recreateStars
+{
+    [self.starsParent removeAllChildrenWithCleanup:YES];
+    
+    NSMutableArray *tempArrayStars = [NSMutableArray array];
+    
+    for (int i = 0; i < [self.delegate getStarsCollected]; i++)
+    {
+        CCSprite *starFrame = [CCSprite spriteWithFile:@"starFrameBase.png"];
+        starFrame.color = UI_COLOR_GREY;
+        starFrame.position = ccp(WIN_SIZE.width * (0.44 + 0.08 * i), WIN_SIZE.height * 0.95);
+        [self.starsParent addChild:starFrame];
+        
+        CCSprite *star = [CCSprite spriteWithFile:@"starBase.png"];
+        star.color = SIGNS_COLOR_ORANGE;
+        star.opacity = DEFAULT_OPACITY;
+        star.position = ccp( starFrame.contentSize.width/2. , starFrame.contentSize.height/2. );
+        [starFrame addChild:star];
+        
+        [tempArrayStars addObject:starFrame];
+    }
+    
+    self.stars = [NSArray arrayWithArray:tempArrayStars];
+}
+
 - (void)recreateInterface
 {
-    
     [self removeAllChildrenWithCleanup:YES];
+    self.energyBars = nil;
+    self.stars = nil;
     
+    // create energy bars
     self.energyBar = [CCNode node];
     [self addChild: self.energyBar];
     
-    int resType1 = [self.delegate getNumberOfResource:RESOURCE_TYPE_1];
-    int resType2 = [self.delegate getNumberOfResource:RESOURCE_TYPE_2];
-    int resType3 = [self.delegate getNumberOfResource:RESOURCE_TYPE_3];
-    int resType4 = [self.delegate getNumberOfResource:RESOURCE_TYPE_4];
-    int resType5 = [self.delegate getNumberOfResource:RESOURCE_TYPE_5];
+    int resType1 = [self.delegate getNumberOfResource:RESOURCE_TYPE_PINK];
+    int resType2 = [self.delegate getNumberOfResource:RESOURCE_TYPE_GREEN];
+    int resType3 = [self.delegate getNumberOfResource:RESOURCE_TYPE_BLUE];
+    int resType4 = [self.delegate getNumberOfResource:RESOURCE_TYPE_PURPLE];
+    int resType5 = [self.delegate getNumberOfResource:RESOURCE_TYPE_YELLOW];
     
     int totalResources = resType1 + resType2 + resType3 + resType4 + resType5;
     
-    for (int i = 0; i < totalResources; i++) {
-        CCSprite *cell = [CCSprite spriteWithFile:@"energySegmentFrameBase.png"];
-        cell.color = UI_COLOR_GREY;
-        cell.position = ccp( WIN_SIZE.width * ( 0.07 + i * 0.03 ), WIN_SIZE.height * ( 0.95 - ( i % 2) * 0.02 ) );
-        [self.energyBar addChild:cell];
+    NSMutableArray *tempArrayEnergy = [NSMutableArray array];
+    
+    for (int i = 0; i < totalResources; i++)
+    {
+        EnergyIndicator *indicator = [EnergyIndicator node];
+        indicator.position = ccp( WIN_SIZE.width * ( 0.07 + i * 0.03 ), WIN_SIZE.height * ( 0.95 - ( i % 2) * 0.02 ) );
+        [self.energyBar addChild:indicator];
         
-        ccColor3B energyColor;
-        if (i < resType1) energyColor = flowerColors[0];
-        else if (i < resType1 + resType2) energyColor = flowerColors[1];
-        else if (i < resType1 + resType2 + resType3) energyColor = flowerColors[2];
-        else if (i < resType1 + resType2 + resType3 + resType4) energyColor = flowerColors[3];
-        else energyColor = flowerColors[4];
-        
-        CCSprite *energyBar = [CCSprite spriteWithFile:@"energySegmentCellBase.png"];
-        energyBar.color = energyColor;
-        energyBar.position = ccp( cell.contentSize.width/2., cell.contentSize.height/2. );
-        energyBar.opacity = DEFAULT_OPACITY;
-        [cell addChild:energyBar];
+        if (i < resType1) indicator.resourceType = RESOURCE_TYPE_PINK;
+        else if (i < resType1 + resType2) indicator.resourceType = RESOURCE_TYPE_GREEN;
+        else if (i < resType1 + resType2 + resType3) indicator.resourceType = RESOURCE_TYPE_BLUE;
+        else if (i < resType1 + resType2 + resType3 + resType4) indicator.resourceType = RESOURCE_TYPE_PURPLE;
+        else indicator.resourceType = RESOURCE_TYPE_YELLOW;
+                
+        [tempArrayEnergy addObject:indicator];
     }
     
+    self.energyBars = [NSArray arrayWithArray:tempArrayEnergy];
+    
+    self.starsParent = [CCNode node];
+    [self addChild:self.starsParent];
+
+    [self recreateStars];
     
     CCSprite *pauseButtonUnpressed = [CCSprite spriteWithFile:@"pauseButtonBase.png"];
     CCSprite *pauseButtonPressed = [CCSprite spriteWithFile:@"pauseButtonBase.png"];
@@ -73,22 +102,28 @@
     CCMenu *pauseMenu = [CCMenu menuWithItems:pauseButton, nil];
     pauseMenu.position = ccp( WIN_SIZE.width * 0.95, WIN_SIZE.height * 0.95);
     [self addChild:pauseMenu];
-    
-    for (int i = 0; i < [self.delegate getStarsCollected]; i++)
-    {
-        CCSprite *starFrame = [CCSprite spriteWithFile:@"starFrameBase.png"];
-        starFrame.color = UI_COLOR_GREY;
-        starFrame.position = ccp(WIN_SIZE.width * (0.44 + 0.08 * i), WIN_SIZE.height * 0.95);
-        [self addChild:starFrame];
-        
-        CCSprite *star = [CCSprite spriteWithFile:@"starBase.png"];
-        star.color = SIGNS_COLOR_ORANGE;
-        star.opacity = DEFAULT_OPACITY;
-        star.position = ccp( starFrame.contentSize.width/2. , starFrame.contentSize.height/2. );
-        [starFrame addChild:star];
-    }
-
 }
+
+- (void)animateResourceRemoved:(int)removedRes ResourceAdded:(int)addedRes Duration:(float)duration
+{
+    EnergyIndicator *indicatorToHide;
+    for (EnergyIndicator *indicator in self.energyBars)
+    {
+        if (indicator.resourceType == removedRes)
+        {
+            indicatorToHide = indicator;
+        }
+    }
+    indicatorToHide.cell.opacity = 0;
+    
+    if (addedRes != UNDEFINED)
+    {
+        indicatorToHide.resourceType = addedRes;
+        CCFadeTo *fadeTo = [CCFadeTo actionWithDuration:duration opacity:DEFAULT_OPACITY];
+        [indicatorToHide.cell runAction:fadeTo];
+    }
+};
+
 
 - (void)pauseButtonPressed
 {

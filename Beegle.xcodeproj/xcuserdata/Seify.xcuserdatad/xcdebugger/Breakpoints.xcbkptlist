@@ -7,27 +7,58 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "PlanesPrototype/libs/cocos2d/CCDirector.m"
-         timestampString = "396477883.995035"
+         filePath = "PlanesPrototype/EnergyIndicator.m"
+         timestampString = "396702236.550727"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "155"
-         endingLineNumber = "155"
-         landmarkName = "-init"
+         startingLineNumber = "17"
+         endingLineNumber = "17"
+         landmarkName = "-setResourceType:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "No"
+         shouldBeEnabled = "Yes"
          ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "PlanesPrototype/libs/cocos2d/CCDirector.m"
-         timestampString = "396477916.410094"
+         continueAfterRunningActions = "Yes"
+         filePath = "PlanesPrototype/EditorLayer.m"
+         timestampString = "396720129.207214"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "567"
-         endingLineNumber = "567"
-         landmarkName = "-showStats"
+         startingLineNumber = "517"
+         endingLineNumber = "517"
+         landmarkName = "-testPressed"
          landmarkType = "5">
+         <Actions>
+            <BreakpointActionProxy
+               ActionType = "Xcode.BreakpointAction.Log">
+               <ActionContent
+                  message = "%B"
+                  conveyanceType = "0">
+               </ActionContent>
+            </BreakpointActionProxy>
+         </Actions>
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "Yes"
+         filePath = "PlanesPrototype/EditorLayer.m"
+         timestampString = "396721327.666572"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "508"
+         endingLineNumber = "508"
+         landmarkName = "-savePressed"
+         landmarkType = "5">
+         <Actions>
+            <BreakpointActionProxy
+               ActionType = "Xcode.BreakpointAction.Log">
+               <ActionContent
+                  message = "%B"
+                  conveyanceType = "0">
+               </ActionContent>
+            </BreakpointActionProxy>
+         </Actions>
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

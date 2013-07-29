@@ -281,11 +281,11 @@
 - (void)addVertexPressed
 {
     CGSize winSize = [[CCDirector sharedDirector] winSize];
-    MapVertex *mv = [[[MapVertex alloc] initWithPosition:ccp(-self.map.position.x + winSize.width / 2.0, -self.map.position.y + winSize.height / 2.0) ResourceType:RESOURCE_TYPE_1] autorelease];
+    MapVertex *mv = [[[MapVertex alloc] initWithPosition:ccp(-self.map.position.x + winSize.width / 2.0, -self.map.position.y + winSize.height / 2.0) ResourceType:RESOURCE_TYPE_PINK] autorelease];
     [self.mapVerts addChild:mv]; [self.vertexes addObject:mv];
     mv.index = [self.vertexes indexOfObject:mv];
     
-    mv.resourceType = rand() % (RESOURCE_TYPE_5 + 1);
+    mv.resourceType = rand() % (RESOURCE_TYPE_YELLOW + 1);
     [mv recreateSprite];
     
     [self recalculateVertexIndexes];
@@ -862,6 +862,8 @@
 - (void)playPressed
 {
     GameLayer *newLayer = [GameLayer node];
+    newLayer.currentLevel = self.currentLevel;
+    newLayer.currentPack = self.currentPack;
     CCScene *newScene = [CCScene node];
     NSDictionary *level = [newLayer loadLevel:self.levelName];
     [newLayer parseLevel:level];
@@ -1037,9 +1039,9 @@
                     {
                         self.newConnectionVertexEnd = mv;
                         
-                        uint newResType = rand() % (RESOURCE_TYPE_5 + 1);
+                        uint newResType = rand() % (RESOURCE_TYPE_YELLOW + 1);
                         while (newResType == self.newConnectionVertexStart.resourceType || newResType == self.newConnectionVertexEnd.resourceType) {
-                        newResType = rand() % (RESOURCE_TYPE_5 + 1);                        }
+                        newResType = rand() % (RESOURCE_TYPE_YELLOW + 1);                        }
                         
                         VertexConnection *newConnection = [[[VertexConnection alloc] initWithStartVertex:self.newConnectionVertexStart EndVertex:self.newConnectionVertexEnd ResourceType:newResType] autorelease];
                         self.newConnectionVertexEnd = self.newConnectionVertexStart = nil;
@@ -1120,8 +1122,8 @@
                 if ([self point:location insideMapVertex:mv])
                 {
                     mv.resourceType++;
-                    if (mv.resourceType > RESOURCE_TYPE_5) {
-                        mv.resourceType = RESOURCE_TYPE_1;
+                    if (mv.resourceType > RESOURCE_TYPE_YELLOW) {
+                        mv.resourceType = RESOURCE_TYPE_PINK;
                     }
                     
                     [mv recreateSprite];
@@ -1151,8 +1153,8 @@
 //                    NSLog(@"self.mapConns.position = (%f, %f)", self.mapConns.position.x, self.mapConns.position.y);
                     
                     vc.resourceType++;
-                    if (vc.resourceType > RESOURCE_TYPE_5) {
-                        vc.resourceType = RESOURCE_TYPE_1;
+                    if (vc.resourceType > RESOURCE_TYPE_YELLOW) {
+                        vc.resourceType = RESOURCE_TYPE_PINK;
                     }
                     
                     [vc recalcPosition]; //recreates sprite;
