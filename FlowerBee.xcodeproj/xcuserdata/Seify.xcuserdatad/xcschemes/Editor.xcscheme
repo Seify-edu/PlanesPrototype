@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0450"
+   LastUpgradeVersion = "0460"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B1EA231716B107260021D124"
-               BuildableName = "Beegle.app"
-               BlueprintName = "Beegle"
-               ReferencedContainer = "container:Beegle.xcodeproj">
+               BlueprintIdentifier = "B1FB01A817A2F6D300D05B2B"
+               BuildableName = "Editor.app"
+               BlueprintName = "Editor"
+               ReferencedContainer = "container:FlowerBee.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,10 +32,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B1EA231716B107260021D124"
-            BuildableName = "Beegle.app"
-            BlueprintName = "Beegle"
-            ReferencedContainer = "container:Beegle.xcodeproj">
+            BlueprintIdentifier = "B1FB01A817A2F6D300D05B2B"
+            BuildableName = "Editor.app"
+            BlueprintName = "Editor"
+            ReferencedContainer = "container:FlowerBee.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -51,10 +51,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B1EA231716B107260021D124"
-            BuildableName = "Beegle.app"
-            BlueprintName = "Beegle"
-            ReferencedContainer = "container:Beegle.xcodeproj">
+            BlueprintIdentifier = "B1FB01A817A2F6D300D05B2B"
+            BuildableName = "Editor.app"
+            BlueprintName = "Editor"
+            ReferencedContainer = "container:FlowerBee.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -69,10 +69,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B1EA231716B107260021D124"
-            BuildableName = "Beegle.app"
-            BlueprintName = "Beegle"
-            ReferencedContainer = "container:Beegle.xcodeproj">
+            BlueprintIdentifier = "B1FB01A817A2F6D300D05B2B"
+            BuildableName = "Editor.app"
+            BlueprintName = "Editor"
+            ReferencedContainer = "container:FlowerBee.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

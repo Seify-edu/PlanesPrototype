@@ -67,7 +67,8 @@
     CCScene *newScene = [CCScene node];
 	[newScene addChild: newLayer];
     
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:newScene withColor:ccWHITE]];
+//    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:newScene withColor:ccWHITE]];
+    [[CCDirector sharedDirector] replaceScene:newScene];
 #endif
     
     

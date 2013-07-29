@@ -76,21 +76,33 @@
             levelEnabled |= (LEVEL_SELECT_MODE_EDITOR == self.mode);
 #endif
             
+#define BUTTON_FADETO_DURATION (0.3)
+#define LABELS_FADETO_DURATION (0.8)
+            
+            
             NSString *buttonText = levelEnabled ? [NSString stringWithFormat:@"%d", levelNumber] : @"?";
             
             CCSprite *normalSprite = [CCSprite spriteWithFile:@"levelSelectButtonBase.png"];
             CCLabelTTF *label = [CCLabelTTF labelWithString:buttonText fontName:@"Marker Felt" fontSize:48];
             label.position = ccp(normalSprite.contentSize.width * 0.5, normalSprite.contentSize.height * 0.7);
             label.color = UI_COLOR_GREY;
-            label.opacity = levelEnabled ? DEFAULT_OPACITY : DEFAULT_OPACITY_DISABLED;
             [normalSprite addChild:label];
+            
+            label.opacity = 0;
+            float labelNewOpacity = levelEnabled ? DEFAULT_OPACITY : DEFAULT_OPACITY_DISABLED;
+            CCFadeTo *labelFadeTo = [CCFadeTo actionWithDuration:LABELS_FADETO_DURATION opacity:labelNewOpacity];
+            [label runAction:labelFadeTo];
+
             
             CCSprite *selectedSprite = [CCSprite spriteWithFile:@"levelSelectButtonBase.png"];
             CCLabelTTF *label2 = [CCLabelTTF labelWithString:buttonText fontName:@"Marker Felt" fontSize:48];
             label2.position = ccp(selectedSprite.contentSize.width * 0.5, selectedSprite.contentSize.height * 0.7);
             label2.color = UI_COLOR_GREY;
-            label2.opacity = levelEnabled ? DEFAULT_OPACITY : DEFAULT_OPACITY_DISABLED;
             [selectedSprite addChild:label2];
+            label2.opacity = 0;
+            float label2NewOpacity = levelEnabled ? DEFAULT_OPACITY : DEFAULT_OPACITY_DISABLED;
+            CCFadeTo *label2FadeTo = [CCFadeTo actionWithDuration:LABELS_FADETO_DURATION opacity:label2NewOpacity];
+            [label2 runAction:label2FadeTo];
             
             CCMenuItemSprite *button;
             if (levelEnabled) {
@@ -100,8 +112,12 @@
             }
             
             button.color = flowerColors[ ( buttonIndex + 2 * row ) % 5 ];
-            button.opacity = levelEnabled ? DEFAULT_OPACITY : DEFAULT_OPACITY_DISABLED;
             button.tag = levelNumber;
+            button.opacity = 0;
+            float buttonNewOpacity = levelEnabled ? DEFAULT_OPACITY : DEFAULT_OPACITY_DISABLED;
+            CCFadeTo *buttonFadeTo = [CCFadeTo actionWithDuration:BUTTON_FADETO_DURATION opacity:buttonNewOpacity];
+            [button runAction:buttonFadeTo];
+
             
             NSString *starsCollectedKey = [NSString stringWithFormat:@"starsUnlockedInPack%dLevel%d", 1, levelNumber];
             int starsUnlocked = [defaults integerForKey:starsCollectedKey];
@@ -119,8 +135,11 @@
                     CCSprite *star = [CCSprite spriteWithFile:@"starBase.png"];
                     star.color = SIGNS_COLOR_ORANGE;
                     star.position = ccp(starFrame.contentSize.width / 2., starFrame.contentSize.height / 2.);
-                    star.opacity = levelEnabled ? DEFAULT_OPACITY : DEFAULT_OPACITY_DISABLED;
                     [starFrame addChild:star];
+                    star.opacity = 0;
+                    float starNewOpacity = levelEnabled ? DEFAULT_OPACITY : DEFAULT_OPACITY_DISABLED;
+                    CCFadeTo *starFadeTo = [CCFadeTo actionWithDuration:LABELS_FADETO_DURATION opacity:starNewOpacity];
+                    [star runAction:starFadeTo];
                 }
             }
             
