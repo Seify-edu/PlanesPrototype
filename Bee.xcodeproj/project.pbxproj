@@ -454,7 +454,7 @@
 		B1CD68AB17A515A300535E41 /* EnergyIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnergyIndicator.m; sourceTree = "<group>"; };
 		B1D76AA016C98333007012E5 /* LevelSelectLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelSelectLayer.h; sourceTree = "<group>"; };
 		B1D76AA116C98333007012E5 /* LevelSelectLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelSelectLayer.m; sourceTree = "<group>"; };
-		B1EA231816B107260021D124 /* FlowerBee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlowerBee.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1EA231816B107260021D124 /* Bee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1EA231C16B107260021D124 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B1EA231E16B107260021D124 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		B1EA232016B107260021D124 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -919,7 +919,7 @@
 		B1EA231916B107260021D124 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B1EA231816B107260021D124 /* FlowerBee.app */,
+				B1EA231816B107260021D124 /* Bee.app */,
 				B1FB01A917A2F6D300D05B2B /* Editor.app */,
 			);
 			name = Products;
@@ -1334,9 +1334,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B1EA231716B107260021D124 /* FlowerBee */ = {
+		B1EA231716B107260021D124 /* Bee */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B1EA24B116B107280021D124 /* Build configuration list for PBXNativeTarget "FlowerBee" */;
+			buildConfigurationList = B1EA24B116B107280021D124 /* Build configuration list for PBXNativeTarget "Bee" */;
 			buildPhases = (
 				B1EA231416B107260021D124 /* Sources */,
 				B1EA231516B107260021D124 /* Frameworks */,
@@ -1346,9 +1346,9 @@
 			);
 			dependencies = (
 			);
-			name = FlowerBee;
+			name = Bee;
 			productName = PlanesPrototype;
-			productReference = B1EA231816B107260021D124 /* FlowerBee.app */;
+			productReference = B1EA231816B107260021D124 /* Bee.app */;
 			productType = "com.apple.product-type.application";
 		};
 		B1FB01A817A2F6D300D05B2B /* Editor */ = {
@@ -1376,7 +1376,7 @@
 			attributes = {
 				LastUpgradeCheck = 0450;
 			};
-			buildConfigurationList = B1EA231216B107260021D124 /* Build configuration list for PBXProject "FlowerBee" */;
+			buildConfigurationList = B1EA231216B107260021D124 /* Build configuration list for PBXProject "Bee" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1388,7 +1388,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B1EA231716B107260021D124 /* FlowerBee */,
+				B1EA231716B107260021D124 /* Bee */,
 				B1FB01A817A2F6D300D05B2B /* Editor */,
 			);
 		};
@@ -1859,7 +1859,7 @@
 					"-ObjC",
 					"-lxml2",
 				);
-				PRODUCT_NAME = FlowerBee;
+				PRODUCT_NAME = Bee;
 				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1882,7 +1882,7 @@
 					"-ObjC",
 					"-lxml2",
 				);
-				PRODUCT_NAME = FlowerBee;
+				PRODUCT_NAME = Bee;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
@@ -1948,7 +1948,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B1EA231216B107260021D124 /* Build configuration list for PBXProject "FlowerBee" */ = {
+		B1EA231216B107260021D124 /* Build configuration list for PBXProject "Bee" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B1EA24AF16B107280021D124 /* Debug */,
@@ -1957,7 +1957,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B1EA24B116B107280021D124 /* Build configuration list for PBXNativeTarget "FlowerBee" */ = {
+		B1EA24B116B107280021D124 /* Build configuration list for PBXNativeTarget "Bee" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B1EA24B216B107280021D124 /* Debug */,

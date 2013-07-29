@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:FlowerBee.xcodeproj">
+      location = "self:Bee.xcodeproj">
    </FileRef>
 </Workspace>
